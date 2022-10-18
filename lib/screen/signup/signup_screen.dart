@@ -5,6 +5,7 @@ import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/input.dart';
 import 'package:untitled/widgets/app_name.dart';
+import 'package:untitled/widgets/pop-up/check-email.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupController signupController = Get.put(SignupController());
@@ -119,11 +120,12 @@ class SignupScreen extends StatelessWidget {
                         color: Color(0xFF000000),
                         width: getWidth(1),
                       )),
-                  child: Text("Login"),
+                  child: Text("Sign up"),
                 ),
                 onPress: () async {
                   var result = await signupController.signup();
                   print(result);
+                  showCheckEmailPopUp(signupController.email.text);
                 },
               ),
               SizedBox(

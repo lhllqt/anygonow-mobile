@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/login/login_controller.dart';
+import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
+import 'package:untitled/screen/home_page/home_page_screen.dart';
 import 'package:untitled/screen/signup/signup_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
@@ -30,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 height: getHeight(15),
               ),
               Text(
-                "Login",
+                'login'.tr,
                 style: TextStyle(
                   fontSize: getWidth(20),
                 ),
@@ -109,6 +111,7 @@ class LoginScreen extends StatelessWidget {
                 onPress: () async {
                   var result = await loginPageController.login();
                   print(result);
+                  Get.to(HomePageScreen());
                 },
               ),
               SizedBox(
@@ -119,7 +122,9 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                       )),
-                  onPress: () => {}),
+                  onPress: () => {
+                    Get.to(ForgotPasswordScreen())
+                  }),
               Row(
                 children: [
                   Text("Don't have an account?"),

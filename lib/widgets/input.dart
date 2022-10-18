@@ -109,7 +109,7 @@ Container inputPassword(
 //                     onPressed: () {
 //                       changeHide();
 //                     },
-//                     icon: Icon(
+//                     icons: Icon(
 //                       isHide ? Icons.visibility_off : Icons.visibility,
 //                       size: 24,
 //                     ))
@@ -216,7 +216,7 @@ Container inputRegular(
 //             FocusScope.of(context).unfocus();
 //             onSearch();
 //           },
-//           child: SvgPicture.asset("assets/images/search-icon.svg"),
+//           child: SvgPicture.asset("assets/images/search-icons.svg"),
 //         ),
 //         Expanded(
 //           child: TextFormField(
@@ -281,7 +281,7 @@ Container inputRegular(
 //                   var data = await onSearch();
 //                   if (data != null) Get.to(() => UserSavedScreen());
 //                 },
-//                 child: SvgPicture.asset("assets/images/search-icon.svg"),
+//                 child: SvgPicture.asset("assets/images/search-icons.svg"),
 //               ),
 //               SizedBox(
 //                 width: getWidth(240),
@@ -320,7 +320,7 @@ Container inputRegular(
 //                   type: "scan",
 //                 ));
 //           },
-//           child: SvgPicture.asset("assets/images/qrcode-icon.svg"),
+//           child: SvgPicture.asset("assets/images/qrcode-icons.svg"),
 //         ),
 //       ],
 //     ),
@@ -363,7 +363,7 @@ Container inputRegular(
 //                   var data = await onSearch();
 //                   if (data != null) Get.to(() => UserSavedScreen());
 //                 },
-//                 child: SvgPicture.asset("assets/images/search-icon.svg"),
+//                 child: SvgPicture.asset("assets/images/search-icons.svg"),
 //               ),
 //               SizedBox(
 //                 width: getWidth(240),
@@ -402,7 +402,7 @@ Container inputRegular(
 //           onTap: () async {
 //             Get.to(() => ScanQRScreen(type: "scan"));
 //           },
-//           child: SvgPicture.asset("assets/images/qrcode-icon.svg"),
+//           child: SvgPicture.asset("assets/images/qrcode-icons.svg"),
 //         ),
 //       ],
 //     ),
