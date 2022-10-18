@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
+import 'package:untitled/screen/reset_password/reset_password_screen.dart';
 import 'package:untitled/screen/signup/signup_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
@@ -126,6 +127,7 @@ class LoginScreen extends StatelessWidget {
                       )),
                   onPress: () => {
                     Get.to(ForgotPasswordScreen())
+                    // Get.to(ResetPasswordScreen())
                   }),
               Row(
                 children: [

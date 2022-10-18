@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/screen/account/account_screen.dart';
 import 'package:untitled/screen/change_password/change_password_screen.dart';
@@ -32,8 +33,8 @@ class UserScreen extends StatelessWidget {
                         height: getHeight(36),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Get.to(() => AccountScreen());
+                        onTap: () async {
+
                         },
                         child: Container(
                           color: Colors.white,
@@ -84,7 +85,8 @@ class UserScreen extends StatelessWidget {
                         height: getHeight(20),
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          await Get.put(AccountController()).getUserInfo();
                           Get.to(() => AccountScreen());
                         },
                         child: Container(

@@ -46,7 +46,7 @@ class SignupController extends GetxController {
             "data": {
               "mail": email.text,
               "phone": phoneNumber.text,
-              "zipCode": zipCode.text,
+              // "zipCode": zipCode.text,
               "encryptedPrivateKey": keyPair["encryptedPrivateKey"],
               "publicKey": keyPair["publicKey"],
             },
@@ -60,8 +60,6 @@ class SignupController extends GetxController {
       if (json["success"] == true) {
         return true;
       }
-
-      print("error");
 
       return data;
     } catch (e, s) {
