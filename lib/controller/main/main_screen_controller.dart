@@ -25,6 +25,11 @@ class Business {
   };
 }
 
+class Category {
+  String id = "";
+  String name= "";
+}
+
 class MainScreenController extends GetxController {
   TextEditingController searchText = TextEditingController();
   TextEditingController searchZipcode = TextEditingController();
@@ -33,6 +38,18 @@ class MainScreenController extends GetxController {
 
   RxList<Business> businessNearList = <Business>[].obs;
   RxList<Business> mostInterested = <Business>[].obs;
+
+  RxList<Category> categories = <Category>[].obs;
+
+  late Future getProNear;
+  late Future getMostInterest;
+
+  @override
+  void onInit() {
+    getProNear = getProfessionalNear();
+    getMostInterest = getMostInterested();
+    super.onInit();
+  }
 
   Future<List<Business>> getProfessionalNear() async {
     try {
@@ -89,6 +106,62 @@ class MainScreenController extends GetxController {
     } catch (e) {
       print(e);
       return ([]);
+    }
+  }
+
+  Future getCategories() async {
+    try {
+      var response;
+      CustomDio customDio = CustomDio();
+      response = await customDio.get("/categories");
+      var json = jsonDecode(response.toString());
+
+      List<dynamic> responseData = json["data"]["result"];
+
+      List<Category> res = [];
+
+      for (int i = 0; i < responseData.length; i++) {
+        Category item = new Category();
+        item.id = responseData[i]["id"];
+        item.name = responseData[i]["name"];
+        print(item);
+        res.add(item);
+      }
+
+      categories.clear();
+      categories.value = res;
+      return(true);
+    } catch (e) {
+      print(e);
+      return (false);
+    }
+  }
+
+  Future getSearchService({String id = ""}) async {
+    try {
+      var response;
+      CustomDio customDio = CustomDio();
+      response = await customDio.get("/categories/${id}");
+      var json = jsonDecode(response.toString());
+
+      List<dynamic> responseData = json["data"]["result"];
+
+      List<Category> res = [];
+
+      for (int i = 0; i < responseData.length; i++) {
+        Category item = new Category();
+        item.id = responseData[i]["id"];
+        item.name = responseData[i]["name"];
+        print(item);
+        res.add(item);
+      }
+
+      categories.clear();
+      categories.value = res;
+      return(true);
+    } catch (e) {
+      print(e);
+      return (false);
     }
   }
 

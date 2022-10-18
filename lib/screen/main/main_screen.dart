@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
+import 'package:untitled/main.dart';
 import 'package:untitled/screen/main/main_screen_model.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/input.dart';
@@ -37,6 +38,7 @@ class MainScreen extends StatelessWidget {
                       hintText: "Search by service",
                       textEditingController: mainScreenController.searchText,
                       onSearch: () => {},
+                      options: List.generate(mainScreenController.categories.length, (index) => mainScreenController.categories[index].name),
                     ),
                   ),
                   Expanded(
@@ -52,6 +54,7 @@ class MainScreen extends StatelessWidget {
                       hintText: "Zipcode",
                       textEditingController: mainScreenController.searchZipcode,
                       onSearch: () => {},
+                      options: [],
                     ),
                   ),
                 ],
@@ -71,12 +74,12 @@ class MainScreen extends StatelessWidget {
             ),
             Container(
               child: FutureBuilder(
-                  future: mainScreenController.getProfessionalNear(),
+                  future: mainScreenController.getProNear,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
                         children: List.generate(
-                          8,
+                          mainScreenController.businessNearList.length,
                               (index) {
                             return handymanItem(
                               image: mainScreenController
@@ -115,12 +118,12 @@ class MainScreen extends StatelessWidget {
             ),
             Container(
               child: FutureBuilder(
-                  future: mainScreenController.getMostInterested(),
+                  future: mainScreenController.getMostInterest,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
                         children: List.generate(
-                          6,
+                          mainScreenController.mostInterested.length,
                               (index) {
                             return serviceItem(image: mainScreenController
                                 .mostInterested[index]
