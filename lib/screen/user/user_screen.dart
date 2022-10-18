@@ -51,15 +51,18 @@ class UserScreen extends StatelessWidget {
                               SizedBox(
                                 width: getWidth(18),
                               ),
-                              Text(
-                                Get.put(GlobalController())
-                                    .user
-                                    .value
-                                    .username
-                                    .toString(),
-                                style: TextStyle(
-                                    fontSize: getWidth(20),
-                                    fontWeight: FontWeight.w600),
+                              FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(
+                                  Get.put(GlobalController())
+                                      .user
+                                      .value
+                                      .username
+                                      .toString(),
+                                  style: TextStyle(
+                                    // fontSize: getWidth(20),
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ],
                           ),

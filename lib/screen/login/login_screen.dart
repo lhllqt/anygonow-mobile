@@ -118,6 +118,7 @@ class LoginScreen extends StatelessWidget {
                   if (result) {
                     Get.to(() => HomePageScreen());
                   }
+                  // Get.to(() => HomePageScreen());
                 },
               ),
               SizedBox(

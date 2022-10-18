@@ -17,6 +17,7 @@ class MainScreen extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.only(left: getWidth(25), right: getWidth(25)),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             Container(
               height: getHeight(32),
@@ -69,70 +70,39 @@ class MainScreen extends StatelessWidget {
               height: getHeight(14),
             ),
             Container(
-              child: Column(
-                children: [
-                  handymanItem(
-                      image: "",
-                      logo: "",
-                      title: "ABC",
-                      stars: 2,
-                      requested: 10,
-                      reviews: 10),
-                  SizedBox(
-                    height: getHeight(32),
-                  ),
-                  handymanItem(
-                      image: "",
-                      logo: "",
-                      title: "ABC",
-                      stars: 2,
-                      requested: 10,
-                      reviews: 10),
-                  SizedBox(
-                    height: getHeight(32),
-                  ),
-                  handymanItem(
-                      image: "",
-                      logo: "",
-                      title: "ABC",
-                      stars: 2,
-                      requested: 10,
-                      reviews: 10),
-                  SizedBox(
-                    height: getHeight(32),
-                  ),
-                  handymanItem(
-                      image: "",
-                      logo: "",
-                      title: "ABC",
-                      stars: 2,
-                      requested: 10,
-                      reviews: 10),
-                  SizedBox(
-                    height: getHeight(32),
-                  ),
-                  handymanItem(
-                      image: "",
-                      logo: "",
-                      title: "ABC",
-                      stars: 2,
-                      requested: 10,
-                      reviews: 10),
-                  SizedBox(
-                    height: getHeight(32),
-                  ),
-                  handymanItem(
-                      image: "",
-                      logo: "",
-                      title: "ABC",
-                      stars: 2,
-                      requested: 10,
-                      reviews: 10),
-                ],
-              ),
+              child: FutureBuilder(
+                  future: mainScreenController.getProfessionalNear(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: List.generate(
+                          8,
+                              (index) {
+                            return handymanItem(
+                              image: mainScreenController
+                                  .businessNearList[index]
+                                  .bussiness["bannerUrl"] ?? "",
+                              logo: mainScreenController
+                                  .businessNearList[index]
+                                  .bussiness["logoUrl"] ?? "",
+                              title: mainScreenController.businessNearList[index].bussiness["name"] ?? "",
+                              stars: mainScreenController
+                                  .businessNearList[index]
+                                  .rating["rate"] ?? 0,
+                              reviews: mainScreenController
+                                  .businessNearList[index]
+                                  .rating["review"]?.toInt() ?? 0,
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  }),
             ),
             SizedBox(
-              height: getHeight(105),
+              height: getHeight(73),
             ),
             Text(
               "Most interested",
@@ -144,35 +114,26 @@ class MainScreen extends StatelessWidget {
               height: getHeight(25),
             ),
             Container(
-              child: Column(
-                children: [
-
-                  serviceItem(service: "Service name"),
-                  SizedBox(
-                    height: getHeight(30),
-                  ),
-                  serviceItem(service: "Service name"),
-                  SizedBox(
-                    height: getHeight(30),
-                  ),
-                  serviceItem(service: "Service name"),
-                  SizedBox(
-                    height: getHeight(30),
-                  ),
-                  serviceItem(service: "Service name"),
-                  SizedBox(
-                    height: getHeight(30),
-                  ),
-                  serviceItem(service: "Service name"),
-                  SizedBox(
-                    height: getHeight(30),
-                  ),
-                  serviceItem(service: "Service name"),
-                  SizedBox(
-                    height: getHeight(30),
-                  ),
-                ],
-              ),
+              child: FutureBuilder(
+                  future: mainScreenController.getMostInterested(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: List.generate(
+                          6,
+                              (index) {
+                            return serviceItem(image: mainScreenController
+                                .mostInterested[index]
+                                .bussiness["logoUrl"] ?? "",
+                              service: mainScreenController.mostInterested[index].bussiness["name"] ?? "",
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  }),
             )
           ],
         ),
