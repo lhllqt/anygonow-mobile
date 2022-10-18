@@ -13,7 +13,8 @@ class User {
         this.publicKey,
         this.encryptedPrivateKey,
         this.privateKey,
-        this.username});
+        this.username,
+        this.certificate});
 
   @HiveField(0)
   String? id;
@@ -31,6 +32,8 @@ class User {
   String? encryptedPrivateKey;
   @HiveField(7)
   String? username;
+  @HiveField(8)
+  String? certificate;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,6 +46,7 @@ dependencies:
   elliptic: ^0.3.5
   json_annotation: ^4.4.0
   hive: ^2.0.5
+  flutter_svg: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +57,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
+  flutter_dotenv: ^5.0.2
+  dio: ^4.0.4
   flutter_lints: ^1.0.0
   json_serializable: ^6.1.4
   build_runner: ^2.1.7
@@ -69,6 +74,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:

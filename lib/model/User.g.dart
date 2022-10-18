@@ -15,6 +15,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
   encryptedPrivateKey: json['encryptedPrivateKey'] as String?,
   privateKey: json['privateKey'] as String?,
   username: json['username'] as String?,
+  certificate: json['certificate'] as String?,
 );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -26,4 +27,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'privateKey': instance.privateKey,
   'encryptedPrivateKey': instance.encryptedPrivateKey,
   'username': instance.username,
+  'certificate': instance.certificate,
 };

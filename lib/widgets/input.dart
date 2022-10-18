@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:untitled/utils/config.dart';
 
 Container inputPassword(
-  BuildContext context,
-  // TextEditingController controller,
-  String hintText,
-  // bool isHide,
-  // Function changeHide,
-  // Function onchange,
-) {
+    BuildContext context,
+    // TextEditingController controller,
+    String hintText,
+    // bool isHide,
+    // Function changeHide,
+    // Function onchange,
+    ) {
   return Container(
     height: getWidth(42),
     // padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -40,7 +40,7 @@ Container inputPassword(
                 // hintText: hintText,
                 contentPadding: EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
                 labelStyle:
-                    TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+                TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
               )),
         ),
         // IconButton(
@@ -141,11 +141,11 @@ Container inputPassword(
 // }
 
 Container inputRegular(
-  BuildContext context, {
-  required String hintText,
-  // required TextEditingController textEditingController,
-  // required Function onChange,
-}) {
+    BuildContext context, {
+      required String hintText,
+      required TextEditingController textEditingController,
+      // required Function onChange,
+    }) {
   return Container(
     height: getWidth(42),
     padding: EdgeInsets.symmetric(vertical: getHeight(3)),
@@ -160,8 +160,8 @@ Container inputRegular(
       children: [
         Expanded(
           child: TextFormField(
-            // controller: textEditingController,
-            // style: TextStyle(fontSize: getWidth(14)),
+            controller: textEditingController,
+            style: TextStyle(fontSize: getWidth(14)),
             // onChanged: (e) {
             //   onChange();
             // },
@@ -174,9 +174,9 @@ Container inputRegular(
               labelText: hintText,
               // hintText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
+              EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
@@ -411,11 +411,11 @@ Container inputRegular(
 
 Container inputWithHint(BuildContext context,
     {required String hintText,
-    required String labelText,
-    required String initialText,
-    required TextEditingController textEditingController,
-    required bool err,
-    Function? onchange}) {
+      required String labelText,
+      required String initialText,
+      required TextEditingController textEditingController,
+      required bool err,
+      Function? onchange}) {
   return Container(
     height: getWidth(56),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -445,9 +445,9 @@ Container inputWithHint(BuildContext context,
               labelText: labelText,
               hintText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
@@ -522,9 +522,9 @@ Container inputWithHint(BuildContext context,
 
 Container inputSignup(BuildContext context,
     {required String hintText,
-    required TextEditingController textEditingController,
-    required bool focus,
-    required bool err}) {
+      required TextEditingController textEditingController,
+      required bool focus,
+      required bool err}) {
   return Container(
     height: getWidth(56),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -534,8 +534,8 @@ Container inputSignup(BuildContext context,
         color: err
             ? Colors.red
             : focus
-                ? Color(0xFF61B3FF)
-                : Color(0xFFE7E8EA),
+            ? Color(0xFF61B3FF)
+            : Color(0xFFE7E8EA),
         width: getHeight(1),
       ),
     ),
@@ -553,9 +553,9 @@ Container inputSignup(BuildContext context,
               disabledBorder: InputBorder.none,
               labelText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
@@ -582,8 +582,8 @@ Container inputPasswordSignup(
         color: err
             ? Colors.red
             : focus
-                ? Color(0xFF61B3FF)
-                : Color(0xFFE7E8EA),
+            ? Color(0xFF61B3FF)
+            : Color(0xFFE7E8EA),
         width: getHeight(1),
       ),
     ),
@@ -606,7 +606,7 @@ Container inputPasswordSignup(
                 labelText: hintText,
                 contentPadding: EdgeInsets.only(left: getWidth(16)),
                 labelStyle:
-                    TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+                TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
               )),
         ),
         IconButton(
@@ -624,8 +624,8 @@ Container inputPasswordSignup(
 
 Container inputOnChange(BuildContext context,
     {required String hintText,
-    required TextEditingController textEditingController,
-    required Function function}) {
+      required TextEditingController textEditingController,
+      required Function function}) {
   return Container(
     height: getWidth(56),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -651,9 +651,9 @@ Container inputOnChange(BuildContext context,
               disabledBorder: InputBorder.none,
               labelText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),

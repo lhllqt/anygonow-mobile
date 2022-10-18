@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:untitled/controller/signup/signup_controller.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/input.dart';
 import 'package:untitled/widgets/app_name.dart';
 
 class SignupScreen extends StatelessWidget {
+  SignupController signupController = Get.put(SignupController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,14 +46,8 @@ class SignupScreen extends StatelessWidget {
               ),
               inputRegular(
                 context,
-                hintText: "Username*",
-              ),
-              SizedBox(
-                height: getHeight(12),
-              ),
-              inputRegular(
-                context,
                 hintText: "Email*",
+                textEditingController: signupController.email,
               ),
               SizedBox(
                 height: getHeight(12),
@@ -57,6 +55,7 @@ class SignupScreen extends StatelessWidget {
               inputRegular(
                 context,
                 hintText: "Phone Number*",
+                textEditingController: signupController.phoneNumber,
               ),
               SizedBox(
                 height: getHeight(12),
@@ -64,6 +63,7 @@ class SignupScreen extends StatelessWidget {
               inputRegular(
                 context,
                 hintText: "Zipcode*",
+                textEditingController: signupController.zipCode,
               ),
               SizedBox(
                 height: getHeight(12),
@@ -71,6 +71,13 @@ class SignupScreen extends StatelessWidget {
               inputPassword(
                 context,
                 "Password*",
+              ),
+              SizedBox(
+                height: getHeight(12),
+              ),
+              inputPassword(
+                context,
+                "Confirm Password*",
               ),
               SizedBox(
                 height: getHeight(15),
@@ -112,7 +119,47 @@ class SignupScreen extends StatelessWidget {
                         color: Color(0xFF000000),
                         width: getWidth(1),
                       )),
-                  child: Text ("Login"),
+                  child: Text("Login"),
+                ),
+                onPress: () async {
+                  var result = await signupController.signup();
+                  print(result);
+                },
+              ),
+              SizedBox(
+                height: getHeight(12),
+              ),
+              Row(
+                children: [
+                  Text("Already have an account"),
+                  Bouncing(
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                      onPress: () => {
+                        Get.back()
+                      })
+                ],
+              ),
+              SizedBox(
+                height: getHeight(28),
+              ),
+              Bouncing(
+                child: Container(
+                  alignment: Alignment.center,
+                  height: getHeight(42),
+                  width: getWidth(double.infinity),
+                  decoration: BoxDecoration(
+                      color: Color(0xFF000000).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: Color(0xFF000000),
+                        width: getWidth(1),
+                      )),
+                  child: Text("Sign up as a handyman"),
                 ),
                 onPress: () => {},
               ),
