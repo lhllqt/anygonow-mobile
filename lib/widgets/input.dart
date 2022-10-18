@@ -4,7 +4,7 @@ import 'package:untitled/utils/config.dart';
 
 Container inputPassword(
     BuildContext context,
-    // TextEditingController controller,
+    TextEditingController controller,
     String hintText,
     // bool isHide,
     // Function changeHide,

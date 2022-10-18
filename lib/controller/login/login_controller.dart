@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/api/certificate_service.dart';
@@ -19,9 +21,10 @@ class LoginPageController extends GetxController {
   Future getPing(List<String> certificateList) async {
     try {
       CustomDio customDio = new CustomDio();
-      // var certificateJson = jsonDecode(certificate);
+      // var certificateJson = jsonEncode(certificateList);
       print("cert: " + certificateList.toString());
-      customDio.dio.options.headers["Authorization"] = certificateList[0];
+      customDio.dio.options.headers["authorization"] = certificateList[0];
+
       var response = await customDio.post(
         "/auth/ping",
         certificateList[1],

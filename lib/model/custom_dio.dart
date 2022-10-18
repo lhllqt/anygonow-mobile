@@ -91,7 +91,7 @@ class CustomDio {
     var privateKey = globalController.user.value.privateKey ?? "";
     if (privateKey != "") {
       var bodySignature =
-          signMessage(privateKey, hashMessage(jsonEncode(data)));
+      signMessage(privateKey, hashMessage(jsonEncode(data)));
       finalData = jsonEncode({"data": data, "_signature": bodySignature});
     } else {
       finalData = jsonEncode({"data": data});
@@ -110,7 +110,7 @@ class CustomDio {
     var privateKey = globalController.user.value.privateKey ?? "";
     if (privateKey != "") {
       var bodySignature =
-          signMessage(privateKey, hashMessage(jsonEncode(data)));
+      signMessage(privateKey, hashMessage(jsonEncode(data)));
       finalData = jsonEncode({"data": data, "_signature": bodySignature});
     } else {
       finalData = jsonEncode({"data": data});
@@ -129,7 +129,7 @@ class CustomDio {
     var privateKey = globalController.user.value.privateKey ?? "";
     if (privateKey != "") {
       var bodySignature =
-          signMessage(privateKey, hashMessage(jsonEncode(data)));
+      signMessage(privateKey, hashMessage(jsonEncode(data)));
       finalData = jsonEncode({"data": data, "_signature": bodySignature});
     } else {
       finalData = jsonEncode({"data": data});

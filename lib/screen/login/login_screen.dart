@@ -111,7 +111,9 @@ class LoginScreen extends StatelessWidget {
                 onPress: () async {
                   var result = await loginPageController.login();
                   print(result);
-                  Get.to(HomePageScreen());
+                  if (result) {
+                    Get.to(() => HomePageScreen());
+                  }
                 },
               ),
               SizedBox(

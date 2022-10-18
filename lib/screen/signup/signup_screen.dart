@@ -71,6 +71,7 @@ class SignupScreen extends StatelessWidget {
               ),
               inputPassword(
                 context,
+                signupController.password,
                 "Password*",
               ),
               SizedBox(
@@ -78,6 +79,7 @@ class SignupScreen extends StatelessWidget {
               ),
               inputPassword(
                 context,
+                signupController.confirmPassword,
                 "Confirm Password*",
               ),
               SizedBox(
@@ -141,9 +143,7 @@ class SignupScreen extends StatelessWidget {
                           decoration: TextDecoration.underline,
                         ),
                       ),
-                      onPress: () => {
-                        Get.back()
-                      })
+                      onPress: () => {Get.back()})
                 ],
               ),
               SizedBox(

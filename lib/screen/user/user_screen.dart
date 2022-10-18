@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/screen/account/account_screen.dart';
+import 'package:untitled/screen/change_password/change_password_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 
@@ -92,7 +93,7 @@ class UserScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -110,7 +111,7 @@ class UserScreen extends StatelessWidget {
                                       Text(
                                         'Account Information',
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                        TextStyle(fontSize: getWidth(16)),
                                       )
                                     ],
                                   ),
@@ -140,7 +141,7 @@ class UserScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -158,7 +159,7 @@ class UserScreen extends StatelessWidget {
                                       Text(
                                         "My Request",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                        TextStyle(fontSize: getWidth(16)),
                                       )
                                     ],
                                   ),
@@ -181,14 +182,16 @@ class UserScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(ChangePasswordScreen());
+                        },
                         child: Container(
                           color: Colors.white,
                           child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -206,7 +209,7 @@ class UserScreen extends StatelessWidget {
                                       Text(
                                         "Change Password",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                        TextStyle(fontSize: getWidth(16)),
                                       )
                                     ],
                                   ),
@@ -253,7 +256,7 @@ class UserScreen extends StatelessWidget {
                                       child: Text(
                                         "Log out",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                        TextStyle(fontSize: getWidth(16)),
                                       ),
                                     )
                                   ],
