@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/input.dart';
 import 'package:untitled/widgets/app_name.dart';
 
-enum LoginOption {
-  customer,
-  professional
-}
-
-class LoginScreen extends StatelessWidget {
-  LoginPageController loginPageController = Get.put(LoginPageController());
-
+class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                 height: getHeight(15),
               ),
               Text(
-                "Login",
+                "Customer - Sign up",
                 style: TextStyle(
                   fontSize: getWidth(20),
                 ),
@@ -41,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 height: getHeight(10),
               ),
               Text(
-                "Sign in to your account",
+                "Sign up to your account",
                 style: TextStyle(
                   fontSize: getWidth(14),
                 ),
@@ -51,48 +42,63 @@ class LoginScreen extends StatelessWidget {
               ),
               inputRegular(
                 context,
-                hintText: "Input your email or phone number",
+                hintText: "Username*",
               ),
               SizedBox(
                 height: getHeight(12),
               ),
               inputRegular(
                 context,
-                hintText: "Input your password",
+                hintText: "Email*",
               ),
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                title: Text("Join as customer"),
-                leading: SizedBox(
-                    height: getHeight(14),
+              SizedBox(
+                height: getHeight(12),
+              ),
+              inputRegular(
+                context,
+                hintText: "Phone Number*",
+              ),
+              SizedBox(
+                height: getHeight(12),
+              ),
+              inputRegular(
+                context,
+                hintText: "Zipcode*",
+              ),
+              SizedBox(
+                height: getHeight(12),
+              ),
+              inputPassword(
+                context,
+                "Password*",
+              ),
+              SizedBox(
+                height: getHeight(15),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      height: getHeight(14),
+                      width: getHeight(14),
+                      child: Checkbox(
+                        value: false,
+                        onChanged: (value) => {},
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      )),
+                  SizedBox(
                     width: getWidth(14),
-                    child: Obx(() => Radio<LoginOption> (
-                      value: LoginOption.customer,
-                      groupValue: loginPageController.loginOption.value,
-                      onChanged: (LoginOption? value) {
-                        if (value != null)
-                          loginPageController.loginOption.value = value;
-                      },
-                    ))
-                ),
-              ),
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                title: Text("Join as professional"),
-                leading: SizedBox(
-                  height: getHeight(14),
-                  width: getWidth(14),
-                  child: Obx(() => Radio<LoginOption> (
-                      value: LoginOption.professional,
-                      groupValue: loginPageController.loginOption.value,
-                      onChanged: (LoginOption? value) {
-                        if (value != null)
-                          loginPageController.loginOption.value = value;
-                      })
                   ),
-                ),
+                  Text(
+                    "I agree to the Term of Use and Privacy Policy ",
+                    style: TextStyle(fontSize: getWidth(12)),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: getHeight(12),
               ),
               Bouncing(
                 child: Container(
