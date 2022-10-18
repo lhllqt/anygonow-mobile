@@ -8,9 +8,6 @@ trigger:
       - dev
   batch: true
 
-pool:
-  name: 'Builder'
-
 variables:
   GIT_PAT: $(gitPat)
   AZURE_PAT: $(azurePass)
