@@ -2,49 +2,74 @@ import 'package:flutter/material.dart';
 import 'package:untitled/utils/config.dart';
 
 Container inputPassword(
-    BuildContext context,
-    TextEditingController controller,
-    String hintText,
-    bool isHide,
-    Function changeHide,
-    ) {
+    BuildContext context, {
+      String? label,
+      required TextEditingController controller,
+      required String hintText,
+      required bool isHide,
+      required Function changeHide,
+    }) {
   return Container(
-    height: getWidth(48),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(getHeight(6)),
-      border: Border.all(
-        color: const Color(0xFFE6E6E6),
-        width: getHeight(1),
-      ),
-    ),
-    child: Row(
+    child: Column(
       children: [
-        Expanded(
-          child: TextFormField(
-              style: TextStyle(fontSize: getWidth(16)),
-              controller: controller,
-              obscureText: isHide,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                labelText: hintText,
-                contentPadding:
-                EdgeInsets.only(left: getWidth(18), bottom: getHeight(14)),
-                labelStyle: TextStyle(
-                    color: const Color(0xFF878C92), fontSize: getWidth(16)),
-              )),
-        ),
-        IconButton(
-            onPressed: () {
-              changeHide();
-            },
-            icon: Icon(
-              isHide ? Icons.visibility_off : Icons.visibility,
-              size: 16,
-            ))
+        label != null
+            ? Container(
+          margin: EdgeInsets.only(
+            left: getWidth(16),
+            right: getWidth(16),
+          ),
+          width: double.infinity,
+          child: Text(label,
+              style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w500)),
+        )
+            : Container(),
+        label != null
+            ? SizedBox(
+          height: getHeight(6),
+        )
+            : Container(),
+        Container(
+          height: getWidth(48),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(getHeight(6)),
+            border: Border.all(
+              color: const Color(0xFFE6E6E6),
+              width: getHeight(1),
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                    style: TextStyle(fontSize: getWidth(16)),
+                    controller: controller,
+                    obscureText: isHide,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      labelText: hintText,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      contentPadding: EdgeInsets.only(
+                          left: getWidth(18), bottom: getHeight(14)),
+                      labelStyle: TextStyle(
+                          color: const Color(0xFF9E9E9E), fontSize: getWidth(14)),
+                    )),
+              ),
+              IconButton(
+                  onPressed: () {
+                    changeHide();
+                  },
+                  icon: Icon(
+                    isHide ? Icons.visibility_off : Icons.visibility,
+                    size: 16,
+                  ))
+            ],
+          ),
+        )
       ],
     ),
   );
@@ -92,6 +117,7 @@ Container inputRegular(
                   style: TextStyle(fontSize: getWidth(16)),
                   decoration: InputDecoration(
                     border: InputBorder.none,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
@@ -100,7 +126,7 @@ Container inputRegular(
                     contentPadding: EdgeInsets.only(
                         left: getWidth(18), bottom: getHeight(14)),
                     labelStyle: TextStyle(
-                        color: const Color(0xFF878C92), fontSize: getWidth(16)),
+                        color: const Color(0xFF9E9E9E), fontSize: getWidth(14)),
                   ),
                 ),
               ),

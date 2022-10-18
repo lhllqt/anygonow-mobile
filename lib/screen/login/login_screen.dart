@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
@@ -23,11 +24,12 @@ class LoginScreen extends StatelessWidget {
           padding: EdgeInsets.only(top: getHeight(12)),
           child: confirmButtonContainer(context, loginPageController)),
       body: Container(
-        margin: EdgeInsets.only(
+        padding: EdgeInsets.only(
           left: getWidth(16),
           right: getWidth(16),
           top: getHeight(62),
         ),
+        color: const Color(0xFFFFFFFF),
         child: ListView(
           children: [
             getAppName(),
@@ -76,38 +78,38 @@ class LoginScreen extends StatelessWidget {
             ),
             Obx(() => inputPassword(
               context,
-              loginPageController.password,
-              "Enter your password",
-              loginPageController.isHidePassword.value,
-              loginPageController.changeHidePassword,
+              controller: loginPageController.password,
+              hintText: "Enter your password",
+              isHide: loginPageController.isHidePassword.value,
+              changeHide: loginPageController.changeHidePassword,
             )),
-            Row(
-              children: [
-                Obx(
-                      () => Radio<LoginOption>(
-                    value: LoginOption.customer,
-                    groupValue: loginPageController.loginOption.value,
-                    onChanged: (LoginOption? value) {
-                      if (value != null)
-                        loginPageController.loginOption.value = value;
-                    },
-                  ),
-                ),
-                Text("Join as customer"),
-              ],
-            ),
-            Row(
-              children: [
-                Obx(() => Radio<LoginOption>(
-                    value: LoginOption.professional,
-                    groupValue: loginPageController.loginOption.value,
-                    onChanged: (LoginOption? value) {
-                      if (value != null)
-                        loginPageController.loginOption.value = value;
-                    })),
-                Text("Join as professional"),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Obx(
+            //           () => Radio<LoginOption>(
+            //         value: LoginOption.customer,
+            //         groupValue: loginPageController.loginOption.value,
+            //         onChanged: (LoginOption? value) {
+            //           if (value != null)
+            //             loginPageController.loginOption.value = value;
+            //         },
+            //       ),
+            //     ),
+            //     Text("Join as customer"),
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Obx(() => Radio<LoginOption>(
+            //         value: LoginOption.professional,
+            //         groupValue: loginPageController.loginOption.value,
+            //         onChanged: (LoginOption? value) {
+            //           if (value != null)
+            //             loginPageController.loginOption.value = value;
+            //         })),
+            //     Text("Join as professional"),
+            //   ],
+            // ),
 
             SizedBox(
               height: getHeight(24),

@@ -82,6 +82,16 @@ flutter:
     - assets/
     - assets/icons/
     - .env
+  fonts:
+    - family: TTNorm
+      fonts:
+        - asset: assets/fonts/TT-Norms-Pro-Regular.ttf
+          weight: 500
+    - family: TTNorm-Bold
+      fonts:
+        - asset: assets/fonts/TT-Norms-Pro-Bold.ttf
+          weight: 500
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

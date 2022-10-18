@@ -7,7 +7,7 @@ import 'package:untitled/widgets/input.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordController changePasswordController =
-      Get.put(ChangePasswordController());
+  Get.put(ChangePasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +38,30 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             Obx(() => inputPassword(
               context,
-              changePasswordController.password,
-              "Current Password",
-              changePasswordController.isHidePassword.value,
-              changePasswordController.changeHidePassword,
+              controller: changePasswordController.password,
+              hintText: "Current Password",
+              isHide: changePasswordController.isHidePassword.value,
+              changeHide: changePasswordController.changeHidePassword,
             )),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputPassword(
               context,
-              changePasswordController.newPassword,
-              "New Password",
-              changePasswordController.isHideNewPassword.value,
-              changePasswordController.changeHideNewPassword,
+              controller: changePasswordController.newPassword,
+              hintText: "New Password",
+              isHide:changePasswordController.isHideNewPassword.value,
+              changeHide:changePasswordController.changeHideNewPassword,
             )),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputPassword(
               context,
-              changePasswordController.confirmPassword,
-              "Confirm New Password",
-              changePasswordController.isHideConfirmPassword.value,
-              changePasswordController.changeHideConfirmPassword,
+              controller: changePasswordController.confirmPassword,
+              hintText: "Confirm New Password",
+              isHide:changePasswordController.isHideConfirmPassword.value,
+              changeHide:changePasswordController.changeHideConfirmPassword,
             )),
             SizedBox(
               height: getHeight(15),

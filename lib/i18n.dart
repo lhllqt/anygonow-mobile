@@ -9,6 +9,10 @@ class Messages extends Translations {
       'appName': "Anygonow",
       'email_or_phone': "Email address or phone number",
       'password': "Password",
+      'email': "Email address",
+      "phone": "Phone",
+      "zipcode": "Zipcode",
+      "cfPassword": "Confirm password",
       'continue': "Continue"
     },
   };
