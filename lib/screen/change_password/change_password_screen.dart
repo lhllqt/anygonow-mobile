@@ -36,27 +36,33 @@ class ChangePasswordScreen extends StatelessWidget {
             SizedBox(
               height: getHeight(17),
             ),
-            inputPassword(
+            Obx(() => inputPassword(
               context,
               changePasswordController.password,
               "Current Password",
-            ),
+              changePasswordController.isHidePassword.value,
+              changePasswordController.changeHidePassword,
+            )),
             SizedBox(
               height: getHeight(8),
             ),
-            inputPassword(
+            Obx(() => inputPassword(
               context,
               changePasswordController.newPassword,
               "New Password",
-            ),
+              changePasswordController.isHideNewPassword.value,
+              changePasswordController.changeHideNewPassword,
+            )),
             SizedBox(
               height: getHeight(8),
             ),
-            inputPassword(
+            Obx(() => inputPassword(
               context,
               changePasswordController.confirmPassword,
               "Confirm New Password",
-            ),
+              changePasswordController.isHideConfirmPassword.value,
+              changePasswordController.changeHideConfirmPassword,
+            )),
             SizedBox(
               height: getHeight(15),
             ),

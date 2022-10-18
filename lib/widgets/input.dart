@@ -6,8 +6,8 @@ Container inputPassword(
     BuildContext context,
     TextEditingController controller,
     String hintText,
-    // bool isHide,
-    // Function changeHide,
+    bool isHide,
+    Function changeHide,
     // Function onchange,
     ) {
   return Container(
@@ -26,7 +26,7 @@ Container inputPassword(
           child: TextFormField(
               style: TextStyle(fontSize: getWidth(16)),
               controller: controller,
-              // obscureText: isHide,
+              obscureText: isHide,
               // onChanged: (e) {
               //   onchange();
               // },
@@ -44,14 +44,14 @@ Container inputPassword(
                 TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
               )),
         ),
-        // IconButton(
-        //     onPressed: () {
-        //       changeHide();
-        //     },
-        //     icon: Icon(
-        //       isHide ? Icons.visibility_off : Icons.visibility,
-        //       size: 24,
-        //     ))
+        IconButton(
+            onPressed: () {
+              changeHide();
+            },
+            icon: Icon(
+              isHide ? Icons.visibility_off : Icons.visibility,
+              size: 24,
+            ))
       ],
     ),
   );

@@ -18,6 +18,12 @@ class LoginPageController extends GetxController {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  RxBool isHidePassword = true.obs;
+
+  void changeHidePassword() {
+    isHidePassword.value = !isHidePassword.value;
+  }
+
   Future getPing(List<String> certificateList) async {
     try {
       CustomDio customDio = new CustomDio();

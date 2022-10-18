@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/login/login_controller.dart';
+import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
 import 'package:untitled/screen/reset_password/reset_password_screen.dart';
@@ -56,11 +57,13 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: getHeight(12),
               ),
-              inputRegular(
+              Obx(() => inputPassword(
                 context,
-                hintText: "Input your password",
-                textEditingController: loginPageController.password,
-              ),
+                loginPageController.password,
+                "Input your password",
+                loginPageController.isHidePassword.value,
+                loginPageController.changeHidePassword,
+              )),
               ListTile(
                 dense: true,
                 contentPadding:
@@ -139,9 +142,7 @@ class LoginScreen extends StatelessWidget {
                           decoration: TextDecoration.underline,
                         ),
                       ),
-                      onPress: () => {
-                        Get.to(SignupScreen())
-                      })
+                      onPress: () => {Get.to(SignupScreen())})
                 ],
               ),
             ],
