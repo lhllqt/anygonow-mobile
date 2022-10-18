@@ -27,7 +27,7 @@ class Business {
 
 class Category {
   String id = "";
-  String name= "";
+  String name = "";
 }
 
 class MainScreenController extends GetxController {
@@ -39,10 +39,14 @@ class MainScreenController extends GetxController {
   RxList<Business> businessNearList = <Business>[].obs;
   RxList<Business> mostInterested = <Business>[].obs;
 
+  RxList<Business> businesses = <Business>[].obs;
+
   RxList<Category> categories = <Category>[].obs;
 
   late Future getProNear;
   late Future getMostInterest;
+
+  RxBool hasSearched = false.obs;
 
   @override
   void onInit() {
@@ -73,7 +77,7 @@ class MainScreenController extends GetxController {
 
       businessNearList.clear();
       businessNearList.value = res;
-      return(res);
+      return (res);
     } catch (e) {
       print(e);
       return ([]);
@@ -102,7 +106,7 @@ class MainScreenController extends GetxController {
 
       mostInterested.clear();
       mostInterested.value = res;
-      return(res);
+      return (res);
     } catch (e) {
       print(e);
       return ([]);
@@ -130,7 +134,7 @@ class MainScreenController extends GetxController {
 
       categories.clear();
       categories.value = res;
-      return(true);
+      return (true);
     } catch (e) {
       print(e);
       return (false);
@@ -158,11 +162,49 @@ class MainScreenController extends GetxController {
 
       categories.clear();
       categories.value = res;
-      return(true);
+      return (true);
     } catch (e) {
       print(e);
       return (false);
     }
   }
 
+  Future getBusinesses() async {
+    try {
+      var response;
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] =
+          globalController.user.value.certificate.toString();
+      Category? value =categories
+          .firstWhereOrNull((element) =>
+      element.name ==
+          searchText.text);
+      if (value != null) {
+        response = await customDio
+            .get("/businesses?categoryId=${value.id}&zipcode=${searchZipcode.text}");
+        var json = jsonDecode(response.toString());
+
+        List<dynamic> responseData = json["data"]["result"];
+
+        List<Business> res = [];
+
+        for (int i = 0; i < responseData.length; i++) {
+          Business item = new Business();
+          item.bussiness = responseData[i]["business"];
+          item.rating = responseData[i]["rating"];
+          res.add(item);
+        }
+
+        businesses.clear();
+        businesses.value = res;
+        print(businesses.toString());
+        return (true);
+      } else{
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return (false);
+    }
+  }
 }

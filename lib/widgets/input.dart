@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:untitled/utils/config.dart';
 
 Container inputPassword(
-  BuildContext context,
-  TextEditingController controller,
-  String hintText,
-  bool isHide,
-  Function changeHide,
-  // Function onchange,
-) {
+    BuildContext context,
+    TextEditingController controller,
+    String hintText,
+    bool isHide,
+    Function changeHide,
+    // Function onchange,
+    ) {
   return Container(
     height: getWidth(42),
     // padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -39,9 +39,9 @@ Container inputPassword(
                 labelText: hintText,
                 // hintText: hintText,
                 contentPadding:
-                    EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
+                EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
                 labelStyle:
-                    TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+                TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
               )),
         ),
         IconButton(
@@ -142,12 +142,12 @@ Container inputPassword(
 // }
 
 Container inputRegular(
-  BuildContext context, {
-  required String hintText,
-  required TextEditingController textEditingController,
-  bool? enabled = true,
-  // required Function onChange,
-}) {
+    BuildContext context, {
+      required String hintText,
+      required TextEditingController textEditingController,
+      bool? enabled = true,
+      // required Function onChange,
+    }) {
   print(textEditingController.value.text);
   return Container(
     height: getWidth(42),
@@ -179,9 +179,9 @@ Container inputRegular(
               labelText: hintText,
               // hintText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
+              EdgeInsets.only(left: getWidth(18), bottom: getHeight(10)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
@@ -191,12 +191,12 @@ Container inputRegular(
 }
 
 Container inputSearch(
-  BuildContext context, {
-  required String hintText,
-  required TextEditingController textEditingController,
-  required dynamic onSearch,
-  required List<String> options,
-}) {
+    BuildContext context, {
+      required String hintText,
+      required TextEditingController textEditingController,
+      required dynamic onSearch,
+      required List<String> options,
+    }) {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey _autocompleteKey = GlobalKey();
   return Container(
@@ -209,35 +209,35 @@ Container inputSearch(
     ),
     child: Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                focusNode: _focusNode,
-                controller: textEditingController,
-                style: TextStyle(fontSize: getWidth(12)),
-                onEditingComplete: () {
-                  FocusScope.of(context).unfocus();
-                  onSearch();
-                },
-                decoration: InputDecoration(
-                  isCollapsed: true,
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  hintText: hintText,
-                  contentPadding: EdgeInsets.only(
-                    right: getWidth(16),
-                  ),
-                  labelStyle: TextStyle(
-                      color: Color(0xFF878C92), fontSize: getWidth(16)),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: TextFormField(
+        //         focusNode: _focusNode,
+        //         controller: textEditingController,
+        //         style: TextStyle(fontSize: getWidth(12)),
+        //         onEditingComplete: () {
+        //           FocusScope.of(context).unfocus();
+        //           onSearch();
+        //         },
+        //         decoration: InputDecoration(
+        //           isCollapsed: true,
+        //           border: InputBorder.none,
+        //           focusedBorder: InputBorder.none,
+        //           enabledBorder: InputBorder.none,
+        //           errorBorder: InputBorder.none,
+        //           disabledBorder: InputBorder.none,
+        //           hintText: hintText,
+        //           contentPadding: EdgeInsets.only(
+        //             right: getWidth(16),
+        //           ),
+        //           labelStyle: TextStyle(
+        //               color: Color(0xFF878C92), fontSize: getWidth(16)),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(
           children: [
             Expanded(
@@ -245,6 +245,34 @@ Container inputSearch(
                 key: _autocompleteKey,
                 focusNode: _focusNode,
                 textEditingController: textEditingController,
+                fieldViewBuilder: (BuildContext context,
+                    TextEditingController textEditingController,
+                    FocusNode focusNode,
+                    VoidCallback onFieldSubmitted) {
+                  return TextFormField(
+                    focusNode: _focusNode,
+                    controller: textEditingController,
+                    style: TextStyle(fontSize: getWidth(12)),
+                    onEditingComplete: () {
+                      FocusScope.of(context).unfocus();
+                      onSearch();
+                    },
+                    decoration: InputDecoration(
+                      isCollapsed: true,
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      hintText: hintText,
+                      contentPadding: EdgeInsets.only(
+                        right: getWidth(16),
+                      ),
+                      labelStyle: TextStyle(
+                          color: Color(0xFF878C92), fontSize: getWidth(16)),
+                    ),
+                  );
+                },
                 optionsViewBuilder: (BuildContext context,
                     AutocompleteOnSelected<String> onSelected,
                     Iterable<String> options) {
@@ -253,13 +281,13 @@ Container inputSearch(
                     child: ListView(
                       children: options
                           .map((String option) => GestureDetector(
-                                onTap: () {
-                                  onSelected(option);
-                                },
-                                child: ListTile(
-                                  title: Text(option),
-                                ),
-                              ))
+                        onTap: () {
+                          onSelected(option);
+                        },
+                        child: ListTile(
+                          title: Text(option),
+                        ),
+                      ))
                           .toList(),
                     ),
                   );
@@ -444,11 +472,11 @@ Container inputSearch(
 
 Container inputWithHint(BuildContext context,
     {required String hintText,
-    required String labelText,
-    required String initialText,
-    required TextEditingController textEditingController,
-    required bool err,
-    Function? onchange}) {
+      required String labelText,
+      required String initialText,
+      required TextEditingController textEditingController,
+      required bool err,
+      Function? onchange}) {
   return Container(
     height: getWidth(56),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -478,9 +506,9 @@ Container inputWithHint(BuildContext context,
               labelText: labelText,
               hintText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
@@ -555,9 +583,9 @@ Container inputWithHint(BuildContext context,
 
 Container inputSignup(BuildContext context,
     {required String hintText,
-    required TextEditingController textEditingController,
-    required bool focus,
-    required bool err}) {
+      required TextEditingController textEditingController,
+      required bool focus,
+      required bool err}) {
   return Container(
     height: getWidth(56),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -567,8 +595,8 @@ Container inputSignup(BuildContext context,
         color: err
             ? Colors.red
             : focus
-                ? Color(0xFF61B3FF)
-                : Color(0xFFE7E8EA),
+            ? Color(0xFF61B3FF)
+            : Color(0xFFE7E8EA),
         width: getHeight(1),
       ),
     ),
@@ -586,9 +614,9 @@ Container inputSignup(BuildContext context,
               disabledBorder: InputBorder.none,
               labelText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
@@ -615,8 +643,8 @@ Container inputPasswordSignup(
         color: err
             ? Colors.red
             : focus
-                ? Color(0xFF61B3FF)
-                : Color(0xFFE7E8EA),
+            ? Color(0xFF61B3FF)
+            : Color(0xFFE7E8EA),
         width: getHeight(1),
       ),
     ),
@@ -639,7 +667,7 @@ Container inputPasswordSignup(
                 labelText: hintText,
                 contentPadding: EdgeInsets.only(left: getWidth(16)),
                 labelStyle:
-                    TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+                TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
               )),
         ),
         IconButton(
@@ -657,8 +685,8 @@ Container inputPasswordSignup(
 
 Container inputOnChange(BuildContext context,
     {required String hintText,
-    required TextEditingController textEditingController,
-    required Function function}) {
+      required TextEditingController textEditingController,
+      required Function function}) {
   return Container(
     height: getWidth(56),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
@@ -684,9 +712,9 @@ Container inputOnChange(BuildContext context,
               disabledBorder: InputBorder.none,
               labelText: hintText,
               contentPadding:
-                  EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
+              EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+              TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
             ),
           ),
         ),
