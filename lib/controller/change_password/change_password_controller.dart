@@ -78,7 +78,7 @@ class ChangePasswordController extends GetxController {
   Future<bool> checkPassword(String password) async {
     var mail = globalController.user.value.mail;
     var responseCredential =
-    await loginPageController.getCredential(mail ?? "");
+        await loginPageController.getCredential(mail ?? "");
     print(responseCredential.toString());
     Status validateUsername = ResponseValidator.check(responseCredential);
     if (validateUsername.status == "OK") {
@@ -94,7 +94,7 @@ class ChangePasswordController extends GetxController {
 
       if (privateKey == null)
         validatePassword =
-        new Status(status: "ERROR", message: "WRONG.PASSWORD");
+            new Status(status: "ERROR", message: "WRONG.PASSWORD");
       else
         validatePassword = new Status(status: "SUCCESS", message: "SUCCESS");
 
@@ -186,12 +186,12 @@ class ChangePasswordController extends GetxController {
         if (truePassword) {
           var encryptedKeyPair = generateKeyPairAndEncrypt(newPassword.text);
           var response =
-          await sendNewKeyPair(encryptedKeyPair: encryptedKeyPair);
+              await sendNewKeyPair(encryptedKeyPair: encryptedKeyPair);
           print(response);
           if (response != null) {
             print('debug1');
             String newEncryptedPrivateKey =
-            encryptedKeyPair["encryptedPrivateKey"];
+                encryptedKeyPair["encryptedPrivateKey"];
             String newPrivateKey = encryptedKeyPair["privateKey"];
 
             globalController.user.value.encryptedPrivateKey =
@@ -201,7 +201,7 @@ class ChangePasswordController extends GetxController {
             var certificateInfo = SignatureService.getCertificateInfo(
                 globalController.user.value.id);
             String signature =
-            SignatureService.getSignature(certificateInfo, newPrivateKey);
+                SignatureService.getSignature(certificateInfo, newPrivateKey);
             int times = TimeService.getTimeNow().toUtc().millisecondsSinceEpoch;
 
             List<String> certificateList = SignatureService.getCertificateLogin(

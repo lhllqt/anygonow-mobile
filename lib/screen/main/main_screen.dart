@@ -80,7 +80,7 @@ class MainScreen extends StatelessWidget {
                       return Column(
                         children: List.generate(
                           mainScreenController.businessNearList.length,
-                              (index) {
+                          (index) {
                             return handymanItem(
                               image: mainScreenController
                                   .businessNearList[index]
@@ -126,8 +126,8 @@ class MainScreen extends StatelessWidget {
                           mainScreenController.mostInterested.length,
                               (index) {
                             return serviceItem(image: mainScreenController
-                                .mostInterested[index]
-                                .bussiness["logoUrl"] ?? "",
+                                  .mostInterested[index]
+                                  .bussiness["logoUrl"] ?? "",
                               service: mainScreenController.mostInterested[index].bussiness["name"] ?? "",
                             );
                           },

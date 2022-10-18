@@ -142,9 +142,9 @@ Container bottomNavigator() {
                                 style: TextStyle(
                                     fontSize: getWidth(12),
                                     color:
-                                    globalController.currentPage.value == 1
-                                        ? Color(0xFF61B3FF)
-                                        : Color(0xFF878C92)),
+                                        globalController.currentPage.value == 1
+                                            ? Color(0xFF61B3FF)
+                                            : Color(0xFF878C92)),
                               ),
                             )
                           ],

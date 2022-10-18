@@ -58,33 +58,33 @@ class LoginScreen extends StatelessWidget {
                 height: getHeight(12),
               ),
               Obx(() => inputPassword(
-                context,
-                loginPageController.password,
-                "Input your password",
-                loginPageController.isHidePassword.value,
-                loginPageController.changeHidePassword,
-              )),
+                    context,
+                    loginPageController.password,
+                    "Input your password",
+                    loginPageController.isHidePassword.value,
+                    loginPageController.changeHidePassword,
+                  )),
               ListTile(
                 dense: true,
                 contentPadding:
-                EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+                    EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
                 title: Text("Join as customer"),
                 leading: SizedBox(
                     height: getHeight(14),
                     width: getWidth(14),
                     child: Obx(() => Radio<LoginOption>(
-                      value: LoginOption.customer,
-                      groupValue: loginPageController.loginOption.value,
-                      onChanged: (LoginOption? value) {
-                        if (value != null)
-                          loginPageController.loginOption.value = value;
-                      },
-                    ))),
+                          value: LoginOption.customer,
+                          groupValue: loginPageController.loginOption.value,
+                          onChanged: (LoginOption? value) {
+                            if (value != null)
+                              loginPageController.loginOption.value = value;
+                          },
+                        ))),
               ),
               ListTile(
                 dense: true,
                 contentPadding:
-                EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+                    EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
                 title: Text("Join as professional"),
                 leading: SizedBox(
                   height: getHeight(14),
@@ -132,9 +132,9 @@ class LoginScreen extends StatelessWidget {
                         decoration: TextDecoration.underline,
                       )),
                   onPress: () => {
-                    Get.to(ForgotPasswordScreen())
-                    // Get.to(ResetPasswordScreen())
-                  }),
+                        Get.to(ForgotPasswordScreen())
+                        // Get.to(ResetPasswordScreen())
+                      }),
               Row(
                 children: [
                   Text("Don't have an account?"),

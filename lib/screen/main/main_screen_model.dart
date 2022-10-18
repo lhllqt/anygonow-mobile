@@ -9,11 +9,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 GestureDetector handymanItem(
     {String image = "",
-      String logo = "",
-      String title = "",
-      double stars = 0,
-      int requested = 0,
-      int reviews = 0}) {
+    String logo = "",
+    String title = "",
+    double stars = 0,
+    int requested = 0,
+    int reviews = 0}) {
   return GestureDetector(
     onTap: () => {Get.to(BrandDetailScreen())},
     child: Container(
@@ -26,13 +26,13 @@ GestureDetector handymanItem(
             flex: 40,
             child: image != ""
                 ? SvgPicture.network(
-              image,
-              height: getHeight(120),
-            )
+                    image,
+                    height: getHeight(120),
+                  )
                 : Container(
-              height: getHeight(120),
-              color: Colors.grey,
-            ),
+                    height: getHeight(120),
+                    color: Colors.grey,
+                  ),
           ),
           Expanded(
             flex: 10,
@@ -53,16 +53,16 @@ GestureDetector handymanItem(
                         width: getHeight(30),
                         decoration: logo != ""
                             ? BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              alignment: Alignment.center,
-                              fit: BoxFit.fill,
-                              image: NetworkImage(logo),
-                            ))
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  alignment: Alignment.center,
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(logo),
+                                ))
                             : BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey,
-                        ),
+                                shape: BoxShape.circle,
+                                color: Colors.grey,
+                              ),
                       ),
                       SizedBox(
                         width: getWidth(12),
@@ -131,14 +131,14 @@ Container serviceItem({String image = "", String service = ""}) {
           child: Container(
             decoration: image == ""
                 ? BoxDecoration(
-              color: Colors.grey,
-            )
+                    color: Colors.grey,
+                  )
                 : BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage(image),
-              ),
-            ),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(image),
+                    ),
+                  ),
           ),
         ),
         Expanded(flex: 5, child: Container()),

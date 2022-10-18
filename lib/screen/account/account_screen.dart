@@ -68,11 +68,11 @@ class AccountScreen extends StatelessWidget {
                 Expanded(
                   flex: 48,
                   child: Obx(() => inputRegular(
-                    context,
-                    hintText: "First name*",
-                    textEditingController: accountController.firstName,
-                    enabled: accountController.isEditting.value,
-                  )),
+                        context,
+                        hintText: "First name*",
+                        textEditingController: accountController.firstName,
+                        enabled: accountController.isEditting.value,
+                      )),
                 ),
                 Expanded(
                   flex: 4,
@@ -81,11 +81,11 @@ class AccountScreen extends StatelessWidget {
                 Expanded(
                   flex: 48,
                   child: Obx(() => inputRegular(
-                    context,
-                    hintText: "Last name*",
-                    textEditingController: accountController.lastName,
-                    enabled: accountController.isEditting.value,
-                  )),
+                        context,
+                        hintText: "Last name*",
+                        textEditingController: accountController.lastName,
+                        enabled: accountController.isEditting.value,
+                      )),
                 ),
               ],
             ),
@@ -93,20 +93,20 @@ class AccountScreen extends StatelessWidget {
               height: getHeight(8),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "Your email address*",
-              textEditingController: accountController.email,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  hintText: "Your email address*",
+                  textEditingController: accountController.email,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "Your phone number*",
-              textEditingController: accountController.phoneNumber,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  hintText: "Your phone number*",
+                  textEditingController: accountController.phoneNumber,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(15),
             ),
@@ -121,20 +121,20 @@ class AccountScreen extends StatelessWidget {
               height: getHeight(15),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "Address 1*",
-              textEditingController: accountController.address1,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  hintText: "Address 1*",
+                  textEditingController: accountController.address1,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "Address 2",
-              textEditingController: accountController.address2,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  hintText: "Address 2",
+                  textEditingController: accountController.address2,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(8),
             ),
@@ -147,29 +147,29 @@ class AccountScreen extends StatelessWidget {
               ),
               Obx(() => accountController.isEditting.value
                   ? getDropDown(
-                USStates.getAllNames(),
-                    (String value) => {accountController.state.text = value},
-              )
+                      USStates.getAllNames(),
+                      (String value) => {accountController.state.text = value},
+                    )
                   : Container()),
             ]),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "City*",
-              textEditingController: accountController.city,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  hintText: "City*",
+                  textEditingController: accountController.city,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "Zipcode*",
-              textEditingController: accountController.zipcode,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  hintText: "Zipcode*",
+                  textEditingController: accountController.zipcode,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(8),
             ),
@@ -188,7 +188,7 @@ class AccountScreen extends StatelessWidget {
                         width: getWidth(1),
                       )),
                   child: Obx(
-                        () => Text(
+                    () => Text(
                         accountController.isEditting.value ? "Update" : "Edit"),
                   ),
                 ),
@@ -201,13 +201,13 @@ class AccountScreen extends StatelessWidget {
                         avatar: "");
                     if (result != null) {
                       accountController.isEditting.value =
-                      !accountController.isEditting.value;
+                          !accountController.isEditting.value;
                     }
                     return;
                   }
 
                   accountController.isEditting.value =
-                  !accountController.isEditting.value;
+                      !accountController.isEditting.value;
                 },
               ),
             ),

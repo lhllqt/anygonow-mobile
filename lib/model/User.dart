@@ -7,14 +7,14 @@ part 'User.g.dart';
 class User {
   User(
       {this.id,
-        this.name,
-        this.phone,
-        this.mail,
-        this.publicKey,
-        this.encryptedPrivateKey,
-        this.privateKey,
-        this.username,
-        this.certificate});
+      this.name,
+      this.phone,
+      this.mail,
+      this.publicKey,
+      this.encryptedPrivateKey,
+      this.privateKey,
+      this.username,
+      this.certificate});
 
   @HiveField(0)
   String? id;
