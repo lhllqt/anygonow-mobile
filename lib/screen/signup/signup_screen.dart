@@ -165,13 +165,13 @@ class SignupScreen extends StatelessWidget {
                   height: getHeight(42),
                   width: getWidth(double.infinity),
                   decoration: BoxDecoration(
-                      color: Color(0xFF000000).withOpacity(0.1),
+                      color: const Color(0xffff511a),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
-                        color: Color(0xFF000000),
+                        color: const Color(0xffff511a),
                         width: getWidth(1),
                       )),
-                  child: Text("Sign up as a handyman"),
+                  child: const Text("Sign up as a handyman", style: TextStyle(color: Colors.white),),
                 ),
                 onPress: () => {},
               ),

@@ -3,8 +3,13 @@ import 'package:get/get.dart';
 class Messages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': {
-          'login': 'Login'
-        },
-      };
+    'en_US': {
+      'login': 'Login',
+      'welcomeBack': "Welcome back",
+      'appName': "Anygonow",
+      'email_or_phone': "Email address or phone number",
+      'password': "Password",
+      'continue': "Continue"
+    },
+  };
 }
