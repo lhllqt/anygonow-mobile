@@ -110,7 +110,7 @@ class LoginPageController extends GetxController {
             userInfo.certificate = certificateList[0];
             responsePing.data["data"]["blockchainIndex"];
             // Get.put(GlobalController()).db.put("user", userInfo);
-            // Get.put(GlobalController()).user.value = userInfo;
+            Get.put(GlobalController()).user.value = userInfo;
             return true;
           } else {
             print("Wrong password");

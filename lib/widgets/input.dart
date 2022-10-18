@@ -25,7 +25,7 @@ Container inputPassword(
         Expanded(
           child: TextFormField(
               style: TextStyle(fontSize: getWidth(16)),
-              // controller: controller,
+              controller: controller,
               // obscureText: isHide,
               // onChanged: (e) {
               //   onchange();

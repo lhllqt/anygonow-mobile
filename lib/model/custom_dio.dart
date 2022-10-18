@@ -8,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/instance_manager.dart';
 import 'package:untitled/api/certificate_service.dart';
 import 'package:untitled/controller/global_controller.dart';
+import 'package:untitled/service/date_format.dart';
 
 class CustomDio {
   GlobalController globalController = Get.put(GlobalController());
@@ -86,6 +87,7 @@ class CustomDio {
     var data = params["data"] ?? {};
     data = {
       ...data,
+      "_timestamp": TimeService.timeToBackEndMaster(TimeService.getTimeNow()),
       "_actionType": _getActionType("post", url),
     };
     var privateKey = globalController.user.value.privateKey ?? "";

@@ -38,7 +38,7 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             inputPassword(
               context,
-              changePasswordController.currentPassword,
+              changePasswordController.password,
               "Current Password",
             ),
             SizedBox(
@@ -54,7 +54,7 @@ class ChangePasswordScreen extends StatelessWidget {
             ),
             inputPassword(
               context,
-              changePasswordController.cfnewPassword,
+              changePasswordController.confirmPassword,
               "Confirm New Password",
             ),
             SizedBox(
@@ -76,7 +76,9 @@ class ChangePasswordScreen extends StatelessWidget {
                       )),
                   child: Text("Update"),
                 ),
-                onPress: () => {},
+                onPress: () => {
+                  changePasswordController.changePassword(context)
+                },
               ),
             ),
           ],
