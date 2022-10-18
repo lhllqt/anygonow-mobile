@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:readmore/readmore.dart';
 
 class BrandDetailScreen extends StatelessWidget {
+  BrandDetailController brandDetailController =
+  Get.put(BrandDetailController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +53,7 @@ class BrandDetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Brand name",
+                    brandDetailController.business.bussiness["name"] ?? "",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                     ),
@@ -182,8 +187,9 @@ class BrandDetailScreen extends StatelessWidget {
 
   Container aboutUs() {
     return Container(
+      alignment: Alignment.topLeft,
       child: ReadMoreText(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas volutpat nisl id semper elementum. Etiam molestie mauris ut velit scelerisque consequat. Ut eget erat sit amet tortor ultrices luctus. Fusce sodales at augue ut pretium. Ut a viverra nisi. Pellentesque ullamcorper dui et lacus consequat vulputate. Aliquam dapibus diam a nisl sollicitudin, a vulputate erat vestibulum. Quisque vulputate ex quis erat congue, tempus sagittis sapien lacinia. Morbi eleifend tortor non eleifend rutrum. Etiam maximus odio at nibh consequat porta. In fringilla tincidunt elit, vitae efficitur erat placerat nec. Fusce iaculis tellus vel porta porta. Pellentesque habitant morbi tristique senectus et.",
+        brandDetailController.business.bussiness["descriptions"] ?? "",
         style: TextStyle(fontSize: getWidth(12)),
         trimMode: TrimMode.Line,
         trimCollapsedText: 'Read more',
@@ -213,12 +219,10 @@ class BrandDetailScreen extends StatelessWidget {
             child: ListView(
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              children: [
-                brandService(),
-                brandService(),
-                brandService(),
-                brandService(),
-              ],
+              children: List.generate(
+                  brandDetailController.services.length,
+                      (index) => brandService(
+                      name: brandDetailController.services[index].name)),
             ),
           )
         ],
@@ -226,13 +230,15 @@ class BrandDetailScreen extends StatelessWidget {
     );
   }
 
-  Container brandService() {
+  Container brandService({String name = ""}) {
     return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.only(
         right: getHeight(17),
       ),
       width: getWidth(216),
       color: Colors.grey,
+      child: Text(name),
     );
   }
 

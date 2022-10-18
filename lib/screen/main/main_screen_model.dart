@@ -3,21 +3,35 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
+import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/brand_detail/brand_detail.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-GestureDetector handymanItem(
-    {String image = "",
-      String logo = "",
-      String title = "",
-      double stars = 0,
-      int requested = 0,
-      int reviews = 0,
-      bool isSearchResult = false,
-      String about = ""}) {
+MainScreenController mainScreenController = Get.put(MainScreenController());
+
+GestureDetector handymanItem({
+  String image = "",
+  String logo = "",
+  String title = "",
+  double stars = 0,
+  int requested = 0,
+  int reviews = 0,
+  bool isSearchResult = false,
+  String about = "",
+  String id = "",
+}) {
   return GestureDetector(
-    onTap: () => {Get.to(BrandDetailScreen())},
+    onTap: () async {
+      var brandDetailController = Get.put(BrandDetailController());
+      var res = await brandDetailController.getBusinessDetail(id: id);
+      var serviceRes = await brandDetailController.getBusinessServices(id: id);
+      var ratingRes = await brandDetailController.getBusinessRating(id: id);
+      if (res && serviceRes && ratingRes) {
+        Get.to(BrandDetailScreen());
+      }
+    },
     child: Container(
       margin: EdgeInsets.only(
         bottom: getHeight(32),
@@ -46,7 +60,7 @@ GestureDetector handymanItem(
               Expanded(
                 flex: 50,
                 child: Container(
-                  height: getHeight(102),
+                  height: getHeight(110),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -72,10 +86,29 @@ GestureDetector handymanItem(
                           SizedBox(
                             width: getWidth(12),
                           ),
-                          Text(
-                            title,
-                            style: TextStyle(fontWeight: FontWeight.w700),
+                          SizedBox(
+                            width: getWidth(75),
+                            child: Text(
+                              title,
+                              style: TextStyle(fontWeight: FontWeight.w700),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
+                          isSearchResult
+                              ? Obx(() => Checkbox(
+                            onChanged: (value) {
+                              if (value == null || !value) {
+                                mainScreenController.requests
+                                    .remove(id);
+                              } else {
+                                mainScreenController.requests.add(id);
+                              }
+                              print(mainScreenController.requests);
+                            },
+                            value: mainScreenController.requests
+                                .contains(id),
+                          ))
+                              : SizedBox(),
                         ],
                       ),
                       RatingBarIndicator(

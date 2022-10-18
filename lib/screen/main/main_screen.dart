@@ -7,7 +7,9 @@ import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/main.dart';
 import 'package:untitled/screen/main/main_screen_model.dart';
 import 'package:untitled/utils/config.dart';
+import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/input.dart';
+import 'package:untitled/widgets/pop-up/password-reset.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreenController mainScreenController = Get.put(MainScreenController());
@@ -18,64 +20,108 @@ class MainScreen extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.only(left: getWidth(25), right: getWidth(25)),
         child: ListView(
+          shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           children: [
-            Container(
-              height: getHeight(32),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: Color(0xFFC4C4C4),
-                  width: getWidth(1),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 69,
-                    child: inputSearch(
-                      context,
-                      hintText: "Search by service",
-                      textEditingController: mainScreenController.searchText,
-                      onSearch: () async {
-                        var res = await mainScreenController.getBusinesses();
+            Row(
+              children: [
+                Obx(() {
+                  return Container(
+                    height: getHeight(32),
+                    width: mainScreenController.hasSearched.value
+                        ? getWidth(250)
+                        : getWidth(320),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: Color(0xFFC4C4C4),
+                        width: getWidth(1),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 69,
+                          child: inputSearch(
+                            context,
+                            hintText: "Search by service",
+                            textEditingController:
+                            mainScreenController.searchText,
+                            onSearch: () async {
+                              var res =
+                              await mainScreenController.getBusinesses();
+                              if (res) {
+                                mainScreenController.hasSearched.value = true;
+                              } else {
+                                print("not found");
+                              }
+                            },
+                            options: List.generate(
+                                mainScreenController.categories.length,
+                                    (index) => mainScreenController
+                                    .categories[index].name),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: SvgPicture.asset(
+                            "assets/icons/line.svg",
+                          ),
+                        ),
+                        Expanded(
+                          flex: 29,
+                          child: inputSearch(
+                            context,
+                            hintText: "Zipcode",
+                            textEditingController:
+                            mainScreenController.searchZipcode,
+                            onSearch: () async {
+                              var res =
+                              await mainScreenController.getBusinesses();
+                              if (res) {
+                                mainScreenController.hasSearched.value = true;
+                              } else {
+                                print("not found");
+                              }
+                            },
+                            options: [],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+                Obx(() {
+                  return mainScreenController.hasSearched.value
+                      ? Container(
+                    margin: EdgeInsets.only(left: getWidth(2)),
+                    width: getWidth(70),
+                    height: getHeight(32),
+                    child: Bouncing(
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.black12,
+                        child: Text(
+                          "Send request",
+                          style: TextStyle(
+                            fontSize: getWidth(10),
+                          ),
+                        ),
+                      ),
+                      onPress: () async {
+                        var res =
+                        await mainScreenController.sendRequest();
                         if (res) {
-                          mainScreenController.hasSearched.value = true;
-                        } else {
-                          print("not found");
+                          showPopUp(
+                            message: "Request has been sent successfully",
+                          );
                         }
                       },
-                      options: List.generate(
-                          mainScreenController.categories.length,
-                              (index) =>
-                          mainScreenController.categories[index].name),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: SvgPicture.asset(
-                      "assets/icons/line.svg",
-                    ),
-                  ),
-                  Expanded(
-                    flex: 29,
-                    child: inputSearch(
-                      context,
-                      hintText: "Zipcode",
-                      textEditingController: mainScreenController.searchZipcode,
-                      onSearch: () async {
-                        var res = await mainScreenController.getBusinesses();
-                        if (res) {
-                          mainScreenController.hasSearched.value = true;
-                        } else {
-                          print("not found");
-                        }
-                      },
-                      options: [],
-                    ),
-                  ),
-                ],
-              ),
+                  )
+                      : SizedBox();
+                })
+              ],
             ),
             SizedBox(
               height: getHeight(24),
@@ -130,6 +176,8 @@ class MainScreen extends StatelessWidget {
                               .businessNearList[index].rating["review"]
                               ?.toInt() ??
                               0,
+                          id: mainScreenController
+                              .businessNearList[index].bussiness["id"],
                         );
                       },
                     ),
@@ -199,6 +247,7 @@ class MainScreen extends StatelessWidget {
           about: mainScreenController
               .businesses[index].bussiness["descriptions"] ??
               "",
+          id: mainScreenController.businesses[index].bussiness["id"] ?? "",
         );
       }),
     );

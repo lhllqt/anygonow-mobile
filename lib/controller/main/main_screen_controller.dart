@@ -48,10 +48,15 @@ class MainScreenController extends GetxController {
 
   RxBool hasSearched = false.obs;
 
+  RxList<String> requests = <String>[].obs;
+
+  String categoryId = "";
+
   @override
   void onInit() {
     getProNear = getProfessionalNear();
     getMostInterest = getMostInterested();
+    hasSearched.value = false;
     super.onInit();
   }
 
@@ -175,36 +180,72 @@ class MainScreenController extends GetxController {
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] =
           globalController.user.value.certificate.toString();
-      Category? value =categories
-          .firstWhereOrNull((element) =>
-      element.name ==
-          searchText.text);
-      if (value != null) {
-        response = await customDio
-            .get("/businesses?categoryId=${value.id}&zipcode=${searchZipcode.text}");
+      Category? value = categories
+          .firstWhereOrNull((element) => element.name == searchText.text);
+      if (searchText.text == "" || value != null) {
+        categoryId = value != null ? value.id : "";
+        response = await customDio.get(
+            "/businesses?categoryId=$categoryId&zipcode=${searchZipcode.text}");
         var json = jsonDecode(response.toString());
 
-        List<dynamic> responseData = json["data"]["result"];
+        if (json["data"]["result"] != null) {
+          List<dynamic> responseData = json["data"]["result"];
 
-        List<Business> res = [];
+          List<Business> res = [];
 
-        for (int i = 0; i < responseData.length; i++) {
-          Business item = new Business();
-          item.bussiness = responseData[i]["business"];
-          item.rating = responseData[i]["rating"];
-          res.add(item);
+          for (int i = 0; i < responseData.length; i++) {
+            Business item = new Business();
+            item.bussiness = responseData[i]["business"];
+            item.rating = responseData[i]["rating"];
+            res.add(item);
+          }
+
+          businesses.clear();
+          businesses.value = res;
+          print(businesses.toString());
+        } else {
+          businesses.clear();
         }
-
-        businesses.clear();
-        businesses.value = res;
-        print(businesses.toString());
         return (true);
-      } else{
+      } else {
         return false;
       }
     } catch (e) {
       print(e);
       return (false);
+    }
+  }
+
+  Future sendRequest() async {
+    try {
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] =
+          globalController.user.value.certificate.toString();
+      var response = await customDio.post(
+        "/orders",
+        {
+          "data": {
+            "businessIds": requests,
+            "zipcode": "100",
+            "UserId": globalController.user.value.id.toString(),
+            "categoryId": categoryId,
+          },
+        },
+        sign: true,
+      );
+
+      print(response.toString());
+
+      var json = jsonDecode(response.toString());
+
+      if (json["success"] == false) {
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }
