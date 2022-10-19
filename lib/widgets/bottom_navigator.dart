@@ -291,7 +291,7 @@ Container bottomNavigatorHandyman() {
 Container bottomBrandDetail({String id = ""}) {
   MainScreenController mainScreenController = Get.put(MainScreenController());
   return bottomContainerLayout(
-    height: 90,
+    height: 100,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

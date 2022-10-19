@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
@@ -110,6 +111,7 @@ class BrandDetailScreen extends StatelessWidget {
                   ),
                   SvgPicture.asset(
                     "assets/icons/section-line.svg",
+                    height: getHeight(3),
                   ),
                   SizedBox(
                     height: getHeight(12),
@@ -120,11 +122,16 @@ class BrandDetailScreen extends StatelessWidget {
                   ),
                   SvgPicture.asset(
                     "assets/icons/section-line.svg",
+                    height: getHeight(3),
                   ),
                   SizedBox(
                     height: getHeight(12),
                   ),
                   reviews(),
+                  SizedBox(
+                    height: getHeight(12),
+                  ),
+                  comments(context),
                 ],
               ),
             )
@@ -269,71 +276,171 @@ class BrandDetailScreen extends StatelessWidget {
           SizedBox(
             height: getHeight(9),
           ),
-          reviewBox(),
+          Container(
+            height: getHeight(74),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 10,
+                  child: Container(
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(56),
+                          child: Container(
+                            width: getHeight(80),
+                            height: getHeight(80),
+                            color: Color(0xFFFFF5F2),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "3.0",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Color(0xFFC02D02)),
+                            ),
+                          ),
+                        ),
+                      )),
+                ),
+                Expanded(
+                  flex: 30,
+                  child: Stack(
+                    children: [
+                      RatingBarIndicator(
+                        rating: 2.75,
+                        itemSize: getHeight(20),
+                        itemBuilder: (context, index) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        itemCount: 5,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: getHeight(28)),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/user.svg",
+                              width: getWidth(18),
+                            ),
+                            SizedBox(
+                              width: getWidth(8),
+                            ),
+                            Text(
+                              "Total 4",
+                              style: TextStyle(
+                                fontSize: getWidth(14),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
   }
 
-  Container reviewBox() {
+  Container comments(context) {
     return Container(
-      height: getHeight(74),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      height: getHeight(400),
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 10,
-            child: Container(
-                child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(56),
-                    child: Container(
-                      width: getHeight(80),
-                      height: getHeight(80),
-                      color: Color(0xFFFFF5F2),
-                      alignment: Alignment.center,
-                      child: Text("3.0", textAlign: TextAlign.center, style: TextStyle(color: Color(0xFFC02D02)),),
-                    ),
-                  ),
-                )),
+          Text(
+            "Comments",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: getWidth(18),
+            ),
           ),
           Expanded(
-            flex: 30,
-            child: Stack(
+            child: MediaQuery.removePadding(context: context, child: ListView(
               children: [
-                RatingBarIndicator(
-                  rating: 2.75,
-                  itemSize: getHeight(20),
-                  itemBuilder: (context, index) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  itemCount: 5,
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: getHeight(28)),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/user.svg",
-                        width: getWidth(18),
-                      ),
-                      SizedBox(
-                        width: getWidth(8),
-                      ),
-                      Text(
-                        "Total 4",
-                        style: TextStyle(
-                          fontSize: getWidth(14),
-                        ),
-                      ),
-                    ],
-                  ),),
+                ...brandDetailController.comments.map((e) {
+                  return commentItem();
+                }).toList(),
               ],
-            ),
+            ),),
           ),
         ],
       ),
     );
+  }
+
+  Container commentItem() {
+    return Container(
+        margin: EdgeInsets.only(bottom: getHeight(40)),
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                Container(
+                    child: Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(56),
+                        child: Container(
+                          width: getHeight(32),
+                          height: getHeight(32),
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blueGrey),
+                        ),
+                      ),
+                    )),
+                SizedBox(
+                  width: getWidth(8),
+                ),
+                Stack(children: [
+                  Container(
+                    child: Text(
+                      "Trinh Van Thuan",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: getHeight(14),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: getHeight(20)),
+                    child: Text(
+                      "Customer service: Moves and Truck",
+                      style: TextStyle(
+                        fontSize: getHeight(12),
+                        color: Color(0xFF333333),
+                      ),
+                    ),
+                  )
+                ]),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(top: getHeight(40), left: getWidth(32)),
+              child: RatingBarIndicator(
+                rating: 2.75,
+                itemSize: getHeight(20),
+                itemBuilder: (context, index) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                itemCount: 5,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: getHeight(70), left: getWidth(32)),
+              padding: EdgeInsets.symmetric(vertical: getHeight(8), horizontal: getWidth(8)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Color(0xFFE6E6E6),
+                ),
+              ),
+              child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....."),
+            )
+          ],
+        ));
   }
 }

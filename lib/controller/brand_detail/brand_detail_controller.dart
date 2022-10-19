@@ -13,6 +13,7 @@ class BrandDetailController extends GetxController {
   Business business = new Business();
   List<Category> services = <Category>[];
   List<Rating> ratings = <Rating>[];
+  List<dynamic> comments = ["1", "2", "3"];
 
   Future getBusinessDetail({String id = ""}) async {
     try {
