@@ -13,7 +13,8 @@ class Messages extends Translations {
       "phone": "Phone",
       "zipcode": "Zipcode",
       "cfPassword": "Confirm password",
-      'continue': "Continue"
+      'continue': "Continue",
+      "signinNow": "Sign-in now"
     },
   };
 }

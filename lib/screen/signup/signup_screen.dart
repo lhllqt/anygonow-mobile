@@ -1,92 +1,138 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/controller/account/otp_controller.dart';
 import 'package:untitled/controller/signup/signup_controller.dart';
-import 'package:untitled/screen/login/login_screen.dart';
-import 'package:untitled/screen/signup/check_email_screen.dart';
+import 'package:untitled/screen/signup/verified-page.dart';
+import 'package:untitled/utils/common-fumction.dart';
 import 'package:untitled/utils/config.dart';
-import 'package:untitled/widgets/input.dart';
 import 'package:untitled/widgets/app_name.dart';
+import 'package:untitled/widgets/bounce_button.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
-class SignupScreen extends StatelessWidget {
+class CheckEmailScreen extends StatelessWidget {
   SignupController signupController = Get.put(SignupController());
+  OTPController otpController = Get.put(OTPController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: Padding(
           padding: EdgeInsets.only(top: getHeight(12)),
-          child: confirmButtonContainer(context, signupController)),
+          child: confirmButtonContainer(context)),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Color(0xFF454B52),
+            ),
+            onPressed: () {
+              Get.back();
+            }),
+        elevation: 0,
+      ),
+      backgroundColor: Colors.white,
       body: Container(
-        margin: EdgeInsets.only(
-          left: getWidth(16),
-          right: getWidth(16),
+        padding: EdgeInsets.only(
+          left: getWidth(24),
+          right: getWidth(24),
           top: getHeight(24),
         ),
-        child: ListView(
+        child: Column(
           children: [
             getAppName(),
             SizedBox(
-              height: getHeight(24),
+              height: getHeight(38),
+            ),
+            Container(
+              height: getHeight(120),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/icons/mail_sending.png'),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: getHeight(36),
             ),
             Text(
-              "Sign up",
+              "Please check your email",
               style: TextStyle(
-                fontSize: getWidth(20),
-              ),
-              textAlign: TextAlign.center,
+                  fontSize: getWidth(24),
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFFFF511A)),
             ),
             SizedBox(
               height: getHeight(16),
             ),
-            inputRegular(
-              context,
-              label: "email".tr,
-              hintText: "name@email.com",
-              textEditingController: signupController.email,
+            Text(
+              "Confirmation link has been sent to email address ${convertLongString(string: signupController.email.text, firstLength: 4, lastLength: 12)}",
+              style: TextStyle(
+                fontSize: getWidth(13),
+                height: getHeight(2),
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: getHeight(36)),
+              width: getWidth(98),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    width: 1,
+                    color: Color(0xFFE6E6E6),
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              "No email? Check your spam folder before you ",
+              style: TextStyle(
+                fontSize: getWidth(13),
+                height: getHeight(2),
+                color: const Color(0xFF333333),
+              ),
+              textAlign: TextAlign.center,
             ),
             SizedBox(
               height: getHeight(12),
             ),
-            inputRegular(
-              context,
-              label: "phone".tr,
-              hintText: "Enter your phone",
-              textEditingController: signupController.phoneNumber,
-            ),
-            SizedBox(
-              height: getHeight(12),
-            ),
-            inputRegular(
-              context,
-              label: "zipcode".tr,
-              hintText: "Enter your zipcode",
-              textEditingController: signupController.zipCode,
-            ),
-            SizedBox(
-              height: getHeight(12),
-            ),
-            Obx(() => inputPassword(
-              context,
-              label: "password".tr,
-              controller: signupController.password,
-              hintText: "Enter your password",
-              isHide: signupController.isHidePassword.value,
-              changeHide: signupController.changeHidePassword,
-            )),
-            SizedBox(
-              height: getHeight(12),
-            ),
-            Obx(() => inputPassword(
-              context,
-              label: "cfPassword".tr,
-              controller: signupController.confirmPassword,
-              hintText: "Enter your password",
-              isHide: signupController.isHideCfPassword.value,
-              changeHide: signupController.changeHideCfPassword,
-            )),
-            SizedBox(
-              height: getHeight(15),
+            Countdown(
+              controller: otpController.countdownController,
+              seconds: 60,
+              build: (BuildContext context, double time) {
+                if (time > 0) {
+                  return Text(
+                    time.toInt().toString(),
+                    style: TextStyle(
+                      color: const Color(0xFF878C92),
+                      fontSize: getWidth(17),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  );
+                } else {
+                  return Bouncing(
+                    child: Text(
+                      "Resend the link",
+                      style: TextStyle(
+                        color: const Color(0xFF3864FF),
+                        decoration: TextDecoration.underline,
+                        fontSize: getWidth(17),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    onPress: () async {
+                      // var isRequest = await signupController.signup();
+                      // if (isRequest) {
+                      otpController.countdownController.restart();
+                      // }
+                    },
+                  );
+                }
+              },
+              interval: Duration(seconds: 1),
             ),
           ],
         ),
@@ -102,14 +148,13 @@ Container layout({required Widget child}) {
       left: getWidth(16),
       right: getWidth(16),
     ),
-    height: getHeight(108),
+    height: getHeight(48),
     width: double.infinity,
     child: child,
   );
 }
 
-Container confirmButtonContainer(
-    BuildContext context, SignupController signupController) {
+Container confirmButtonContainer(BuildContext context) {
   return layout(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -124,38 +169,10 @@ Container confirmButtonContainer(
               ),
             ),
             onPressed: () async {
-              if (signupController.email.text != "" &&
-                  signupController.phoneNumber.text != "" &&
-                  signupController.zipCode.text != "" &&
-                  signupController.password.text != "" &&
-                  signupController.confirmPassword.text != "") {
-                var result = await signupController.signup();
-                Get.to(() => CheckEmailScreen());
-              }
+              Get.to(() => VerifiedPage());
             },
-            child: Text("continue".tr, style: const TextStyle(color: Colors.white)),
-          ),
-        ),
-        SizedBox(
-          height: getHeight(12),
-        ),
-        Expanded(
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(
-                color: Colors.white,
-              ),
-            ),
-            onPressed: () {
-              Get.to(() => LoginScreen());
-            },
-            child: const Text(
-              "Already have account? Back to Sign-in",
-              style: TextStyle(
-                color: Color(0xffff511a),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: Text("continue".tr,
+                style: const TextStyle(color: Colors.white)),
           ),
         ),
       ],

@@ -83,34 +83,6 @@ class LoginScreen extends StatelessWidget {
               isHide: loginPageController.isHidePassword.value,
               changeHide: loginPageController.changeHidePassword,
             )),
-            // Row(
-            //   children: [
-            //     Obx(
-            //           () => Radio<LoginOption>(
-            //         value: LoginOption.customer,
-            //         groupValue: loginPageController.loginOption.value,
-            //         onChanged: (LoginOption? value) {
-            //           if (value != null)
-            //             loginPageController.loginOption.value = value;
-            //         },
-            //       ),
-            //     ),
-            //     Text("Join as customer"),
-            //   ],
-            // ),
-            // Row(
-            //   children: [
-            //     Obx(() => Radio<LoginOption>(
-            //         value: LoginOption.professional,
-            //         groupValue: loginPageController.loginOption.value,
-            //         onChanged: (LoginOption? value) {
-            //           if (value != null)
-            //             loginPageController.loginOption.value = value;
-            //         })),
-            //     Text("Join as professional"),
-            //   ],
-            // ),
-
             SizedBox(
               height: getHeight(24),
             ),

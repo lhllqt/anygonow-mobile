@@ -65,6 +65,7 @@ dev_dependencies:
   json_annotation: ^4.4.0
   us_states: ^1.1.5
   flutter_rating_bar: ^4.0.0
+  timer_count_down: ^2.2.0
   readmore: ^2.1.0
   protobuf: ^2.0.1
 
