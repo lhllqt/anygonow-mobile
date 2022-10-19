@@ -45,13 +45,13 @@ GestureDetector handymanItem({
                 flex: 40,
                 child: image != ""
                     ? SvgPicture.network(
-                  image,
-                  height: getHeight(120),
-                )
+                        image,
+                        height: getHeight(120),
+                      )
                     : Container(
-                  height: getHeight(120),
-                  color: Colors.grey,
-                ),
+                        height: getHeight(120),
+                        color: Colors.grey,
+                      ),
               ),
               Expanded(
                 flex: 10,
@@ -72,16 +72,16 @@ GestureDetector handymanItem({
                             width: getHeight(30),
                             decoration: logo != ""
                                 ? BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  alignment: Alignment.center,
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(logo),
-                                ))
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      alignment: Alignment.center,
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(logo),
+                                    ))
                                 : BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey,
-                            ),
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey,
+                                  ),
                           ),
                           SizedBox(
                             width: getWidth(12),
@@ -96,18 +96,18 @@ GestureDetector handymanItem({
                           ),
                           isSearchResult
                               ? Obx(() => Checkbox(
-                            onChanged: (value) {
-                              if (value == null || !value) {
-                                mainScreenController.requests
-                                    .remove(id);
-                              } else {
-                                mainScreenController.requests.add(id);
-                              }
-                              print(mainScreenController.requests);
-                            },
-                            value: mainScreenController.requests
-                                .contains(id),
-                          ))
+                                    onChanged: (value) {
+                                      if (value == null || !value) {
+                                        mainScreenController.requests
+                                            .remove(id);
+                                      } else {
+                                        mainScreenController.requests.add(id);
+                                      }
+                                      print(mainScreenController.requests);
+                                    },
+                                    value: mainScreenController.requests
+                                        .contains(id),
+                                  ))
                               : SizedBox(),
                         ],
                       ),
@@ -156,29 +156,29 @@ GestureDetector handymanItem({
           ),
           isSearchResult
               ? Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: getHeight(12),
-                ),
-                Text(
-                  "About",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: getHeight(12),
+                      ),
+                      Text(
+                        "About",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(
+                        height: getHeight(8),
+                      ),
+                      Text(
+                        about,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                      )
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: getHeight(8),
-                ),
-                Text(
-                  about,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
                 )
-              ],
-            ),
-          )
               : SizedBox(),
         ],
       ),
@@ -197,14 +197,14 @@ Container serviceItem({String image = "", String service = ""}) {
           child: Container(
             decoration: image == ""
                 ? BoxDecoration(
-              color: Colors.grey,
-            )
+                    color: Colors.grey,
+                  )
                 : BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage(image),
-              ),
-            ),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(image),
+                    ),
+                  ),
           ),
         ),
         Expanded(flex: 5, child: Container()),

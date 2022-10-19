@@ -8,7 +8,7 @@ import 'package:untitled/widgets/input.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordController forgotPasswordController =
-  Get.put(ForgotPasswordController());
+      Get.put(ForgotPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -130,3 +130,4 @@ Container confirmButtonContainer(
     ),
   );
 }
+

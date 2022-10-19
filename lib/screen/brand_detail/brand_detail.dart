@@ -9,7 +9,7 @@ import 'package:readmore/readmore.dart';
 
 class BrandDetailScreen extends StatelessWidget {
   BrandDetailController brandDetailController =
-  Get.put(BrandDetailController());
+      Get.put(BrandDetailController());
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +221,7 @@ class BrandDetailScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: List.generate(
                   brandDetailController.services.length,
-                      (index) => brandService(
+                  (index) => brandService(
                       name: brandDetailController.services[index].name)),
             ),
           )

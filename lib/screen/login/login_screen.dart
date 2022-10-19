@@ -65,48 +65,48 @@ class LoginScreen extends StatelessWidget {
                 hintText: "name@email.com",
                 textEditingController: loginPageController.username),
             Obx(
-                  () => loginPageController.messValidateUsername.value != ""
+              () => loginPageController.messValidateUsername.value != ""
                   ? Padding(
-                padding: EdgeInsets.only(
-                    top: getHeight(12), left: getWidth(16)),
-                child: InkWell(
-                  child: Text(
-                    loginPageController.messValidateUsername.value.tr,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-              )
+                      padding: EdgeInsets.only(
+                          top: getHeight(12), left: getWidth(16)),
+                      child: InkWell(
+                        child: Text(
+                          loginPageController.messValidateUsername.value.tr,
+                          style: const TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        onTap: () {},
+                      ),
+                    )
                   : Container(),
             ),
             SizedBox(
               height: getHeight(24),
             ),
             Obx(() => inputPassword(
-              context,
-              label: "password".tr,
-              controller: loginPageController.password,
-              hintText: "Enter your password",
-              isHide: loginPageController.isHidePassword.value,
-              changeHide: loginPageController.changeHidePassword,
-            )),
+                  context,
+                  label: "password".tr,
+                  controller: loginPageController.password,
+                  hintText: "Enter your password",
+                  isHide: loginPageController.isHidePassword.value,
+                  changeHide: loginPageController.changeHidePassword,
+                )),
             Obx(
-                  () => loginPageController.messValidatePassword.value != ""
+              () => loginPageController.messValidatePassword.value != ""
                   ? Padding(
-                padding: EdgeInsets.only(
-                    top: getHeight(12), left: getWidth(16)),
-                child: InkWell(
-                  child: Text(
-                    loginPageController.messValidatePassword.value.tr,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-              )
+                      padding: EdgeInsets.only(
+                          top: getHeight(12), left: getWidth(16)),
+                      child: InkWell(
+                        child: Text(
+                          loginPageController.messValidatePassword.value.tr,
+                          style: const TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        onTap: () {},
+                      ),
+                    )
                   : Container(),
             ),
             SizedBox(

@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
-import 'package:untitled/screen/account/account_screen.dart';
 import 'package:untitled/screen/change_password/change_password_screen.dart';
 import 'package:untitled/screen/handyman/business_management/business_management_screen.dart';
+import 'package:untitled/screen/handyman/payment_page/payment_page_screen.dart';
 import 'package:untitled/utils/config.dart';
-import 'package:untitled/widgets/bounce_button.dart';
 
 class HandymanUserScreen extends StatelessWidget {
   @override
@@ -187,7 +185,9 @@ class HandymanUserScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to((PaymentPageScreen()));
+                        },
                         child: Container(
                           color: Colors.white,
                           child: Column(

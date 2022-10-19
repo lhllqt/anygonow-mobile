@@ -8,7 +8,7 @@ import 'package:untitled/widgets/input.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordController resetPasswordController =
-  Get.put(ResetPasswordController());
+      Get.put(ResetPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ResetPasswordScreen extends StatelessWidget {
               height: getHeight(38),
             ),
             Text("Reset your password", style: TextStyle(
-                fontSize: getWidth(20)
+              fontSize: getWidth(20)
             ),),
             SizedBox(
               height: getHeight(16),

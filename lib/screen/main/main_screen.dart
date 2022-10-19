@@ -46,10 +46,10 @@ class MainScreen extends StatelessWidget {
                             context,
                             hintText: "Search by service",
                             textEditingController:
-                            mainScreenController.searchText,
+                                mainScreenController.searchText,
                             onSearch: () async {
                               var res =
-                              await mainScreenController.getBusinesses();
+                                  await mainScreenController.getBusinesses();
                               if (res) {
                                 mainScreenController.hasSearched.value = true;
                               } else {
@@ -58,7 +58,7 @@ class MainScreen extends StatelessWidget {
                             },
                             options: List.generate(
                                 mainScreenController.categories.length,
-                                    (index) => mainScreenController
+                                (index) => mainScreenController
                                     .categories[index].name),
                           ),
                         ),
@@ -74,10 +74,10 @@ class MainScreen extends StatelessWidget {
                             context,
                             hintText: "Zipcode",
                             textEditingController:
-                            mainScreenController.searchZipcode,
+                                mainScreenController.searchZipcode,
                             onSearch: () async {
                               var res =
-                              await mainScreenController.getBusinesses();
+                                  await mainScreenController.getBusinesses();
                               if (res) {
                                 mainScreenController.hasSearched.value = true;
                               } else {
@@ -94,31 +94,31 @@ class MainScreen extends StatelessWidget {
                 Obx(() {
                   return mainScreenController.hasSearched.value
                       ? Container(
-                    margin: EdgeInsets.only(left: getWidth(2)),
-                    width: getWidth(70),
-                    height: getHeight(32),
-                    child: Bouncing(
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Colors.black12,
-                        child: Text(
-                          "Send request",
-                          style: TextStyle(
-                            fontSize: getWidth(10),
+                          margin: EdgeInsets.only(left: getWidth(2)),
+                          width: getWidth(70),
+                          height: getHeight(32),
+                          child: Bouncing(
+                            child: Container(
+                              alignment: Alignment.center,
+                              color: Colors.black12,
+                              child: Text(
+                                "Send request",
+                                style: TextStyle(
+                                  fontSize: getWidth(10),
+                                ),
+                              ),
+                            ),
+                            onPress: () async {
+                              var res =
+                                  await mainScreenController.sendRequest();
+                              if (res) {
+                                showPopUp(
+                                  message: "Request has been sent successfully",
+                                );
+                              }
+                            },
                           ),
-                        ),
-                      ),
-                      onPress: () async {
-                        var res =
-                        await mainScreenController.sendRequest();
-                        if (res) {
-                          showPopUp(
-                            message: "Request has been sent successfully",
-                          );
-                        }
-                      },
-                    ),
-                  )
+                        )
                       : SizedBox();
                 })
               ],
@@ -158,23 +158,23 @@ class MainScreen extends StatelessWidget {
                   return Column(
                     children: List.generate(
                       mainScreenController.businessNearList.length,
-                          (index) {
+                      (index) {
                         return handymanItem(
                           image: mainScreenController.businessNearList[index]
-                              .bussiness["bannerUrl"] ??
+                                  .bussiness["bannerUrl"] ??
                               "",
                           logo: mainScreenController.businessNearList[index]
-                              .bussiness["logoUrl"] ??
+                                  .bussiness["logoUrl"] ??
                               "",
                           title: mainScreenController
-                              .businessNearList[index].bussiness["name"] ??
+                                  .businessNearList[index].bussiness["name"] ??
                               "",
                           stars: mainScreenController
-                              .businessNearList[index].rating["rate"] ??
+                                  .businessNearList[index].rating["rate"] ??
                               0,
                           reviews: mainScreenController
-                              .businessNearList[index].rating["review"]
-                              ?.toInt() ??
+                                  .businessNearList[index].rating["review"]
+                                  ?.toInt() ??
                               0,
                           id: mainScreenController
                               .businessNearList[index].bussiness["id"],
@@ -207,13 +207,13 @@ class MainScreen extends StatelessWidget {
                 return Column(
                   children: List.generate(
                     mainScreenController.mostInterested.length,
-                        (index) {
+                    (index) {
                       return serviceItem(
                         image: mainScreenController
-                            .mostInterested[index].bussiness["logoUrl"] ??
+                                .mostInterested[index].bussiness["logoUrl"] ??
                             "",
                         service: mainScreenController
-                            .mostInterested[index].bussiness["name"] ??
+                                .mostInterested[index].bussiness["name"] ??
                             "",
                       );
                     },
@@ -234,18 +234,18 @@ class MainScreen extends StatelessWidget {
       children: List.generate(mainScreenController.businesses.length, (index) {
         return handymanItem(
           image:
-          mainScreenController.businesses[index].bussiness["bannerUrl"] ??
-              "",
+              mainScreenController.businesses[index].bussiness["bannerUrl"] ??
+                  "",
           logo:
-          mainScreenController.businesses[index].bussiness["logoUrl"] ?? "",
+              mainScreenController.businesses[index].bussiness["logoUrl"] ?? "",
           title: mainScreenController.businesses[index].bussiness["name"] ?? "",
           stars: mainScreenController.businesses[index].rating["rate"] ?? 0,
           reviews: mainScreenController.businesses[index].rating["review"]
-              ?.toInt() ??
+                  ?.toInt() ??
               0,
           isSearchResult: true,
           about: mainScreenController
-              .businesses[index].bussiness["descriptions"] ??
+                  .businesses[index].bussiness["descriptions"] ??
               "",
           id: mainScreenController.businesses[index].bussiness["id"] ?? "",
         );

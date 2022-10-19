@@ -7,7 +7,7 @@ import 'package:untitled/widgets/input.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordController changePasswordController =
-  Get.put(ChangePasswordController());
+      Get.put(ChangePasswordController());
 
   @override
   Widget build(BuildContext context) {
