@@ -82,7 +82,7 @@ Container inputRegular(BuildContext context,
     {String? label,
     required String hintText,
     required TextEditingController textEditingController,
-    bool? enabled = true,
+    bool enabled = true,
     double height = 54,
     double width = 0,
     int maxLines = 1}) {
@@ -110,7 +110,7 @@ Container inputRegular(BuildContext context,
               )
             : Container(),
         Container(
-          height: getWidth(height),
+          height: getHeight(height),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(getHeight(6)),
             border: Border.all(
@@ -123,7 +123,8 @@ Container inputRegular(BuildContext context,
               Expanded(
                 child: TextFormField(
                   maxLines: maxLines,
-                  enabled: enabled,
+                  readOnly: !enabled,
+                  // enabled: enabled,
                   controller: textEditingController,
                   style: TextStyle(fontSize: getWidth(14)),
                   decoration: InputDecoration(

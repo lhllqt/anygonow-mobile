@@ -31,8 +31,6 @@ class AccountController extends GetxController{
           globalController.user.value.certificate.toString();
       response = await customDio.get("/users/$userID");
       var json = jsonDecode(response.toString());
-      print(json.toString());
-      print(userID);
       var userInfo = json["data"]["user"];
 
       myAccountController.email.text = userInfo["mail"] ?? "";
@@ -53,7 +51,7 @@ class AccountController extends GetxController{
     }
   }
 
-  Future editUserInfo(
+  Future editUserInfo (
       {
         required String firstName,
         required String lastName,

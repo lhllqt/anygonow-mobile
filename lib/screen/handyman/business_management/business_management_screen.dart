@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/handyman/business_management/business_management_controller.dart';
@@ -227,6 +226,14 @@ class BusinessManagementScreen extends StatelessWidget {
                               ),
                             ),
                             onPress: () async {
+                              if (businessManagementController.isEditing.value) {
+                                var result = await businessManagementController.editBusiness();
+                                if (result) {
+                                  businessManagementController.isEditing.value =
+                                  !businessManagementController.isEditing.value;
+                                }
+                                return;
+                              }
                               businessManagementController.isEditing.value =
                                   !businessManagementController.isEditing.value;
                             },
@@ -283,7 +290,7 @@ class BusinessManagementScreen extends StatelessWidget {
                               context,
                               hintText: "County",
                               textEditingController:
-                                  contactInfoController.address1,
+                                  contactInfoController.county,
                               enabled: contactInfoController.isEditing.value,
                             )),
                         SizedBox(
@@ -339,7 +346,15 @@ class BusinessManagementScreen extends StatelessWidget {
                                     : "Edit"),
                               ),
                             ),
-                            onPress: () {
+                            onPress: () async {
+                              if (contactInfoController.isEditing.value) {
+                                var result = await contactInfoController.editContactInfo();
+                                if (result) {
+                                  contactInfoController.isEditing.value =
+                                  !contactInfoController.isEditing.value;
+                                }
+                                return;
+                              }
                               contactInfoController.isEditing.value =
                                   !contactInfoController.isEditing.value;
                             },

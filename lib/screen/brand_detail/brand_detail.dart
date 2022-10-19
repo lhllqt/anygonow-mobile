@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:untitled/widgets/bottom_navigator.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:readmore/readmore.dart';
 
@@ -14,6 +15,7 @@ class BrandDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: bottomBrandDetail(),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: BackButton(

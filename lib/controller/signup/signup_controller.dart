@@ -17,6 +17,16 @@ class SignupController extends GetxController {
   RxBool isHidePassword = true.obs;
   RxBool isHideCfPassword = true.obs;
 
+  RxBool isCustomerMode = true.obs;
+
+  void resetInput() {
+    email.clear();
+    phoneNumber.clear();
+    zipCode.clear();
+    password.clear();
+    confirmPassword.clear();
+  }
+
   void updateTime() {
     update(["validateOTP"]);
   }
@@ -63,7 +73,7 @@ class SignupController extends GetxController {
       var keyPair = generateKeyPairAndEncrypt(password.text);
       CustomDio customDio = CustomDio();
       response = await customDio.post(
-          "/users",
+          "/${isCustomerMode.value ? "users" : "businesses"}",
           {
             "data": {
               "mail": email.text,

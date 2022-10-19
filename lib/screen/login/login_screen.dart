@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
+import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
@@ -165,11 +166,12 @@ Container confirmButtonContainer(
                   await Get.put(MainScreenController()).getCategories();
                   Get.to(() => HomePageScreen());
                 } else {
+                  await Get.put(MyRequestController()).getRequests();
                   Get.to(() => HandymanHomePageScreen());
                 }
               }
             },
-            child: const Text("Sign in", style: TextStyle(color: Colors.white)),
+            child: const Text("Login", style: TextStyle(color: Colors.white)),
           ),
         ),
         SizedBox(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
+import 'package:untitled/screen/main/main_screen_model.dart';
 import 'package:untitled/utils/config.dart';
+import 'package:untitled/widgets/pop-up/password-reset.dart';
 
 import 'bounce_button.dart';
 
@@ -215,8 +218,7 @@ Container bottomNavigatorHandyman() {
                   }),
                   Obx(() {
                     return Bouncing(
-                      onPress: () {
-                      },
+                      onPress: () {},
                       child: Container(
                         width: getWidth(60),
                         child: Column(
@@ -244,8 +246,7 @@ Container bottomNavigatorHandyman() {
                   }),
                   Obx(() {
                     return Bouncing(
-                      onPress: () {
-                      },
+                      onPress: () {},
                       child: Container(
                         width: getWidth(60),
                         child: Column(
@@ -273,8 +274,7 @@ Container bottomNavigatorHandyman() {
                   }),
                   Obx(() {
                     return Bouncing(
-                      onPress: () {
-                      },
+                      onPress: () {},
                       child: Container(
                         width: getWidth(60),
                         child: Column(
@@ -323,9 +323,9 @@ Container bottomNavigatorHandyman() {
                                 style: TextStyle(
                                     fontSize: getWidth(10),
                                     color:
-                                    globalController.currentPage.value == 1
-                                        ? Color(0xFF61B3FF)
-                                        : Color(0xFF878C92)),
+                                        globalController.currentPage.value == 1
+                                            ? Color(0xFF61B3FF)
+                                            : Color(0xFF878C92)),
                               ),
                             )
                           ],
@@ -343,3 +343,73 @@ Container bottomNavigatorHandyman() {
   );
 }
 
+Container bottomBrandDetail({String id = ""}) {
+  MainScreenController mainScreenController = Get.put(MainScreenController());
+  return Container(
+    height: getHeight(45),
+    width: double.infinity,
+    color: Colors.white,
+    child: Stack(
+      children: [
+        Container(
+          height: 1,
+          color: Color(0xFFE5E5E5),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Bouncing(
+                    onPress: () async {
+                      mainScreenController.requests.clear();
+                      mainScreenController.requests.add(Get.put(BrandDetailController()).business.bussiness["id"]);
+                      var res = await mainScreenController.sendRequest();
+                      if (res) {
+                        showPopUp(
+                          message: "Request has been sent successfully",
+                        );
+                      }
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.white,
+                      width: getWidth(120),
+                      child: Text(
+                        "Send request",
+                        style: TextStyle(
+                          fontSize: getWidth(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SvgPicture.asset(
+                    "assets/icons/line.svg",
+                    height: getHeight(38),
+                  ),
+                  Bouncing(
+                    onPress: () {
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: getWidth(120),
+                      child: Text(
+                        "Send message",
+                        style: TextStyle(
+                          fontSize: getWidth(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
