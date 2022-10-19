@@ -9,6 +9,7 @@ import 'package:untitled/screen/account/account_screen.dart';
 import 'package:untitled/screen/change_password/change_password_screen.dart';
 import 'package:untitled/screen/handyman/business_management/business_management_screen.dart';
 import 'package:untitled/screen/handyman/payment_page/payment_page_screen.dart';
+import 'package:untitled/screen/login/login_screen.dart';
 import 'package:untitled/utils/config.dart';
 
 class HandymanUserScreen extends StatelessWidget {
@@ -357,12 +358,17 @@ class HandymanUserScreen extends StatelessWidget {
                                     SizedBox(
                                       width: getWidth(12),
                                     ),
-                                    Container(
-                                      width: getWidth(200),
-                                      child: Text(
-                                        "Log out",
-                                        style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.offAll(() => LoginScreen());
+                                      },
+                                      child: Container(
+                                        width: getWidth(200),
+                                        child: Text(
+                                          "Log out",
+                                          style:
+                                          TextStyle(fontSize: getWidth(16)),
+                                        ),
                                       ),
                                     ),
                                   ],

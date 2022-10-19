@@ -6,7 +6,7 @@ import 'package:untitled/controller/signup/signup_controller.dart';
 import 'package:untitled/screen/forgot_password/verified-page.dart';
 import 'package:untitled/screen/login/login_screen.dart';
 import 'package:untitled/screen/signup/verified-page.dart';
-import 'package:untitled/utils/common-fumction.dart';
+import 'package:untitled/utils/common-function.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/app_name.dart';
 import 'package:untitled/widgets/bounce_button.dart';

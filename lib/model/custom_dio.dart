@@ -67,6 +67,7 @@ class CustomDio {
         },
         onError: (DioError error, ErrorInterceptorHandler handler) async {
           print({'onError': error});
+          print({'onError2': error.response});
           return handler.next(error); //continue
         },
       ),

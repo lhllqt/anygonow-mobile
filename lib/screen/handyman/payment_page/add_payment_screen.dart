@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:untitled/service/stripe.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/dialog.dart';
 import 'package:untitled/widgets/layout.dart';
@@ -52,18 +53,11 @@ class AddPaymentScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            CardField(
-              onCardChanged: (card) {
-                print(card);
-              },
-            ),
             TextButton(
               onPressed: () async {
-                // create payment method
-                final paymentMethod = await Stripe.instance
-                    .createPaymentMethod(PaymentMethodParams.card());
+                await StripeService.createSetupIntent();
               },
-              child: Text('pay'),
+              child: Text('test'),
             )
           ],
         ));

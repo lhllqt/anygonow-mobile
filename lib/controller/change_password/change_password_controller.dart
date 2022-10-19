@@ -179,8 +179,6 @@ class ChangePasswordController extends GetxController {
       errPassword.value = "";
       if (errNewPassword.value == "" && errConfirmPassword.value == "") {
         // Todo change password api
-        // showLoading();
-        print(password.text);
         // var truePassword = await checkPassword(password.text);
         var truePassword = checkCurrentPassword(password.text);
         if (truePassword) {
@@ -189,7 +187,6 @@ class ChangePasswordController extends GetxController {
               await sendNewKeyPair(encryptedKeyPair: encryptedKeyPair);
           print(response);
           if (response != null) {
-            print('debug1');
             String newEncryptedPrivateKey =
                 encryptedKeyPair["encryptedPrivateKey"];
             String newPrivateKey = encryptedKeyPair["privateKey"];
@@ -220,15 +217,12 @@ class ChangePasswordController extends GetxController {
             newPassword.clear();
             confirmPassword.clear();
             Get.back();
-            // CustomDialog(context, "CHANGE_PASSWORD").show();
           } else {
-            print('debug2');
             Get.back();
             errPassword.value = "エラーが発生しました。";
           }
         } else {
           Get.back();
-          print('debug3');
           errPassword.value = "パスワードが合っていません。";
         }
       }

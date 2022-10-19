@@ -23,7 +23,8 @@ class Messages extends Translations {
           "confirm": "Confirm",
           "success_add_payment": "Successfully added new payment method !",
           "common_success": "Successfully !",
-          "next": "Next"
+          "next": "Next",
+          "referCode": "Referral code"
         },
       };
 }

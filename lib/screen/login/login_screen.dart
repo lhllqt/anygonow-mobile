@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
-import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
 import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
-import 'package:untitled/screen/signup/signup_screen.dart';
+import 'package:untitled/screen/signup/signup_welcome_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/input.dart';
@@ -17,10 +16,9 @@ import 'package:untitled/widgets/app_name.dart';
 enum LoginOption { customer, professional }
 
 class LoginScreen extends StatelessWidget {
-  LoginPageController loginPageController = Get.put(LoginPageController());
-
   @override
   Widget build(BuildContext context) {
+    LoginPageController loginPageController = Get.put(LoginPageController());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: Padding(
@@ -170,6 +168,7 @@ Container confirmButtonContainer(
                       if (result) {
                         controller.isLoading.value = false;
                         int? role = Get.put(GlobalController()).user.value.role;
+                        print(role);
                         if (role == null || role == 0) {
                           await Get.put(MainScreenController()).getCategories();
                           Get.to(() => HomePageScreen());
@@ -195,7 +194,7 @@ Container confirmButtonContainer(
               ),
             ),
             onPressed: () {
-              Get.to(SignupScreen());
+              Get.to(SignupWelcomeScreen());
             },
             child: const Text(
               "Don't have account? Create new",
