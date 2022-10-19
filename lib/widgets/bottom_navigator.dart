@@ -6,6 +6,7 @@ import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/main/main_screen_model.dart';
 import 'package:untitled/utils/config.dart';
+import 'package:untitled/widgets/layout.dart';
 import 'package:untitled/widgets/pop-up/password-reset.dart';
 
 import 'bounce_button.dart';
@@ -45,17 +46,11 @@ Container bottomNavigator() {
                             SvgPicture.asset(
                               "assets/images/home.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 0
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "home".tr,
-                              style: TextStyle(
-                                  fontSize: getWidth(12),
-                                  color: globalController.currentPage.value == 0
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -75,17 +70,11 @@ Container bottomNavigator() {
                             SvgPicture.asset(
                               "assets/images/share.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 5
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "share".tr,
-                              style: TextStyle(
-                                  fontSize: getWidth(12),
-                                  color: globalController.currentPage.value == 5
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -105,17 +94,11 @@ Container bottomNavigator() {
                             SvgPicture.asset(
                               "assets/images/view.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 5
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "view".tr,
-                              style: TextStyle(
-                                  fontSize: getWidth(12),
-                                  color: globalController.currentPage.value == 5
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -135,19 +118,12 @@ Container bottomNavigator() {
                             SvgPicture.asset(
                               "assets/icons/user.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 1
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             FittedBox(
                               child: Text(
                                 "Profile",
-                                style: TextStyle(
-                                    fontSize: getWidth(12),
-                                    color:
-                                        globalController.currentPage.value == 1
-                                            ? Color(0xFF61B3FF)
-                                            : Color(0xFF878C92)),
+                                style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                               ),
                             )
                           ],
@@ -199,17 +175,11 @@ Container bottomNavigatorHandyman() {
                             SvgPicture.asset(
                               "assets/icons/request.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 0
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "My request",
-                              style: TextStyle(
-                                  fontSize: getWidth(10),
-                                  color: globalController.currentPage.value == 0
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -227,17 +197,11 @@ Container bottomNavigatorHandyman() {
                             SvgPicture.asset(
                               "assets/icons/message.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 5
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "Message",
-                              style: TextStyle(
-                                  fontSize: getWidth(10),
-                                  color: globalController.currentPage.value == 5
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -255,17 +219,11 @@ Container bottomNavigatorHandyman() {
                             SvgPicture.asset(
                               "assets/icons/advertise.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 5
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "Advertise",
-                              style: TextStyle(
-                                  fontSize: getWidth(10),
-                                  color: globalController.currentPage.value == 5
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -283,17 +241,11 @@ Container bottomNavigatorHandyman() {
                             SvgPicture.asset(
                               "assets/icons/noti.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 5
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
                               "Notification",
-                              style: TextStyle(
-                                  fontSize: getWidth(10),
-                                  color: globalController.currentPage.value == 5
-                                      ? Color(0xFF61B3FF)
-                                      : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -313,19 +265,12 @@ Container bottomNavigatorHandyman() {
                             SvgPicture.asset(
                               "assets/icons/user.svg",
                               width: getWidth(24),
-                              color: globalController.currentPage.value == 1
-                                  ? Color(0xFF61B3FF)
-                                  : Color(0xFF878C92),
+                              color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             FittedBox(
                               child: Text(
                                 "Profile",
-                                style: TextStyle(
-                                    fontSize: getWidth(10),
-                                    color:
-                                        globalController.currentPage.value == 1
-                                            ? Color(0xFF61B3FF)
-                                            : Color(0xFF878C92)),
+                                style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                               ),
                             )
                           ],
@@ -345,69 +290,62 @@ Container bottomNavigatorHandyman() {
 
 Container bottomBrandDetail({String id = ""}) {
   MainScreenController mainScreenController = Get.put(MainScreenController());
-  return Container(
-    height: getHeight(45),
-    width: double.infinity,
-    color: Colors.white,
-    child: Stack(
+  return bottomContainerLayout(
+    height: 90,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          height: 1,
-          color: Color(0xFFE5E5E5),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Bouncing(
-                    onPress: () async {
-                      mainScreenController.requests.clear();
-                      mainScreenController.requests.add(Get.put(BrandDetailController()).business.bussiness["id"]);
-                      var res = await mainScreenController.sendRequest();
-                      if (res) {
-                        showPopUp(
-                          message: "Request has been sent successfully",
-                        );
-                      }
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.white,
-                      width: getWidth(120),
-                      child: Text(
-                        "Send request",
-                        style: TextStyle(
-                          fontSize: getWidth(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SvgPicture.asset(
-                    "assets/icons/line.svg",
-                    height: getHeight(38),
-                  ),
-                  Bouncing(
-                    onPress: () {
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: getWidth(120),
-                      child: Text(
-                        "Send message",
-                        style: TextStyle(
-                          fontSize: getWidth(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+        Expanded(
+          child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.white,
+                side: const BorderSide(
+                  color: Color(0xffff511a),
+                ),
               ),
-            ),
-          ),
+              onPressed: () async {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset("assets/icons/message.svg"),
+                  SizedBox(
+                    width: getWidth(4),
+                  ),
+                  Text("Message".tr, style: const TextStyle(color: Color(0xffff511a))),
+                ],
+              )),
+        ),
+        SizedBox(
+          width: getWidth(8),
+        ),
+        Expanded(
+          child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: const Color(0xffff511a),
+                side: const BorderSide(
+                  color: Color(0xffff511a),
+                ),
+              ),
+              onPressed: () async {
+                mainScreenController.requests.clear();
+                mainScreenController.requests.add(Get.put(BrandDetailController()).business.bussiness["id"]);
+                var res = await mainScreenController.sendRequest();
+                if (res) {
+                  showPopUp(
+                    message: "Request has been sent successfully",
+                  );
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset("assets/icons/flag.svg"),
+                  SizedBox(
+                    width: getWidth(4),
+                  ),
+                  Text("Send request".tr, style: const TextStyle(color: Colors.white)),
+                ],
+              )),
         ),
       ],
     ),
