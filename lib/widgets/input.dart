@@ -85,7 +85,9 @@ Container inputRegular(BuildContext context,
     bool enabled = true,
     double height = 54,
     double width = 0,
-    int maxLines = 1}) {
+    int maxLines = 1,
+    int minLines = 1,
+    TextInputType keyboardType = TextInputType.text}) {
   return Container(
     width: width == 0 ? null : getWidth(width),
     child: Column(
@@ -123,6 +125,8 @@ Container inputRegular(BuildContext context,
               Expanded(
                 child: TextFormField(
                   maxLines: maxLines,
+                  minLines: minLines,
+                  keyboardType: keyboardType,
                   readOnly: !enabled,
                   // enabled: enabled,
                   controller: textEditingController,

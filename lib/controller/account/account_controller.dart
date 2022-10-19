@@ -15,10 +15,16 @@ class AccountController extends GetxController{
   TextEditingController state = TextEditingController();
   TextEditingController city = TextEditingController();
   TextEditingController zipcode = TextEditingController();
+  TextEditingController website = TextEditingController();
+  TextEditingController business = TextEditingController();
+  TextEditingController category = TextEditingController();
+  TextEditingController description = TextEditingController();
+  TextEditingController country = TextEditingController();
 
   GlobalController globalController = Get.put(GlobalController());
 
   RxBool isEditting = false.obs;
+  RxBool isLoading = false.obs;
 
   Future getUserInfo() async {
     try {
