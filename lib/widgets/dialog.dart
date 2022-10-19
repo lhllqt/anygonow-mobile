@@ -13,8 +13,9 @@ class CustomDialog {
     if (type == "SUCCESS") {
       alert = alertDialogSuccess(context, message);
     } else if (type == "HELP") {
-      alert = alertHelpdeskDialog(context, optionData["title"],
-          optionData["message"], optionData["image"]);
+      alert = alertHelpdeskDialog(context, optionData["title"], optionData["message"], optionData["image"]);
+    } else if (type == "CONFIRM") {
+      alert = alertConfirmDialog(context, optionData["title"], optionData["message"], optionData["onConfirm"]);
     } else {
       alert = alertDialog(context, message);
     }
@@ -76,10 +77,7 @@ AlertDialog alertDialogSuccess(context, message) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: getWidth(17),
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -130,10 +128,7 @@ AlertDialog alertDialog(context, message) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: getWidth(17),
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -159,7 +154,9 @@ AlertDialog alertHelpdeskDialog(context, title, helptext, image) {
             title,
             style: TextStyle(fontSize: getWidth(14)),
           ),
-          SizedBox(height: getHeight(15),),
+          SizedBox(
+            height: getHeight(15),
+          ),
           Text(
             helptext,
             style: TextStyle(fontSize: getWidth(12), fontWeight: FontWeight.normal),
@@ -199,10 +196,81 @@ AlertDialog alertHelpdeskDialog(context, title, helptext, image) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: getWidth(17),
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: getWidth(10)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+AlertDialog alertConfirmDialog(context, title, message, onConfirm) {
+  return AlertDialog(
+    content: Container(
+      width: getWidth(343),
+      height: getHeight(150),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: getWidth(16)),
+          ),
+          SizedBox(
+            height: getHeight(15),
+          ),
+          Text(
+            message,
+            style: TextStyle(fontSize: getWidth(14), fontWeight: FontWeight.normal),
+            textAlign: TextAlign.center,
+          ),
+          Expanded(
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: const Color(0xffff511a),
+                        side: const BorderSide(
+                          color: Color(0xffff511a),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: getHeight(12)),
+                      ),
+                      onPressed: () async {
+                        await onConfirm();
+                      },
+                      child: Text(
+                        'confirm'.tr,
+                        style: TextStyle(color: Colors.white, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: getWidth(10)),
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: const Color(0xFFE9E9E9),
+                        side: const BorderSide(
+                          color: Color(0xFFE9E9E9),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: getHeight(12)),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'close'.tr,
+                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),

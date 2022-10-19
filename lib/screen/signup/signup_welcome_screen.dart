@@ -17,10 +17,11 @@ class SignupWelcomeScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(top: getHeight(12)),
+          padding: EdgeInsets.only(top: getHeight(0)),
           child: confirmButtonContainer(context, signupController)),
       body: Container(
-        margin: EdgeInsets.only(
+        color: Colors.white,
+        padding: EdgeInsets.only(
           left: getWidth(16),
           right: getWidth(16),
           top: getHeight(24),

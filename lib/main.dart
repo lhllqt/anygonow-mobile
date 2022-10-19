@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       translations: Messages(),
       locale: const Locale('en', 'US'),
       defaultTransition:
-      Platform.isIOS ? Transition.cupertino : Transition.rightToLeft,
+          Platform.isIOS ? Transition.cupertino : Transition.rightToLeft,
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "TTNorm-Bold"),
       home: home(),
     );

@@ -32,7 +32,7 @@ Container inputPassword(
               )
             : Container(),
         Container(
-          height: getWidth(52),
+          height: getHeight(50),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(getHeight(6)),
             border: Border.all(
@@ -56,7 +56,7 @@ Container inputPassword(
                       labelText: hintText,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       contentPadding: EdgeInsets.only(
-                          left: getWidth(18), bottom: getHeight(14)),
+                          left: getWidth(18), bottom: getHeight(20)),
                       labelStyle: TextStyle(
                           color: const Color(0xFF9E9E9E),
                           fontSize: getWidth(14)),
@@ -83,7 +83,7 @@ Container inputRegular(BuildContext context,
     required String hintText,
     required TextEditingController textEditingController,
     bool enabled = true,
-    double height = 54,
+    double height = 50,
     double width = 0,
     int maxLines = 1,
     int minLines = 1,
@@ -141,7 +141,7 @@ Container inputRegular(BuildContext context,
                     labelText: hintText,
                     contentPadding: EdgeInsets.only(
                       left: getWidth(18),
-                      bottom: getHeight(14),
+                      bottom: getHeight(20),
                     ),
                     labelStyle: TextStyle(
                         color: const Color(0xFF9E9E9E), fontSize: getWidth(14)),

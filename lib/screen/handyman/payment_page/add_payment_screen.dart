@@ -21,7 +21,7 @@ class AddPaymentScreen extends StatelessWidget {
     var border = OutlineInputBorder(
       borderSide: BorderSide(
         color: Colors.grey.withOpacity(0.7),
-        width: 2.0,
+        width: 1.0,
       ),
     );
 
@@ -56,7 +56,7 @@ class AddPaymentScreen extends StatelessWidget {
                 CustomDialog(context, "HELP").show({
                   "title": "Information on Security Code",
                   "message":
-                  "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
+                      "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
                   "image": "assets/icons/helpdesk-add-payment.png",
                 });
               },
@@ -66,11 +66,6 @@ class AddPaymentScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            // inputRegular(context, hintText: "Number", textEditingController: paymentController.number),
-            // inputRegular(context, hintText: "Expired month", textEditingController: paymentController.expiredMonth),
-            // inputRegular(context, hintText: "Expired year", textEditingController: paymentController.expiredYear),
-            // inputRegular(context, hintText: "Cvv", textEditingController: paymentController.cvv),
-            // inputRegular(context, hintText: "Holder", textEditingController: paymentController.holder),
             CreditCardForm(
               formKey: formKey,
               cardNumber: cardNumber,
@@ -124,6 +119,7 @@ class AddPaymentScreen extends StatelessWidget {
 
 Container confirmButtonContainer(BuildContext context, PaymentController paymentController) {
   return bottomContainerLayout(
+    height: 52,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,

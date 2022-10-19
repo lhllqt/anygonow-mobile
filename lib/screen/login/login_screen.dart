@@ -12,6 +12,7 @@ import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/input.dart';
 import 'package:untitled/widgets/app_name.dart';
+import 'package:untitled/widgets/layout.dart';
 
 enum LoginOption { customer, professional }
 
@@ -21,16 +22,14 @@ class LoginScreen extends StatelessWidget {
     LoginPageController loginPageController = Get.put(LoginPageController());
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(top: getHeight(0)),
-          child: confirmButtonContainer(context, loginPageController)),
+      bottomNavigationBar: Padding(padding: EdgeInsets.only(top: getHeight(0)), child: confirmButtonContainer(context, loginPageController)),
       body: Container(
         padding: EdgeInsets.only(
           left: getWidth(16),
           right: getWidth(16),
           top: getHeight(62),
         ),
-        color: const Color(0xFFFFFFFF),
+        color: Colors.white,
         child: ListView(
           children: [
             getAppName(),
@@ -59,15 +58,11 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               height: getHeight(40),
             ),
-            inputRegular(context,
-                label: "email_or_phone".tr,
-                hintText: "name@email.com",
-                textEditingController: loginPageController.username),
+            inputRegular(context, label: "email_or_phone".tr, hintText: "name@email.com", textEditingController: loginPageController.username),
             Obx(
               () => loginPageController.messValidateUsername.value != ""
                   ? Padding(
-                      padding: EdgeInsets.only(
-                          top: getHeight(12), left: getWidth(16)),
+                      padding: EdgeInsets.only(top: getHeight(12), bottom: getHeight(12), left: getWidth(16)),
                       child: InkWell(
                         child: Text(
                           loginPageController.messValidateUsername.value.tr,
@@ -78,10 +73,9 @@ class LoginScreen extends StatelessWidget {
                         onTap: () {},
                       ),
                     )
-                  : Container(),
-            ),
-            SizedBox(
-              height: getHeight(24),
+                  : SizedBox(
+                      height: getHeight(12),
+                    ),
             ),
             Obx(() => inputPassword(
                   context,
@@ -94,8 +88,7 @@ class LoginScreen extends StatelessWidget {
             Obx(
               () => loginPageController.messValidatePassword.value != ""
                   ? Padding(
-                      padding: EdgeInsets.only(
-                          top: getHeight(12), left: getWidth(16)),
+                      padding: EdgeInsets.only(top: getHeight(12), bottom: getHeight(12), left: getWidth(16)),
                       child: InkWell(
                         child: Text(
                           loginPageController.messValidatePassword.value.tr,
@@ -106,10 +99,9 @@ class LoginScreen extends StatelessWidget {
                         onTap: () {},
                       ),
                     )
-                  : Container(),
-            ),
-            SizedBox(
-              height: getHeight(24),
+                  : SizedBox(
+                      height: getHeight(12),
+                    ),
             ),
             Bouncing(
                 child: const Text(
@@ -128,23 +120,9 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-Container layout({required Widget child}) {
-  return Container(
-    margin: EdgeInsets.only(
-      bottom: getHeight(46),
-      left: getWidth(16),
-      right: getWidth(16),
-    ),
-    height: getHeight(108),
-    width: double.infinity,
-    color: const Color(0xFFFFFFFF),
-    child: child,
-  );
-}
-
-Container confirmButtonContainer(
-    BuildContext context, LoginPageController controller) {
-  return layout(
+Container confirmButtonContainer(BuildContext context, LoginPageController controller) {
+  return bottomContainerLayout(
+    height: 120,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -152,8 +130,11 @@ Container confirmButtonContainer(
         Obx(
           () => Expanded(
             child: controller.isLoading.value == true
-                ? const Center(
-                    child: CircularProgressIndicator(),
+                ? Container(
+                    color: Colors.white,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   )
                 : OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -178,8 +159,7 @@ Container confirmButtonContainer(
                       }
                       controller.isLoading.value = false;
                     },
-                    child: const Text("Sign in",
-                        style: TextStyle(color: Colors.white)),
+                    child: const Text("Sign in", style: TextStyle(color: Colors.white)),
                   ),
           ),
         ),
