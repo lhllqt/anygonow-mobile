@@ -14,7 +14,8 @@ class Messages extends Translations {
       "zipcode": "Zipcode",
       "cfPassword": "Confirm password",
       'continue': "Continue",
-      "signinNow": "Sign-in now"
+      "signinNow": "Sign-in now",
+      "signin": "Sign in"
     },
   };
 }

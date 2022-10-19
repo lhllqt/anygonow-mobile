@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/account/otp_controller.dart';
+import 'package:untitled/controller/forgot_password/forgot_password_controller.dart';
 import 'package:untitled/controller/signup/signup_controller.dart';
+import 'package:untitled/screen/forgot_password/verified-page.dart';
 import 'package:untitled/screen/signup/verified-page.dart';
 import 'package:untitled/utils/common-fumction.dart';
 import 'package:untitled/utils/config.dart';
@@ -9,8 +11,8 @@ import 'package:untitled/widgets/app_name.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-class CheckEmailScreen extends StatelessWidget {
-  SignupController signupController = Get.put(SignupController());
+class ForgotPasswordCheckEmailScreen extends StatelessWidget {
+  ForgotPasswordController forgotPasswordController = Get.put(ForgotPasswordController());
   OTPController otpController = Get.put(OTPController());
 
   @override
@@ -67,7 +69,7 @@ class CheckEmailScreen extends StatelessWidget {
               height: getHeight(16),
             ),
             Text(
-              "Confirmation link has been sent to email address ${convertLongString(string: signupController.email.text, firstLength: 4, lastLength: 12)}",
+              "Confirmation link has been sent to email address ${convertLongString(string: forgotPasswordController.email.text, firstLength: 4, lastLength: 12)}",
               style: TextStyle(
                 fontSize: getWidth(13),
                 height: getHeight(2),
@@ -124,7 +126,6 @@ class CheckEmailScreen extends StatelessWidget {
                       ),
                     ),
                     onPress: () async {
-                      await signupController.signup();
                       otpController.countdownController.restart();
                     },
                   );
@@ -167,7 +168,7 @@ Container confirmButtonContainer(BuildContext context) {
               ),
             ),
             onPressed: () async {
-              Get.to(() => VerifiedPage());
+              Get.to(() => ForgotPasswordVerifiedPage());
             },
             child: Text("continue".tr,
                 style: const TextStyle(color: Colors.white)),
