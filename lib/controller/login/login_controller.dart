@@ -19,6 +19,7 @@ class LoginPageController extends GetxController {
   TextEditingController password = TextEditingController();
 
   RxBool isHidePassword = true.obs;
+  RxBool isLoading = false.obs;
   var messValidateUsername = "".obs;
   var messValidatePassword = "".obs;
 

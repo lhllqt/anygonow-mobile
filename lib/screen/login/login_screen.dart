@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(top: getHeight(12)),
+          padding: EdgeInsets.only(top: getHeight(0)),
           child: confirmButtonContainer(context, loginPageController)),
       body: Container(
         padding: EdgeInsets.only(
@@ -66,48 +66,48 @@ class LoginScreen extends StatelessWidget {
                 hintText: "name@email.com",
                 textEditingController: loginPageController.username),
             Obx(
-              () => loginPageController.messValidateUsername.value != ""
+                  () => loginPageController.messValidateUsername.value != ""
                   ? Padding(
-                      padding: EdgeInsets.only(
-                          top: getHeight(12), left: getWidth(16)),
-                      child: InkWell(
-                        child: Text(
-                          loginPageController.messValidateUsername.value.tr,
-                          style: const TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                        onTap: () {},
-                      ),
-                    )
+                padding: EdgeInsets.only(
+                    top: getHeight(12), left: getWidth(16)),
+                child: InkWell(
+                  child: Text(
+                    loginPageController.messValidateUsername.value.tr,
+                    style: const TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              )
                   : Container(),
             ),
             SizedBox(
               height: getHeight(24),
             ),
             Obx(() => inputPassword(
-                  context,
-                  label: "password".tr,
-                  controller: loginPageController.password,
-                  hintText: "Enter your password",
-                  isHide: loginPageController.isHidePassword.value,
-                  changeHide: loginPageController.changeHidePassword,
-                )),
+              context,
+              label: "password".tr,
+              controller: loginPageController.password,
+              hintText: "Enter your password",
+              isHide: loginPageController.isHidePassword.value,
+              changeHide: loginPageController.changeHidePassword,
+            )),
             Obx(
-              () => loginPageController.messValidatePassword.value != ""
+                  () => loginPageController.messValidatePassword.value != ""
                   ? Padding(
-                      padding: EdgeInsets.only(
-                          top: getHeight(12), left: getWidth(16)),
-                      child: InkWell(
-                        child: Text(
-                          loginPageController.messValidatePassword.value.tr,
-                          style: const TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                        onTap: () {},
-                      ),
-                    )
+                padding: EdgeInsets.only(
+                    top: getHeight(12), left: getWidth(16)),
+                child: InkWell(
+                  child: Text(
+                    loginPageController.messValidatePassword.value.tr,
+                    style: const TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              )
                   : Container(),
             ),
             SizedBox(
@@ -139,6 +139,7 @@ Container layout({required Widget child}) {
     ),
     height: getHeight(108),
     width: double.infinity,
+    color: const Color(0xFFFFFFFF),
     child: child,
   );
 }
@@ -150,28 +151,37 @@ Container confirmButtonContainer(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              backgroundColor: const Color(0xffff511a),
-              side: const BorderSide(
-                color: Color(0xffff511a),
+        Obx(
+              () => Expanded(
+            child: controller.isLoading.value == true
+                ? const Center(
+              child: CircularProgressIndicator(),
+            )
+                : OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: const Color(0xffff511a),
+                side: const BorderSide(
+                  color: Color(0xffff511a),
+                ),
               ),
-            ),
-            onPressed: () async {
-              var result = await controller.login();
-              if (result) {
-                int? role = Get.put(GlobalController()).user.value.role;
-                if (role == null || role == 0) {
-                  await Get.put(MainScreenController()).getCategories();
-                  Get.to(() => HomePageScreen());
-                } else {
-                  await Get.put(MyRequestController()).getRequests();
-                  Get.to(() => HandymanHomePageScreen());
+              onPressed: () async {
+                controller.isLoading.value = true;
+                var result = await controller.login();
+                if (result) {
+                  controller.isLoading.value = false;
+                  int? role = Get.put(GlobalController()).user.value.role;
+                  if (role == null || role == 0) {
+                    await Get.put(MainScreenController()).getCategories();
+                    Get.to(() => HomePageScreen());
+                  } else {
+                    Get.to(() => HandymanHomePageScreen());
+                  }
                 }
-              }
-            },
-            child: const Text("Login", style: TextStyle(color: Colors.white)),
+                controller.isLoading.value = false;
+              },
+              child: const Text("Sign in",
+                  style: TextStyle(color: Colors.white)),
+            ),
           ),
         ),
         SizedBox(
