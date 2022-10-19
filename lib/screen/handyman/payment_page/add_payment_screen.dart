@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:untitled/controller/handyman/payment_method/payment_method_controller.dart';
 import 'package:untitled/service/stripe.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/dialog.dart';
@@ -10,11 +11,23 @@ import 'package:untitled/widgets/layout.dart';
 class AddPaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    PaymentController paymentController = Get.put(PaymentController());
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    String cardNumber = '';
+    String expiryDate = '';
+    String cardHolderName = '';
+    String cvvCode = '';
+
+    var border = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey.withOpacity(0.7),
+        width: 2.0,
+      ),
+    );
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(top: getHeight(12)),
-            child: confirmButtonContainer(context)),
+        bottomNavigationBar: Padding(padding: EdgeInsets.only(top: getHeight(12)), child: confirmButtonContainer(context, paymentController)),
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text(
@@ -43,7 +56,7 @@ class AddPaymentScreen extends StatelessWidget {
                 CustomDialog(context, "HELP").show({
                   "title": "Information on Security Code",
                   "message":
-                      "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
+                  "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
                   "image": "assets/icons/helpdesk-add-payment.png",
                 });
               },
@@ -53,18 +66,63 @@ class AddPaymentScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            TextButton(
-              onPressed: () async {
-                await StripeService.createSetupIntent();
+            // inputRegular(context, hintText: "Number", textEditingController: paymentController.number),
+            // inputRegular(context, hintText: "Expired month", textEditingController: paymentController.expiredMonth),
+            // inputRegular(context, hintText: "Expired year", textEditingController: paymentController.expiredYear),
+            // inputRegular(context, hintText: "Cvv", textEditingController: paymentController.cvv),
+            // inputRegular(context, hintText: "Holder", textEditingController: paymentController.holder),
+            CreditCardForm(
+              formKey: formKey,
+              cardNumber: cardNumber,
+              cvvCode: cvvCode,
+              cardHolderName: cardHolderName,
+              expiryDate: expiryDate,
+              themeColor: Colors.blue,
+              textColor: Colors.black,
+              cardNumberDecoration: InputDecoration(
+                labelText: 'Number',
+                hintText: 'XXXX XXXX XXXX XXXX',
+                hintStyle: const TextStyle(color: Colors.black),
+                labelStyle: const TextStyle(color: Colors.black),
+                focusedBorder: border,
+                enabledBorder: border,
+              ),
+              expiryDateDecoration: InputDecoration(
+                hintStyle: const TextStyle(color: Colors.black),
+                labelStyle: const TextStyle(color: Colors.black),
+                focusedBorder: border,
+                enabledBorder: border,
+                labelText: 'Expired Date',
+                hintText: 'XX/XX',
+              ),
+              cvvCodeDecoration: InputDecoration(
+                hintStyle: const TextStyle(color: Colors.black),
+                labelStyle: const TextStyle(color: Colors.black),
+                focusedBorder: border,
+                enabledBorder: border,
+                labelText: 'CVV',
+                hintText: 'XXX',
+              ),
+              cardHolderDecoration: InputDecoration(
+                hintStyle: const TextStyle(color: Colors.black),
+                labelStyle: const TextStyle(color: Colors.black),
+                focusedBorder: border,
+                enabledBorder: border,
+                labelText: 'Card Holder',
+              ),
+              onCreditCardModelChange: (CreditCardModel creditCardModel) {
+                paymentController.cardNumber.value = creditCardModel.cardNumber;
+                paymentController.cardExpireDate.value = creditCardModel.expiryDate;
+                paymentController.cardHolder.value = creditCardModel.cardHolderName;
+                paymentController.cardCVV.value = creditCardModel.cvvCode;
               },
-              child: Text('test'),
-            )
+            ),
           ],
         ));
   }
 }
 
-Container confirmButtonContainer(BuildContext context) {
+Container confirmButtonContainer(BuildContext context, PaymentController paymentController) {
   return bottomContainerLayout(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,14 +137,25 @@ Container confirmButtonContainer(BuildContext context) {
               ),
             ),
             onPressed: () async {
-              final paymentMethod = await Stripe.instance
-                  .createPaymentMethod(PaymentMethodParams.card());
-              print({paymentMethod});
-              CustomDialog(context, "SUCCESS")
-                  .show({"message": "success_add_payment"});
+              var _card = CardDetails();
+              var expireDate = paymentController.cardExpireDate.value;
+              if (paymentController.cardNumber.value != "") {
+                _card = _card.copyWith(number: paymentController.cardNumber.value.replaceAll(" ", ""));
+              }
+              if (expireDate.split('/').first != '') {
+                _card = _card.copyWith(expirationMonth: int.parse(expireDate.split('/').first));
+              }
+              if (expireDate.split('/').last != '') {
+                _card = _card.copyWith(expirationYear: int.parse(expireDate.split('/').last));
+              }
+              if (paymentController.cardCVV.isNotEmpty) {
+                _card = _card.copyWith(cvc: paymentController.cardCVV.value);
+              }
+              SetupIntent? paymentMethod = await StripeService.createSetupIntent(_card);
+              await StripeService.createNewPayment(paymentMethod);
+              CustomDialog(context, "SUCCESS").show({"message": "success_add_payment"});
             },
-            child:
-                Text("Confirm".tr, style: const TextStyle(color: Colors.white)),
+            child: Text("Confirm".tr, style: const TextStyle(color: Colors.white)),
           ),
         ),
       ],

@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:untitled/controller/handyman/payment_method/payment_method_controller.dart';
 import 'package:untitled/screen/handyman/payment_page/add_payment_screen.dart';
 import 'package:untitled/utils/config.dart';
 
 class PaymentPageScreen extends StatelessWidget {
-  List cards = [
-    {
-      'cardNumber': '4242424242434242',
-      'expiryDate': '04/22',
-      'cardHolderName': 'Kaura Jerim',
-      'cvvCode': '424',
-      'showBackView': false,
-    },
-    {
-      'cardNumber': '55555345966554444',
-      'expiryDate': '02/25',
-      'cardHolderName': 'Jerim Kaura',
-      'cvvCode': '123',
-      'showBackView': false,
-    }
-  ];
   @override
   Widget build(BuildContext context) {
+    PaymentController paymentController = Get.put(PaymentController());
+    paymentController.getPaymentMethods();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -45,31 +32,31 @@ class PaymentPageScreen extends StatelessWidget {
             }),
         elevation: 0,
       ),
-      body: Container(
-        padding: EdgeInsets.all(getWidth(23)),
-        child: !cards.isNotEmpty
-            ? ListView.builder(
-                itemCount: cards.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var card = cards[index];
-                  return InkWell(
-                    onTap: () {},
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: getWidth(14)),
-                      child: CreditCardWidget(
-                        cardNumber: card['cardNumber'],
-                        expiryDate: card['expiryDate'],
-                        cardHolderName: card['cardHolderName'],
-                        cvvCode: card['cvvCode'],
-                        showBackView: false,
-                        onCreditCardWidgetChange: (CreditCardBrand) {},
-                      ),
-                    ),
-                  );
-                },
-              )
-            : Container(
-                child: Column(
+      body: Obx(
+            () => Container(
+          padding: EdgeInsets.all(getWidth(23)),
+          child: paymentController.paymentMethod["paymentMethodId"] != null
+              ? ListView.builder(
+            itemCount: 1,
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                onTap: () {},
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: getWidth(14)),
+                  child: CreditCardWidget(
+                    cardNumber: "4242424242424242",
+                    expiryDate: "02/42",
+                    cardHolderName: "Trinh Van Thuan",
+                    cvvCode: "XXX",
+                    showBackView: false,
+                    onCreditCardWidgetChange: (CreditCardBrand) {},
+                  ),
+                ),
+              );
+            },
+          )
+              : Container(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -87,11 +74,11 @@ class PaymentPageScreen extends StatelessWidget {
                     onPressed: () async {
                       Get.to(() => AddPaymentScreen());
                     },
-                    child: Text("Add Payment Method".tr,
-                        style: const TextStyle(color: Colors.white)),
+                    child: Text("Add Payment Method".tr, style: const TextStyle(color: Colors.white)),
                   ),
                 ],
               )),
+        ),
       ),
     );
   }

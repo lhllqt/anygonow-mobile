@@ -39,7 +39,7 @@ class BusinessManagementController extends GetxController {
           }
         },
       );
-      print(response);
+
       var json = jsonDecode(response.toString());
       if (json["data"]["business"] != null) {
         return true;
