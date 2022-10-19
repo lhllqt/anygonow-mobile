@@ -9,10 +9,6 @@ buildscript {
     }
 }
 
-lintOptions {
-    checkReleaseBuilds false
-}
-
 allprojects {
     repositories {
         google()
