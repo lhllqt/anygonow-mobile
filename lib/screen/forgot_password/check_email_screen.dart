@@ -4,6 +4,7 @@ import 'package:untitled/controller/account/otp_controller.dart';
 import 'package:untitled/controller/forgot_password/forgot_password_controller.dart';
 import 'package:untitled/controller/signup/signup_controller.dart';
 import 'package:untitled/screen/forgot_password/verified-page.dart';
+import 'package:untitled/screen/login/login_screen.dart';
 import 'package:untitled/screen/signup/verified-page.dart';
 import 'package:untitled/utils/common-fumction.dart';
 import 'package:untitled/utils/config.dart';
@@ -121,11 +122,12 @@ class ForgotPasswordCheckEmailScreen extends StatelessWidget {
                       style: TextStyle(
                         color: const Color(0xFF3864FF),
                         decoration: TextDecoration.underline,
-                        fontSize: getWidth(17),
+                        fontSize: getWidth(14),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     onPress: () async {
+                      await forgotPasswordController.forgotPassword();
                       otpController.countdownController.restart();
                     },
                   );
@@ -168,9 +170,9 @@ Container confirmButtonContainer(BuildContext context) {
               ),
             ),
             onPressed: () async {
-              Get.to(() => ForgotPasswordVerifiedPage());
+              Get.to(() => LoginScreen());
             },
-            child: Text("continue".tr,
+            child: Text("signin".tr,
                 style: const TextStyle(color: Colors.white)),
           ),
         ),

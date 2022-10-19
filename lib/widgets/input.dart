@@ -42,7 +42,7 @@ Container inputPassword(
             children: [
               Expanded(
                 child: TextFormField(
-                    style: TextStyle(fontSize: getWidth(16)),
+                    style: TextStyle(fontSize: getWidth(14)),
                     controller: controller,
                     obscureText: isHide,
                     decoration: InputDecoration(
@@ -114,7 +114,7 @@ Container inputRegular(
                 child: TextFormField(
                   enabled: enabled,
                   controller: textEditingController,
-                  style: TextStyle(fontSize: getWidth(16)),
+                  style: TextStyle(fontSize: getWidth(14)),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     floatingLabelBehavior: FloatingLabelBehavior.never,

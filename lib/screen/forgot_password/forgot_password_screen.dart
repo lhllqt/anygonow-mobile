@@ -120,6 +120,7 @@ Container confirmButtonContainer(
               ),
             ),
             onPressed: () async {
+              await controller.forgotPassword();
               Get.to(() => ForgotPasswordCheckEmailScreen());
             },
             child: Text("continue".tr, style: const TextStyle(color: Colors.white)),

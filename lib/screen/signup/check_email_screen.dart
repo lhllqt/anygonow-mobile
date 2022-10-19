@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/account/otp_controller.dart';
 import 'package:untitled/controller/signup/signup_controller.dart';
+import 'package:untitled/screen/login/login_screen.dart';
 import 'package:untitled/screen/signup/verified-page.dart';
 import 'package:untitled/utils/common-fumction.dart';
 import 'package:untitled/utils/config.dart';
@@ -119,7 +120,7 @@ class CheckEmailScreen extends StatelessWidget {
                       style: TextStyle(
                         color: const Color(0xFF3864FF),
                         decoration: TextDecoration.underline,
-                        fontSize: getWidth(17),
+                        fontSize: getWidth(14),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -167,9 +168,9 @@ Container confirmButtonContainer(BuildContext context) {
               ),
             ),
             onPressed: () async {
-              Get.to(() => VerifiedPage());
+              Get.to(() => LoginScreen());
             },
-            child: Text("continue".tr,
+            child: Text("signin".tr,
                 style: const TextStyle(color: Colors.white)),
           ),
         ),
