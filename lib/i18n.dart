@@ -15,7 +15,10 @@ class Messages extends Translations {
       "cfPassword": "Confirm password",
       'continue': "Continue",
       "signinNow": "Sign-in now",
-      "signin": "Sign in"
+      "signin": "Sign in",
+      "invalid_username": "Your email address or phone number is invalid !",
+      "invalid_password": "Your password is invalid !",
+      "error_server": "Server is not working !"
     },
   };
 }

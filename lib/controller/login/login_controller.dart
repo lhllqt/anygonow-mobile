@@ -19,6 +19,8 @@ class LoginPageController extends GetxController {
   TextEditingController password = TextEditingController();
 
   RxBool isHidePassword = true.obs;
+  var messValidateUsername = "".obs;
+  var messValidatePassword = "".obs;
 
   void changeHidePassword() {
     isHidePassword.value = !isHidePassword.value;
@@ -27,8 +29,6 @@ class LoginPageController extends GetxController {
   Future getPing(List<String> certificateList) async {
     try {
       CustomDio customDio = new CustomDio();
-      // var certificateJson = jsonEncode(certificateList);
-      print("cert: " + certificateList.toString());
       customDio.dio.options.headers["Authorization"] = certificateList[0];
 
       var response = await customDio.post(
@@ -62,15 +62,16 @@ class LoginPageController extends GetxController {
 
   Future<bool> login() async {
     User userInfo = User();
+    messValidateUsername.value = "";
+    messValidatePassword.value = "";
     if (username.text == "") {
-      print("Username can not be empty");
+      messValidateUsername.value = "invalid_username";
     } else if (password.text == "") {
-      print("Password can not be empty");
+      messValidatePassword.value = "invalid_password";
     } else {
       var responseCredential = await getCredential(username.text);
       Status validateUsername = ResponseValidator.check(responseCredential);
       if (validateUsername.status == "OK") {
-        print({"data": responseCredential});
         var data = responseCredential.data["data"];
         var userId = data["id"];
         var publicKey = data['publicKey'];
@@ -79,14 +80,13 @@ class LoginPageController extends GetxController {
         String? privateKey =
         decryptAESCryptoJS(encryptedPrivateKey, password.text);
 
-        print("pK:" + privateKey.toString());
-        Status validatePassword = new Status();
+        Status validatePassword = Status();
 
-        if (privateKey == null)
-          validatePassword =
-          new Status(status: "ERROR", message: "WRONG.PASSWORD");
-        else
-          validatePassword = new Status(status: "SUCCESS", message: "SUCCESS");
+        if (privateKey == null) {
+          validatePassword = Status(status: "ERROR", message: "WRONG.PASSWORD");
+        } else {
+          validatePassword = Status(status: "SUCCESS", message: "SUCCESS");
+        }
 
         if (validatePassword.status == "SUCCESS") {
           var certificateInfo = SignatureService.getCertificateInfo(userId);
@@ -103,9 +103,8 @@ class LoginPageController extends GetxController {
               times);
 
           var responsePing = await getPing(certificateList);
-          print({"resPing": responsePing.toString()});
           Status validateServer2 = ResponseValidator.check(responsePing);
-          var jsonReponse = jsonDecode(responsePing.toString());
+          var jsonResponse = jsonDecode(responsePing.toString());
           if (validateServer2.status == "OK") {
             userInfo.id = userId;
             userInfo.name = userName;
@@ -115,20 +114,19 @@ class LoginPageController extends GetxController {
             userInfo.encryptedPrivateKey = encryptedPrivateKey;
             userInfo.username = username.text;
             userInfo.certificate = certificateList[0];
-            userInfo.role = jsonReponse["data"]["role"];
-            // Get.put(GlobalController()).db.put("user", userInfo);
+            userInfo.role = jsonResponse["data"]["role"];
             Get.put(GlobalController()).user.value = userInfo;
             return true;
           } else {
-            print("Wrong password");
+            messValidatePassword.value = "invalid_password";
           }
         } else {
-          print("Wrong password");
+          messValidatePassword.value = "invalid_password";
         }
       } else if (validateUsername.status == "ERROR.SERVER") {
-        print("Error Server");
+        messValidateUsername.value = "invalid_username";
       } else {
-        print("Username Invalid");
+        messValidateUsername.value = "invalid_username";
       }
     }
     return false;

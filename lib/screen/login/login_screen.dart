@@ -64,6 +64,23 @@ class LoginScreen extends StatelessWidget {
                 label: "email_or_phone".tr,
                 hintText: "name@email.com",
                 textEditingController: loginPageController.username),
+            Obx(
+                  () => loginPageController.messValidateUsername.value != ""
+                  ? Padding(
+                padding: EdgeInsets.only(
+                    top: getHeight(12), left: getWidth(16)),
+                child: InkWell(
+                  child: Text(
+                    loginPageController.messValidateUsername.value.tr,
+                    style: const TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              )
+                  : Container(),
+            ),
             SizedBox(
               height: getHeight(24),
             ),
@@ -75,6 +92,23 @@ class LoginScreen extends StatelessWidget {
               isHide: loginPageController.isHidePassword.value,
               changeHide: loginPageController.changeHidePassword,
             )),
+            Obx(
+                  () => loginPageController.messValidatePassword.value != ""
+                  ? Padding(
+                padding: EdgeInsets.only(
+                    top: getHeight(12), left: getWidth(16)),
+                child: InkWell(
+                  child: Text(
+                    loginPageController.messValidatePassword.value.tr,
+                    style: const TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              )
+                  : Container(),
+            ),
             SizedBox(
               height: getHeight(24),
             ),
