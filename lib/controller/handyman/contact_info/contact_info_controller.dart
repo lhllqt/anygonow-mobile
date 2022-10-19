@@ -26,6 +26,7 @@ class ContactInfoController extends GetxController {
   Future editContactInfo() async {
     try {
       var userID = globalController.user.value.id.toString();
+      String stateId = globalController.states.firstWhere((element) => element.name == state.text).id ?? "";
       var response;
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] =
@@ -40,7 +41,7 @@ class ContactInfoController extends GetxController {
             "zipcode": zipCode.text,
             "address1": address1.text,
             "address2": address2.text,
-            "stateId": state.text,
+            "stateId": stateId,
             "city": city.text,
           }
         },
