@@ -60,26 +60,16 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               height: getHeight(40),
             ),
-            Text("email_or_phone".tr,
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w500)),
-            SizedBox(
-              height: getHeight(4),
-            ),
             inputRegular(context,
+                label: "email_or_phone".tr,
                 hintText: "name@email.com",
                 textEditingController: loginPageController.username),
             SizedBox(
               height: getHeight(24),
             ),
-            Text("password".tr,
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w500)),
-            SizedBox(
-              height: getHeight(4),
-            ),
             Obx(() => inputPassword(
               context,
+              label: "password".tr,
               controller: loginPageController.password,
               hintText: "Enter your password",
               isHide: loginPageController.isHidePassword.value,

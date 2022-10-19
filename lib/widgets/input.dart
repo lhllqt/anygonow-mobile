@@ -20,8 +20,10 @@ Container inputPassword(
           ),
           width: double.infinity,
           child: Text(label,
-              style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.w500)),
+              style: TextStyle(
+                  fontSize: getWidth(14),
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500)),
         )
             : Container(),
         label != null
@@ -30,7 +32,7 @@ Container inputPassword(
         )
             : Container(),
         Container(
-          height: getWidth(48),
+          height: getWidth(52),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(getHeight(6)),
             border: Border.all(
@@ -56,7 +58,8 @@ Container inputPassword(
                       contentPadding: EdgeInsets.only(
                           left: getWidth(18), bottom: getHeight(14)),
                       labelStyle: TextStyle(
-                          color: const Color(0xFF9E9E9E), fontSize: getWidth(14)),
+                          color: const Color(0xFF9E9E9E),
+                          fontSize: getWidth(14)),
                     )),
               ),
               IconButton(
@@ -80,7 +83,7 @@ Container inputRegular(BuildContext context,
       required String hintText,
       required TextEditingController textEditingController,
       bool? enabled = true,
-      double height = 48,
+      double height = 54,
       double width = 0,
       int maxLines = 1}) {
   return Container(
@@ -95,8 +98,10 @@ Container inputRegular(BuildContext context,
           ),
           width: double.infinity,
           child: Text(label,
-              style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.w500)),
+              style: TextStyle(
+                  fontSize: getWidth(14),
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500)),
         )
             : Container(),
         label != null
@@ -105,13 +110,12 @@ Container inputRegular(BuildContext context,
         )
             : Container(),
         Container(
-          height: getHeight(height),
+          height: getWidth(height),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              getHeight(6),
-            ),
+            borderRadius: BorderRadius.circular(getHeight(6)),
             border: Border.all(
-              color: const Color(0xFFe6e6e6),
+              color: const Color(0xFFE6E6E6),
+              width: getHeight(1),
             ),
           ),
           child: Row(
@@ -122,9 +126,6 @@ Container inputRegular(BuildContext context,
                   enabled: enabled,
                   controller: textEditingController,
                   style: TextStyle(fontSize: getWidth(14)),
-                  style: TextStyle(
-                    fontSize: getWidth(16),
-                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -167,35 +168,6 @@ Container inputSearch(
     ),
     child: Column(
       children: [
-        // Row(
-        //   children: [
-        //     Expanded(
-        //       child: TextFormField(
-        //         focusNode: _focusNode,
-        //         controller: textEditingController,
-        //         style: TextStyle(fontSize: getWidth(12)),
-        //         onEditingComplete: () {
-        //           FocusScope.of(context).unfocus();
-        //           onSearch();
-        //         },
-        //         decoration: InputDecoration(
-        //           isCollapsed: true,
-        //           border: InputBorder.none,
-        //           focusedBorder: InputBorder.none,
-        //           enabledBorder: InputBorder.none,
-        //           errorBorder: InputBorder.none,
-        //           disabledBorder: InputBorder.none,
-        //           hintText: hintText,
-        //           contentPadding: EdgeInsets.only(
-        //             right: getWidth(16),
-        //           ),
-        //           labelStyle: TextStyle(
-        //               color: Color(0xFF878C92), fontSize: getWidth(16)),
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
         Row(
           children: [
             Expanded(
@@ -274,7 +246,7 @@ Container inputWithHint(BuildContext context,
       required bool err,
       Function? onchange}) {
   return Container(
-    height: getWidth(56),
+    height: getWidth(52),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(getHeight(4)),
@@ -319,7 +291,7 @@ Container inputSignup(BuildContext context,
       required bool focus,
       required bool err}) {
   return Container(
-    height: getWidth(56),
+    height: getWidth(52),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(getHeight(4)),
@@ -367,7 +339,7 @@ Container inputPasswordSignup(
     bool err,
     {Function? onchange}) {
   return Container(
-    height: getWidth(56),
+    height: getWidth(52),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(getHeight(4)),
@@ -420,7 +392,7 @@ Container inputOnChange(BuildContext context,
       required TextEditingController textEditingController,
       required Function function}) {
   return Container(
-    height: getWidth(56),
+    height: getWidth(52),
     padding: EdgeInsets.symmetric(vertical: getHeight(5)),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(getHeight(4)),
