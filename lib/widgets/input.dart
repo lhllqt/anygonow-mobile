@@ -75,14 +75,16 @@ Container inputPassword(
   );
 }
 
-Container inputRegular(
-    BuildContext context, {
-      String? label,
+Container inputRegular(BuildContext context,
+    {String? label,
       required String hintText,
       required TextEditingController textEditingController,
       bool? enabled = true,
-    }) {
+      double height = 48,
+      double width = 0,
+      int maxLines = 1}) {
   return Container(
+    width: width == 0 ? null : getWidth(width),
     child: Column(
       children: [
         label != null
@@ -103,18 +105,26 @@ Container inputRegular(
         )
             : Container(),
         Container(
-          height: getWidth(48),
+          height: getHeight(height),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(getHeight(6)),
-            border: Border.all(color: const Color(0xFFe6e6e6)),
+            borderRadius: BorderRadius.circular(
+              getHeight(6),
+            ),
+            border: Border.all(
+              color: const Color(0xFFe6e6e6),
+            ),
           ),
           child: Row(
             children: [
               Expanded(
                 child: TextFormField(
+                  maxLines: maxLines,
                   enabled: enabled,
                   controller: textEditingController,
                   style: TextStyle(fontSize: getWidth(14)),
+                  style: TextStyle(
+                    fontSize: getWidth(16),
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -124,7 +134,9 @@ Container inputRegular(
                     disabledBorder: InputBorder.none,
                     labelText: hintText,
                     contentPadding: EdgeInsets.only(
-                        left: getWidth(18), bottom: getHeight(14)),
+                      left: getWidth(18),
+                      bottom: getHeight(14),
+                    ),
                     labelStyle: TextStyle(
                         color: const Color(0xFF9E9E9E), fontSize: getWidth(14)),
                   ),
@@ -132,7 +144,7 @@ Container inputRegular(
               ),
             ],
           ),
-        )
+        ),
       ],
     ),
   );

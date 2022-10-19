@@ -105,6 +105,7 @@ class LoginPageController extends GetxController {
           var responsePing = await getPing(certificateList);
           print({"resPing": responsePing.toString()});
           Status validateServer2 = ResponseValidator.check(responsePing);
+          var jsonReponse = jsonDecode(responsePing.toString());
           if (validateServer2.status == "OK") {
             userInfo.id = userId;
             userInfo.name = userName;
@@ -114,7 +115,7 @@ class LoginPageController extends GetxController {
             userInfo.encryptedPrivateKey = encryptedPrivateKey;
             userInfo.username = username.text;
             userInfo.certificate = certificateList[0];
-            responsePing.data["data"]["blockchainIndex"];
+            userInfo.role = jsonReponse["data"]["role"];
             // Get.put(GlobalController()).db.put("user", userInfo);
             Get.put(GlobalController()).user.value = userInfo;
             return true;

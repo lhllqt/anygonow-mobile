@@ -5,16 +5,18 @@ part 'User.g.dart';
 
 @JsonSerializable()
 class User {
-  User(
-      {this.id,
-      this.name,
-      this.phone,
-      this.mail,
-      this.publicKey,
-      this.encryptedPrivateKey,
-      this.privateKey,
-      this.username,
-      this.certificate});
+  User({
+    this.id,
+    this.name,
+    this.phone,
+    this.mail,
+    this.publicKey,
+    this.encryptedPrivateKey,
+    this.privateKey,
+    this.username,
+    this.certificate,
+    this.role,
+  });
 
   @HiveField(0)
   String? id;
@@ -34,6 +36,8 @@ class User {
   String? username;
   @HiveField(8)
   String? certificate;
+  @HiveField(9)
+  int? role;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

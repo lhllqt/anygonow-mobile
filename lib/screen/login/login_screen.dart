@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
+import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
 import 'package:untitled/screen/signup/signup_screen.dart';
 import 'package:untitled/utils/config.dart';
@@ -134,8 +136,13 @@ Container confirmButtonContainer(
             onPressed: () async {
               var result = await controller.login();
               if (result) {
-                await Get.put(MainScreenController()).getCategories();
-                Get.to(() => HomePageScreen());
+                int? role = Get.put(GlobalController()).user.value.role;
+                if (role == null || role == 0) {
+                  await Get.put(MainScreenController()).getCategories();
+                  Get.to(() => HomePageScreen());
+                } else {
+                  Get.to(() => HandymanHomePageScreen());
+                }
               }
             },
             child: const Text("Sign in", style: TextStyle(color: Colors.white)),
