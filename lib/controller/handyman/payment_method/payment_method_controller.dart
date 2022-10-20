@@ -20,7 +20,7 @@ class PaymentController extends GetxController {
       CustomDio customDio = CustomDio();
       var response = await customDio.get("stripe/payment-method");
       var json = jsonDecode(response.toString());
-      var payment = json["data"]["payment"];
+      var payment = json["data"];
       paymentMethod.value = payment;
       return response;
     } catch (e, s) {
@@ -31,7 +31,7 @@ class PaymentController extends GetxController {
   Future deletePaymentMethods() async {
     try {
       CustomDio customDio = CustomDio();
-      var response = await customDio.post("businesses/payment-method/payment", {"data": {}});
+      var response = await customDio.post("businesses/payment-method/delete", {"data": {}});
       var json = jsonDecode(response.toString());
       paymentMethod.value = {};
       return json;

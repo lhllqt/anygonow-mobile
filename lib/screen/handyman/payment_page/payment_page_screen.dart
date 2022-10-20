@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:get/get.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:untitled/controller/handyman/payment_method/payment_method_controller.dart';
@@ -36,7 +37,7 @@ class PaymentPageScreen extends StatelessWidget {
       body: Obx(
             () => Container(
           padding: EdgeInsets.all(getWidth(23)),
-          child: paymentController.paymentMethod["paymentMethodId"] != null
+          child: paymentController.paymentMethod["last4"] != null
               ? Column(
             children: [
               InkWell(
@@ -44,9 +45,10 @@ class PaymentPageScreen extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: getWidth(14)),
                   child: CreditCardWidget(
-                    cardNumber: "4242 4242 4242 4242",
-                    expiryDate: "02/42",
-                    cardHolderName: "Trinh Van Thuan",
+                    cardNumber: "xxxx xxxx xxxx " + paymentController.paymentMethod["last4"],
+                    expiryDate: paymentController.paymentMethod["expireDate"],
+                    cardType: paymentController.paymentMethod["cardType"] == "visa" ? CardType.visa : CardType.mastercard,
+                    cardHolderName: "",
                     cvvCode: "XXX",
                     showBackView: false,
                     onCreditCardWidgetChange: (CreditCardBrand) {},

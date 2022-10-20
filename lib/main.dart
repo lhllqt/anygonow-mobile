@@ -39,6 +39,6 @@ class MyApp extends StatelessWidget {
   }
 
   Widget home() {
-    return BrandDetailScreen();
+    return LoginScreen();
   }
 }
