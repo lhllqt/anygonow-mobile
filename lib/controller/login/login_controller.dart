@@ -116,6 +116,7 @@ class LoginPageController extends GetxController {
             userInfo.username = username.text;
             userInfo.certificate = certificateList[0];
             userInfo.role = jsonResponse["data"]["role"];
+            userInfo.process = jsonResponse["data"]["process"] ?? 0;
             Get.put(GlobalController()).user.value = userInfo;
             return true;
           } else {

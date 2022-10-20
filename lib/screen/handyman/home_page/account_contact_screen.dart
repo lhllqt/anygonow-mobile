@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/account/account_controller.dart';
-import 'package:untitled/screen/home_page/home_page_screen.dart';
+import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/app_bar.dart';
-import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/dropdown.dart';
 import 'package:untitled/widgets/input.dart';
 import 'package:untitled/widgets/layout.dart';
@@ -128,9 +127,11 @@ Container confirmButtonContainer(
                       ),
                     ),
                     onPressed: () async {
-                      controller.isLoading.value = true;
-                      Get.to(() => HomePageScreen());
+                      var result = await controller.editBusinessContact();
                       controller.isLoading.value = false;
+                      if (result != null) {
+                        Get.to(() => HandymanHomePageScreen());
+                      }
                     },
                     child:
                         Text("confirm".tr, style: TextStyle(color: Colors.white)),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/account/account_controller.dart';
-import 'package:untitled/screen/account/account_contact_screen.dart';
+import 'package:untitled/screen/handyman/home_page/account_contact_screen.dart';
+import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
 import 'package:untitled/widgets/dropdown.dart';
@@ -162,9 +163,11 @@ Container confirmButtonContainer(
                       ),
                     ),
                     onPressed: () async {
-                      controller.isLoading.value = true;
-                      Get.to(() => AccountContactScreen());
+                      var result = await controller.editBusinessInfo();
                       controller.isLoading.value = false;
+                      if (result != null) {
+                        Get.to(() => AccountContactScreen());
+                      }
                     },
                     child:
                         Text("next".tr, style: TextStyle(color: Colors.white)),

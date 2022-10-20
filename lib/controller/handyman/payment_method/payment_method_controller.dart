@@ -14,16 +14,20 @@ class PaymentController extends GetxController {
   var cardHolder = "".obs;
 
   var paymentMethod = {}.obs;
+  var loading = false.obs;
 
   Future getPaymentMethods() async {
     try {
+      loading.value = true;
       CustomDio customDio = CustomDio();
       var response = await customDio.get("stripe/payment-method");
       var json = jsonDecode(response.toString());
       var payment = json["data"];
       paymentMethod.value = payment;
+      loading.value = false;
       return response;
     } catch (e, s) {
+      loading.value = false;
       return null;
     }
   }

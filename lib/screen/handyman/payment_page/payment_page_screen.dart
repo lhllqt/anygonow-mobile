@@ -37,7 +37,12 @@ class PaymentPageScreen extends StatelessWidget {
       body: Obx(
         () => Container(
           padding: EdgeInsets.all(getWidth(23)),
-          child: paymentController.paymentMethod["last4"] != null
+          child: paymentController.loading.value ? Container(
+            color: Colors.white,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ) : paymentController.paymentMethod["last4"] != null
               ? Column(
                   children: [
                     InkWell(

@@ -96,7 +96,6 @@ class SignupController extends GetxController {
       return result;
     } catch (e, s) {
       print(e);
-      print(s);
       return null;
     }
   }

@@ -44,11 +44,6 @@ class AccountController extends GetxController{
       myAccountController.lastName.text = userInfo["lastName"] ?? "";
       myAccountController.phoneNumber.text = userInfo["phone"] ?? "";
 
-      // Get.put(GlobalController())
-      //     .db
-      //     .put("user", Get.put(GlobalController()).user.value);
-
-
       return (json["data"]);
     } catch (e, s) {
       print(e);
@@ -64,8 +59,6 @@ class AccountController extends GetxController{
         required String avatar}) async {
     try {
       AccountController myAccountController = Get.put(AccountController());
-      // var color = AccountController.avatarList.indexOf(avatar);
-      // print("new:" + color.toString());
       var userID = globalController.user.value.id.toString();
       var response;
       CustomDio customDio = CustomDio();
@@ -96,4 +89,62 @@ class AccountController extends GetxController{
       return null;
     }
   }
+
+  Future editBusinessInfo () async {
+    try {
+      var userID = globalController.user.value.id.toString();
+      isLoading.value = true;
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
+      var response = await customDio.put(
+        "/businesses/$userID",
+        {
+          "data": {
+            "UserId": userID,
+            "avatarUrl": null,
+            "name": business.text,
+            "description": description.text,
+          }
+        },
+      );
+      print(response);
+      var json = jsonDecode(response.toString());
+      return json["data"];
+    } catch (e, s) {
+      print(e);
+      return null;
+    }
+  }
+
+  Future editBusinessContact () async {
+    try {
+      var userID = globalController.user.value.id.toString();
+      isLoading.value = true;
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
+      var response = await customDio.put(
+        "/contacts/$userID",
+        {
+          "data": {
+            "id": userID,
+            "avatarUrl": null,
+            "address1": address1.text,
+            "address2": address2.text,
+            "stateId": state.text,
+            "city": city.text,
+            "zipcode": zipcode.text,
+          }
+        },
+      );
+      print(response);
+      var json = jsonDecode(response.toString());
+      return json["data"];
+    } catch (e, s) {
+      print(e);
+      return null;
+    }
+  }
+
+
+
 }

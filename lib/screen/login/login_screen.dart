@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
+import 'package:untitled/screen/handyman/home_page/account_contact_screen.dart';
+import 'package:untitled/screen/handyman/home_page/account_service_screen.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
 import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
@@ -121,6 +123,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 Container confirmButtonContainer(BuildContext context, LoginPageController controller) {
+  GlobalController globalController = Get.put(GlobalController());
   return bottomContainerLayout(
     height: 120,
     child: Column(
@@ -148,13 +151,19 @@ Container confirmButtonContainer(BuildContext context, LoginPageController contr
                       var result = await controller.login();
                       if (result) {
                         controller.isLoading.value = false;
-                        int? role = Get.put(GlobalController()).user.value.role;
-                        print(role);
+                        int? role = globalController.user.value.role;
+                        int? process = globalController.user.value.process;
                         if (role == null || role == 0) {
                           await Get.put(MainScreenController()).getCategories();
                           Get.to(() => HomePageScreen());
                         } else {
-                          Get.to(() => HandymanHomePageScreen());
+                          if (process == 1) {
+                            Get.to(() => AccountServiceScreen());
+                          } else if (process == 2) {
+                            Get.to(() => AccountContactScreen());
+                          } else {
+                            Get.to(() => HandymanHomePageScreen());
+                          }
                         }
                       }
                       controller.isLoading.value = false;

@@ -16,6 +16,7 @@ class User {
     this.username,
     this.certificate,
     this.role,
+    this.process,
   });
 
   @HiveField(0)
@@ -38,6 +39,8 @@ class User {
   String? certificate;
   @HiveField(9)
   int? role;
+  @HiveField(9)
+  int? process;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
