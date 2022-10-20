@@ -74,6 +74,7 @@ dev_dependencies:
   protobuf: ^2.0.1
   flutter_map: ^0.14.0
   carousel_slider: ^4.0.0
+  image_picker:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
