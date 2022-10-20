@@ -48,14 +48,15 @@ GestureDetector handymanItem({
                 Expanded(
                   flex: 42,
                   child: image != ""
-                      ? Image.network(
-                          image,
-                          height: getHeight(120),
-                        )
+                      ? SvgPicture.network(
+                    image,
+                    fit: BoxFit.contain,
+                    height: getHeight(120),
+                  )
                       : Container(
-                          height: getHeight(120),
-                          color: Colors.grey,
-                        ),
+                    height: getHeight(120),
+                    color: Colors.grey,
+                  ),
                 ),
                 Expanded(
                   flex: 3,
@@ -76,16 +77,16 @@ GestureDetector handymanItem({
                               width: getHeight(25),
                               decoration: logo != ""
                                   ? BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        alignment: Alignment.center,
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(logo),
-                                      ))
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(logo),
+                                  ))
                                   : BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey,
-                                    ),
+                                shape: BoxShape.circle,
+                                color: Colors.grey,
+                              ),
                             ),
                             SizedBox(
                               width: getWidth(12),
@@ -210,14 +211,14 @@ Card serviceItem({String image = "", String service = ""}) {
             child: Container(
               decoration: image == ""
                   ? BoxDecoration(
-                      color: Colors.grey,
-                    )
+                color: Colors.grey,
+              )
                   : BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(image),
-                      ),
-                    ),
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(image),
+                ),
+              ),
             ),
           ),
           Expanded(flex: 5, child: Container()),
@@ -261,14 +262,14 @@ Card carouselItem({
             child: Container(
               decoration: image == ""
                   ? BoxDecoration(
-                      color: Colors.grey,
-                    )
+                color: Colors.grey,
+              )
                   : BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(image),
-                      ),
-                    ),
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(image),
+                ),
+              ),
             ),
           ),
           Expanded(
@@ -287,16 +288,16 @@ Card carouselItem({
                           width: getHeight(30),
                           decoration: logo != ""
                               ? BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    alignment: Alignment.center,
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(logo),
-                                  ))
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                alignment: Alignment.center,
+                                fit: BoxFit.fill,
+                                image: NetworkImage(logo),
+                              ))
                               : BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey,
-                                ),
+                            shape: BoxShape.circle,
+                            color: Colors.grey,
+                          ),
                         ),
                         SizedBox(
                           width: getWidth(12),

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
+import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/main/main_screen_model.dart';
 import 'package:untitled/utils/config.dart';
@@ -163,7 +164,8 @@ Container bottomNavigatorHandyman() {
                 children: [
                   Obx(() {
                     return Bouncing(
-                      onPress: () {
+                      onPress: () async {
+                        await Get.put(MyRequestController()).getRequests();
                         globalController.onChangeTab(0);
                       },
                       child: Container(
