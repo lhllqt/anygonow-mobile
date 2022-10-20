@@ -72,9 +72,9 @@ class MyRequestScreen extends StatelessWidget {
               (index) => requestItem(
             startDate: TimeService.dateTimeToString2(TimeService.stringToDateTime(myRequestController.requests[index]["startDate"]) ?? DateTime(1,1,1)),
             endDate: TimeService.dateTimeToString2(TimeService.stringToDateTime(myRequestController.requests[index]["endDate"]) ?? DateTime(1,1,1)),
-            serviceName: myRequestController.requests[index]["serviceName"],
-            zipCode: myRequestController.requests[index]["customerZipcode"],
-            fee: myRequestController.requests[index]["fee"].toString(),
+            serviceName: myRequestController.requests[index]["serviceName"] ?? "",
+            zipCode: myRequestController.requests[index]["customerZipcode"] ?? "",
+            fee: myRequestController.requests[index]["fee"]?.toString() ?? "0",
           )),
     );
   }

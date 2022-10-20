@@ -364,7 +364,7 @@ class MainScreen extends StatelessWidget {
             reviews: mainScreenController.businesses[index].rating["review"]
                 ?.toInt() ??
                 0,
-            isSearchResult: true,
+            isSearchResult: false,
             about: mainScreenController
                 .businesses[index].bussiness["descriptions"] ??
                 "",
