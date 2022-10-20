@@ -26,6 +26,7 @@ class AccountController extends GetxController {
   RxBool isEditting = false.obs;
   RxBool isBusinessScreen = true.obs;
   RxBool isLoading = false.obs;
+
   RxString logoImage = "".obs;
   RxString bannerImage = "".obs;
 
