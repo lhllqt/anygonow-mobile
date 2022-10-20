@@ -20,7 +20,7 @@ class StripeService {
     try {
       CustomDio customDio = CustomDio();
       var response =
-          await customDio.post("businesses/payment-method/setup", {"data": {}});
+      await customDio.post("businesses/payment-method/setup", {"data": {}});
       var json = jsonDecode(response.toString());
 
       var publishedKey = await getPubKey();
@@ -28,7 +28,7 @@ class StripeService {
 
       await Stripe.instance.dangerouslyUpdateCardDetails(_card);
       const billingDetails =
-          BillingDetails(email: "thuan2172001@gmail.com", phone: "0337336033");
+      BillingDetails(email: "thuan2172001@gmail.com", phone: "0337336033");
 
       var paymentMethod = await Stripe.instance.createPaymentMethod(
           const PaymentMethodParams.card(billingDetails: billingDetails));
@@ -38,7 +38,7 @@ class StripeService {
 
       SetupIntent confirmPayment = await Stripe.instance
           .confirmSetupIntent(json["data"]["clientSecret"], params);
-      
+
       return confirmPayment;
     } catch (e, s) {
       print(e);
@@ -61,7 +61,7 @@ class StripeService {
       return json["data"];
     } catch (e, s) {
       print(e);
-      return "";
+      return null;
     }
   }
 

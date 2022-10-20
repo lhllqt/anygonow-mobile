@@ -56,7 +56,7 @@ class AddPaymentScreen extends StatelessWidget {
                 CustomDialog(context, "HELP").show({
                   "title": "Information on Security Code",
                   "message":
-                      "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
+                  "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
                   "image": "assets/icons/helpdesk-add-payment.png",
                 });
               },
@@ -148,9 +148,13 @@ Container confirmButtonContainer(BuildContext context, PaymentController payment
                 _card = _card.copyWith(cvc: paymentController.cardCVV.value);
               }
               SetupIntent? paymentMethod = await StripeService.createSetupIntent(_card);
-              await StripeService.createNewPayment(paymentMethod);
-              CustomDialog(context, "SUCCESS").show({"message": "success_add_payment"});
-              paymentController.getPaymentMethods();
+              var result = await StripeService.createNewPayment(paymentMethod);
+              if (result != null) {
+                CustomDialog(context, "SUCCESS").show({"message": "success_add_payment"});
+                paymentController.getPaymentMethods();
+              } else {
+                CustomDialog(context, "FAILED").show({"message": "failed_add_payment"});
+              }
             },
             child: Text("Confirm".tr, style: const TextStyle(color: Colors.white)),
           ),
