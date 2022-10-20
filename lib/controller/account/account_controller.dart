@@ -24,17 +24,19 @@ class AccountController extends GetxController {
   GlobalController globalController = Get.put(GlobalController());
 
   RxBool isEditting = false.obs;
+  RxBool isBusinessScreen = true.obs;
   RxBool isLoading = false.obs;
+  RxString logoImage = "".obs;
+  RxString bannerImage = "".obs;
 
   Future getUserInfo() async {
     try {
       AccountController myAccountController = Get.put(AccountController());
 
       var userID = globalController.user.value.id.toString();
-      var response;
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
-      response = await customDio.get("/users/$userID");
+      var response = await customDio.get("/users/$userID");
       var json = jsonDecode(response.toString());
       var userInfo = json["data"]["user"];
 
@@ -94,9 +96,12 @@ class AccountController extends GetxController {
         "/businesses/$userID",
         {
           "data": {
-            "avatarUrl": null,
+            "bannerUrl": bannerImage.value,
+            "logoUrl": logoImage.value,
             "name": business.text,
             "description": description.text,
+            "website": website.text,
+            "phone": phoneNumber.text,
           }
         },
       );
@@ -127,7 +132,17 @@ class AccountController extends GetxController {
           }
         },
       );
-      print(response);
+
+      var response2 = await customDio.put(
+        "/businesses/$userID",
+        {
+          "data": {
+            "website": website.text,
+            "phone": phoneNumber.text,
+          }
+        },
+      );
+
       var json = jsonDecode(response.toString());
       return json["data"];
     } catch (e, s) {
@@ -143,20 +158,33 @@ class AccountController extends GetxController {
       customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
       var response = await customDio.get("/businesses/$userID");
       var response2 = await customDio.get("/contacts/$userID");
+      var response3 = await customDio.get("/businesses/$userID/services");
+
       var json = jsonDecode(response.toString());
       var json2 = jsonDecode(response2.toString());
+      var json3 = jsonDecode(response3.toString());
+
       var businessData = json["data"]["business"];
       var contact = json2["data"]["contact"];
+      var serviceData = json3["data"]["result"];
 
       business.text = businessData["name"] ?? "";
-      description.text = businessData["description"] ?? "";
+      description.text = businessData["descriptions"] ?? "";
+      logoImage.value = businessData["logoImage"] ?? "";
+      bannerImage.value = businessData["bannerImage"] ?? "";
+      phoneNumber.text = businessData["phone"] ?? "";
+      website.text = businessData["website"] ?? "";
+
       address1.text = contact["address1"] ?? "";
       address2.text = contact["address2"] ?? "";
       state.text = contact["state"] ?? "";
       city.text = contact["city"] ?? "";
-      website.text = contact["website"] ?? "";
       zipcode.text = contact["zipcode"] ?? "";
-      phoneNumber.text = contact["phone"] ?? "";
+      country.text = contact["country"] ?? "";
+
+      category.text = serviceData.map((e) {
+        return e["name"];
+      }).join(", ");
 
       return json["data"];
     } catch (e, s) {

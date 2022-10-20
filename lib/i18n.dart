@@ -27,7 +27,9 @@ class Messages extends Translations {
           "success_delete_payment": "Successfully delete payment method !",
           "referCode": "Referral code",
           "common_failed": "Failed !",
-          "failed_add_payment": "Add payment failed !"
+          "failed_add_payment": "Add payment failed !",
+          "edit": "Edit",
+          "update": "Update"
         },
       };
 }

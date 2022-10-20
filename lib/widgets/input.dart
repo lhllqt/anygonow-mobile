@@ -129,7 +129,6 @@ Container inputRegular(BuildContext context,
                   minLines: minLines,
                   keyboardType: keyboardType,
                   readOnly: !enabled,
-                  // enabled: enabled,
                   controller: textEditingController,
                   style: TextStyle(fontSize: getWidth(14)),
                   decoration: InputDecoration(

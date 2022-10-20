@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
-import 'package:untitled/screen/handyman/home_page/account_contact_screen.dart';
-import 'package:untitled/screen/handyman/home_page/account_service_screen.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
+import 'package:untitled/screen/handyman/business_management/business_management_screen.dart';
 import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
 import 'package:untitled/screen/signup/signup_welcome_screen.dart';
@@ -63,48 +61,48 @@ class LoginScreen extends StatelessWidget {
             ),
             inputRegular(context, label: "email_or_phone".tr, hintText: "name@email.com", textEditingController: loginPageController.username),
             Obx(
-                  () => loginPageController.messValidateUsername.value != ""
+              () => loginPageController.messValidateUsername.value != ""
                   ? Padding(
-                padding: EdgeInsets.only(top: getHeight(12), bottom: getHeight(12), left: getWidth(16)),
-                child: InkWell(
-                  child: Text(
-                    loginPageController.messValidateUsername.value.tr,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-              )
+                      padding: EdgeInsets.only(top: getHeight(12), bottom: getHeight(12), left: getWidth(16)),
+                      child: InkWell(
+                        child: Text(
+                          loginPageController.messValidateUsername.value.tr,
+                          style: const TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        onTap: () {},
+                      ),
+                    )
                   : SizedBox(
-                height: getHeight(12),
-              ),
+                      height: getHeight(12),
+                    ),
             ),
             Obx(() => inputPassword(
-              context,
-              label: "password".tr,
-              controller: loginPageController.password,
-              hintText: "Enter your password",
-              isHide: loginPageController.isHidePassword.value,
-              changeHide: loginPageController.changeHidePassword,
-            )),
+                  context,
+                  label: "password".tr,
+                  controller: loginPageController.password,
+                  hintText: "Enter your password",
+                  isHide: loginPageController.isHidePassword.value,
+                  changeHide: loginPageController.changeHidePassword,
+                )),
             Obx(
-                  () => loginPageController.messValidatePassword.value != ""
+              () => loginPageController.messValidatePassword.value != ""
                   ? Padding(
-                padding: EdgeInsets.only(top: getHeight(12), bottom: getHeight(12), left: getWidth(16)),
-                child: InkWell(
-                  child: Text(
-                    loginPageController.messValidatePassword.value.tr,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-              )
+                      padding: EdgeInsets.only(top: getHeight(12), bottom: getHeight(12), left: getWidth(16)),
+                      child: InkWell(
+                        child: Text(
+                          loginPageController.messValidatePassword.value.tr,
+                          style: const TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        onTap: () {},
+                      ),
+                    )
                   : SizedBox(
-                height: getHeight(12),
-              ),
+                      height: getHeight(12),
+                    ),
             ),
             Bouncing(
                 child: const Text(
@@ -132,45 +130,47 @@ Container confirmButtonContainer(BuildContext context, LoginPageController contr
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Obx(
-              () => Expanded(
+          () => Expanded(
             child: controller.isLoading.value == true
                 ? Container(
-              color: Colors.white,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            )
+                    color: Colors.white,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
                 : OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: const Color(0xffff511a),
-                side: const BorderSide(
-                  color: Color(0xffff511a),
-                ),
-              ),
-              onPressed: () async {
-                controller.isLoading.value = true;
-                var result = await controller.login();
-                if (result) {
-                  controller.isLoading.value = false;
-                  int? role = globalController.user.value.role;
-                  int? process = globalController.user.value.process;
-                  if (role == null || role == 0) {
-                    await Get.put(MainScreenController()).getCategories();
-                    Get.to(() => HomePageScreen());
-                  } else {
-                    if (process == 1) {
-                      Get.to(() => AccountServiceScreen());
-                    } else if (process == 2) {
-                      Get.to(() => AccountContactScreen());
-                    } else {
-                      Get.to(() => HandymanHomePageScreen());
-                    }
-                  }
-                }
-                controller.isLoading.value = false;
-              },
-              child: const Text("Sign in", style: TextStyle(color: Colors.white)),
-            ),
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: const Color(0xffff511a),
+                      side: const BorderSide(
+                        color: Color(0xffff511a),
+                      ),
+                    ),
+                    onPressed: () async {
+                      controller.isLoading.value = true;
+                      var result = await controller.login();
+                      if (result) {
+                        controller.isLoading.value = false;
+                        int? role = globalController.user.value.role;
+                        int? process = globalController.user.value.process;
+                        if (role == null || role == 0) {
+                          await Get.put(MainScreenController()).getCategories();
+                          Get.to(() => HomePageScreen());
+                        } else {
+                          if (process == 1) {
+                            Get.to(() => BusinessManagementScreen());
+                            AccountController().isBusinessScreen.value = true;
+                          } else if (process == 2) {
+                            Get.to(() => BusinessManagementScreen());
+                            AccountController().isBusinessScreen.value = false;
+                          } else {
+                            Get.to(() => HandymanHomePageScreen());
+                          }
+                        }
+                      }
+                      controller.isLoading.value = false;
+                    },
+                    child: const Text("Sign in", style: TextStyle(color: Colors.white)),
+                  ),
           ),
         ),
         SizedBox(

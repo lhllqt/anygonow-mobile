@@ -48,9 +48,11 @@ class BrandDetailController extends GetxController {
         List<Category> res = [];
 
         for (int i = 0; i < responseData.length; i++) {
-          Category item = new Category();
-          item.id = responseData[i]["id"];
-          item.name = responseData[i]["name"];
+          Category item = Category();
+          item.id = responseData[i]["id"] ?? "";
+          item.name = responseData[i]["name"] ?? "";
+          item.numberOrder = responseData[i]["numberOrder"] ?? 0;
+          item.image = responseData[i]["image"] ?? "";
           res.add(item);
         }
 

@@ -3,6 +3,7 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
+import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:untitled/widgets/bottom_navigator.dart';
@@ -190,9 +191,9 @@ class BrandDetailScreen extends StatelessWidget {
           SizedBox(
             height: getHeight(145),
             child: ListView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              children: List.generate(brandDetailController.services.length, (index) => brandService(name: brandDetailController.services[index].name)),
+              children: List.generate(brandDetailController.services.length, (index) => brandService(data: brandDetailController.services[index])),
             ),
           )
         ],
@@ -200,7 +201,7 @@ class BrandDetailScreen extends StatelessWidget {
     );
   }
 
-  Container brandService({String name = ""}) {
+  Container brandService({Category? data}) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -223,18 +224,14 @@ class BrandDetailScreen extends StatelessWidget {
               SizedBox(
                 width: getWidth(16),
               ),
-              SvgPicture.asset(
-                "assets/icons/mail_sending.svg",
-                width: getWidth(62),
-                height: getHeight(62),
-              ),
+              getImage(data!.image, width: getWidth(62), height: getHeight(62)),
               SizedBox(
                 width: getWidth(16),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("500 times request"),
+                  Text("${data.numberOrder} times request"),
                   Text("Best house cleaning"),
                 ],
               )
@@ -251,7 +248,7 @@ class BrandDetailScreen extends StatelessWidget {
             ),
             width: double.infinity,
             child: Text(
-              name,
+              data.name,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white),
             ),
@@ -360,13 +357,16 @@ class BrandDetailScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: MediaQuery.removePadding(context: context, child: ListView(
-              children: [
-                ...brandDetailController.comments.map((e) {
-                  return commentItem();
-                }).toList(),
-              ],
-            ),),
+            child: MediaQuery.removePadding(
+              context: context,
+              child: ListView(
+                children: [
+                  ...brandDetailController.comments.map((e) {
+                    return commentItem();
+                  }).toList(),
+                ],
+              ),
+            ),
           ),
         ],
       ),
