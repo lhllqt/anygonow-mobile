@@ -420,7 +420,7 @@ class BrandDetailScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: getHeight(40), left: getWidth(32)),
               child: RatingBarIndicator(
-                rating: 2.75,
+                rating: 3,
                 itemSize: getHeight(20),
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,

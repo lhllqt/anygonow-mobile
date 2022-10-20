@@ -323,10 +323,8 @@ class MainScreen extends StatelessWidget {
                             title: mainScreenController.businessNearList[index]
                                     .bussiness["name"] ??
                                 "",
-                            stars: mainScreenController.businessNearList[index]
-                                        .rating["rate"] *
-                                    1.0 ??
-                                0.0,
+                            stars: (mainScreenController.businessNearList[index]
+                                        .rating["rate"] ?? 0.0 ) * 1.0,
                             reviews: mainScreenController
                                     .businessNearList[index].rating["review"]
                                     ?.toInt() ??
