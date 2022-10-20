@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:untitled/model/custom_dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:untitled/widgets/dialog.dart';
 
 class StripeService {
   static Future<String> getPubKey() async {
@@ -46,7 +48,7 @@ class StripeService {
     }
   }
 
-  static Future createNewPayment(SetupIntent? paymentMethod) async {
+  static Future createNewPayment(SetupIntent? paymentMethod, BuildContext context) async {
     try {
       if (paymentMethod == null) {
         return;
@@ -60,7 +62,7 @@ class StripeService {
       var json = jsonDecode(response.toString());
       return json["data"];
     } catch (e, s) {
-      print(e);
+      CustomDialog(context, "FAILED").show({"message": e.toString()});
       return null;
     }
   }

@@ -148,7 +148,7 @@ Container confirmButtonContainer(BuildContext context, PaymentController payment
                 _card = _card.copyWith(cvc: paymentController.cardCVV.value);
               }
               SetupIntent? paymentMethod = await StripeService.createSetupIntent(_card);
-              var result = await StripeService.createNewPayment(paymentMethod);
+              var result = await StripeService.createNewPayment(paymentMethod, context);
               if (result != null) {
                 CustomDialog(context, "SUCCESS").show({"message": "success_add_payment"});
                 paymentController.getPaymentMethods();
