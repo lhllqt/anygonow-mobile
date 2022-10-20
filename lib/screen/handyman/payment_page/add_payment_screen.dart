@@ -3,6 +3,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:untitled/controller/handyman/payment_method/payment_method_controller.dart';
+import 'package:untitled/screen/handyman/payment_page/payment_page_screen.dart';
 import 'package:untitled/service/stripe.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/dialog.dart';
@@ -56,7 +57,7 @@ class AddPaymentScreen extends StatelessWidget {
                 CustomDialog(context, "HELP").show({
                   "title": "Information on Security Code",
                   "message":
-                      "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
+                  "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
                   "image": "assets/icons/helpdesk-add-payment.png",
                 });
               },
@@ -124,8 +125,13 @@ Container confirmButtonContainer(BuildContext context, PaymentController payment
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-          child: OutlinedButton(
+        Obx(() => Expanded(
+          child: paymentController.loading.value == true ? Container(
+            color: Colors.white,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ) :OutlinedButton(
             style: OutlinedButton.styleFrom(
               backgroundColor: const Color(0xffff511a),
               side: const BorderSide(
@@ -133,6 +139,7 @@ Container confirmButtonContainer(BuildContext context, PaymentController payment
               ),
             ),
             onPressed: () async {
+              paymentController.loading.value = true;
               var _card = CardDetails();
               var expireDate = paymentController.cardExpireDate.value;
               if (paymentController.cardNumber.value != "") {
@@ -150,15 +157,16 @@ Container confirmButtonContainer(BuildContext context, PaymentController payment
               SetupIntent? paymentMethod = await StripeService.createSetupIntent(_card);
               var result = await StripeService.createNewPayment(paymentMethod, context);
               if (result != null) {
+                await paymentController.getPaymentMethods();
                 CustomDialog(context, "SUCCESS").show({"message": "success_add_payment"});
-                paymentController.getPaymentMethods();
               } else {
                 CustomDialog(context, "FAILED").show({"message": "failed_add_payment"});
               }
+              paymentController.loading.value = false;
             },
             child: Text("Confirm".tr, style: const TextStyle(color: Colors.white)),
           ),
-        ),
+        ),),
       ],
     ),
   );
