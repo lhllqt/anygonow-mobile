@@ -56,7 +56,7 @@ class AddPaymentScreen extends StatelessWidget {
                 CustomDialog(context, "HELP").show({
                   "title": "Information on Security Code",
                   "message":
-                  "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
+                      "We require that you enter your credit card verification number (CVV) to make sure the payment goes through. Your CVV number can be located on the back of your credit card.",
                   "image": "assets/icons/helpdesk-add-payment.png",
                 });
               },

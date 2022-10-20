@@ -14,14 +14,14 @@ GlobalController globalController = Get.put(GlobalController());
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey = "pk_test_51KQyIYHKYRxtUDcpc8lKY260HdU59NP0SkXg4zOu18S4lbLAH3uREkrR9KNpUp5HICQwZm3utRrwOHTVbQknue3A00jFmfMeSj";
+  Stripe.publishableKey =
+      "pk_test_51KQyIYHKYRxtUDcpc8lKY260HdU59NP0SkXg4zOu18S4lbLAH3uREkrR9KNpUp5HICQwZm3utRrwOHTVbQknue3A00jFmfMeSj";
   await dotenv.load(fileName: ".env");
   await globalController.getStates();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -32,8 +32,11 @@ class MyApp extends StatelessWidget {
       translations: Messages(),
       locale: const Locale('en', 'US'),
       defaultTransition:
-      Platform.isIOS ? Transition.cupertino : Transition.rightToLeft,
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "TTNorm-Bold"),
+          Platform.isIOS ? Transition.cupertino : Transition.rightToLeft,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: "TTNorm-Bold",
+      ),
       home: home(),
     );
   }

@@ -164,13 +164,13 @@ AlertDialog alertHelpdeskDialog(context, title, helptext, image) {
           ),
           image != null
               ? Container(
-            height: getWidth(120),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(image),
-              ),
-            ),
-          )
+                  height: getWidth(120),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(image),
+                    ),
+                  ),
+                )
               : Container(),
           SizedBox(
             height: getHeight(12),

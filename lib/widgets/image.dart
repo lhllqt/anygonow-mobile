@@ -6,6 +6,6 @@ Container getImage(String? src, {Key? key, width, height, fit}) {
       child: src == null
           ? Container()
           : src.contains(".svg")
-          ? SvgPicture.network(src, height: height)
-          : Image.network(src, height: height));
+              ? SvgPicture.network(src, height: height)
+              : Image.network(src, height: height));
 }

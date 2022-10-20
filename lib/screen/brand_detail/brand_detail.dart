@@ -285,21 +285,21 @@ class BrandDetailScreen extends StatelessWidget {
                   flex: 10,
                   child: Container(
                       child: Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(56),
-                          child: Container(
-                            width: getHeight(80),
-                            height: getHeight(80),
-                            color: Color(0xFFFFF5F2),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "3.0",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Color(0xFFC02D02)),
-                            ),
-                          ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(56),
+                      child: Container(
+                        width: getHeight(80),
+                        height: getHeight(80),
+                        color: Color(0xFFFFF5F2),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "3.0",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Color(0xFFC02D02)),
                         ),
-                      )),
+                      ),
+                    ),
+                  )),
                 ),
                 Expanded(
                   flex: 30,
@@ -382,15 +382,15 @@ class BrandDetailScreen extends StatelessWidget {
               children: [
                 Container(
                     child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(56),
-                        child: Container(
-                          width: getHeight(32),
-                          height: getHeight(32),
-                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blueGrey),
-                        ),
-                      ),
-                    )),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(56),
+                    child: Container(
+                      width: getHeight(32),
+                      height: getHeight(32),
+                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blueGrey),
+                    ),
+                  ),
+                )),
                 SizedBox(
                   width: getWidth(8),
                 ),

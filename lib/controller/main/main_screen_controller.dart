@@ -52,6 +52,8 @@ class MainScreenController extends GetxController {
 
   String categoryId = "";
 
+  RxInt currentIndex = 0.obs;
+
   @override
   void onInit() {
     getProNear = getProfessionalNear();

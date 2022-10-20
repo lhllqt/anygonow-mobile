@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:untitled/utils/config.dart';
 
 Container inputPassword(
@@ -162,81 +163,88 @@ Container inputSearch(
   required TextEditingController textEditingController,
   required dynamic onSearch,
   required List<String> options,
+  String prefixIcon = "",
 }) {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey _autocompleteKey = GlobalKey();
   return Container(
     margin: EdgeInsets.only(
       right: getWidth(10),
-      left: getWidth(10),
-      top: getHeight(5),
+      left: getWidth(8),
+      // top: getHeight(10),
     ),
-    child: Column(
+    child: Row(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: RawAutocomplete<String>(
-                key: _autocompleteKey,
+        Expanded(
+          child: RawAutocomplete<String>(
+            key: _autocompleteKey,
+            focusNode: _focusNode,
+            textEditingController: textEditingController,
+            fieldViewBuilder: (BuildContext context,
+                TextEditingController textEditingController,
+                FocusNode focusNode,
+                VoidCallback onFieldSubmitted) {
+              return TextFormField(
                 focusNode: _focusNode,
-                textEditingController: textEditingController,
-                fieldViewBuilder: (BuildContext context,
-                    TextEditingController textEditingController,
-                    FocusNode focusNode,
-                    VoidCallback onFieldSubmitted) {
-                  return TextFormField(
-                    focusNode: _focusNode,
-                    controller: textEditingController,
-                    style: TextStyle(fontSize: getWidth(12)),
-                    onEditingComplete: () {
-                      FocusScope.of(context).unfocus();
-                      onSearch();
-                    },
-                    decoration: InputDecoration(
-                      isCollapsed: true,
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      hintText: hintText,
-                      contentPadding: EdgeInsets.only(
-                        right: getWidth(16),
-                      ),
-                      labelStyle: TextStyle(
-                          color: Color(0xFF878C92), fontSize: getWidth(16)),
-                    ),
-                  );
+                controller: textEditingController,
+                style: TextStyle(fontSize: getWidth(12)),
+                onEditingComplete: () {
+                  FocusScope.of(context).unfocus();
+                  onSearch();
                 },
-                optionsViewBuilder: (BuildContext context,
-                    AutocompleteOnSelected<String> onSelected,
-                    Iterable<String> options) {
-                  return Material(
-                    elevation: 4.0,
-                    child: ListView(
-                      children: options
-                          .map((String option) => GestureDetector(
-                                onTap: () {
-                                  onSelected(option);
-                                },
-                                child: ListTile(
-                                  title: Text(option),
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  );
-                },
-                optionsBuilder: (TextEditingValue textEditingValue) {
-                  return options.where((String option) {
-                    return option
-                        .toLowerCase()
-                        .contains(textEditingValue.text.toLowerCase());
-                  }).toList();
-                },
-              ),
-            )
-          ],
+                decoration: InputDecoration(
+                  prefixIconConstraints: BoxConstraints(
+                    maxHeight: 30,
+                    maxWidth: 30,
+                  ),
+                  prefixIcon: prefixIcon == ""
+                      ? null
+                      : SizedBox(
+                          child: SvgPicture.asset(prefixIcon),
+                        ),
+                  isCollapsed: true,
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  hintText: hintText,
+                  contentPadding: EdgeInsets.only(
+                    right: getWidth(16),
+                    top: getHeight(2),
+                  ),
+                  labelStyle: TextStyle(
+                      color: Color(0xFF878C92), fontSize: getWidth(16)),
+                ),
+              );
+            },
+            optionsViewBuilder: (BuildContext context,
+                AutocompleteOnSelected<String> onSelected,
+                Iterable<String> options) {
+              return Material(
+                elevation: 4.0,
+                child: ListView(
+                  children: options
+                      .map((String option) => GestureDetector(
+                            onTap: () {
+                              onSelected(option);
+                            },
+                            child: ListTile(
+                              title: Text(option),
+                            ),
+                          ))
+                      .toList(),
+                ),
+              );
+            },
+            optionsBuilder: (TextEditingValue textEditingValue) {
+              return options.where((String option) {
+                return option
+                    .toLowerCase()
+                    .contains(textEditingValue.text.toLowerCase());
+              }).toList();
+            },
+          ),
         )
       ],
     ),

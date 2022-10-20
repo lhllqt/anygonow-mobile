@@ -32,187 +32,344 @@ GestureDetector handymanItem({
         Get.to(BrandDetailScreen());
       }
     },
-    child: Container(
+    child: Card(
       margin: EdgeInsets.only(
         bottom: getHeight(32),
       ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 42,
+                  child: image != ""
+                      ? Image.network(
+                          image,
+                          height: getHeight(120),
+                        )
+                      : Container(
+                          height: getHeight(120),
+                          color: Colors.grey,
+                        ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: SizedBox(),
+                ),
+                Expanded(
+                  flex: 50,
+                  child: Container(
+                    height: getHeight(110),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: getHeight(18),
+                              width: getHeight(25),
+                              decoration: logo != ""
+                                  ? BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        alignment: Alignment.center,
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(logo),
+                                      ))
+                                  : BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey,
+                                    ),
+                            ),
+                            SizedBox(
+                              width: getWidth(12),
+                            ),
+                            SizedBox(
+                              width: getWidth(44),
+                              child: Text(
+                                title,
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            // isSearchResult
+                            //     ? Obx(() => Checkbox(
+                            //           onChanged: (value) {
+                            //             if (value == null || !value) {
+                            //               mainScreenController.requests
+                            //                   .remove(id);
+                            //             } else {
+                            //               mainScreenController.requests.add(id);
+                            //             }
+                            //             print(mainScreenController.requests);
+                            //           },
+                            //           value: mainScreenController.requests
+                            //               .contains(id),
+                            //         ))
+                            //     : SizedBox(),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset("assets/icons/book-mark.svg"),
+                            Text(
+                              " Requested " + requested.toString() + " times",
+                              style: TextStyle(
+                                fontSize: getWidth(12),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset("assets/icons/chat.svg"),
+                            Text(
+                              " " + reviews.toString() + " Customer Reviews",
+                              style: TextStyle(
+                                fontSize: getWidth(12),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            RatingBarIndicator(
+                              rating: 2.75,
+                              itemSize: getHeight(15),
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 17,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: SizedBox(),
+                ),
+              ],
+            ),
+            // isSearchResult
+            //     ? Container(
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             SizedBox(
+            //               height: getHeight(12),
+            //             ),
+            //             Text(
+            //               "About",
+            //               style: TextStyle(
+            //                 fontWeight: FontWeight.w700,
+            //               ),
+            //             ),
+            //             SizedBox(
+            //               height: getHeight(8),
+            //             ),
+            //             Text(
+            //               about,
+            //               overflow: TextOverflow.ellipsis,
+            //               maxLines: 3,
+            //             )
+            //           ],
+            //         ),
+            //       )
+            //     : SizedBox(),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Card serviceItem({String image = "", String service = ""}) {
+  return Card(
+    child: Container(
+      // height: getHeight(205),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 40,
-                child: image != ""
-                    ? SvgPicture.network(
-                        image,
-                        height: getHeight(120),
-                      )
-                    : Container(
-                        height: getHeight(120),
-                        color: Colors.grey,
+          Expanded(
+            flex: 60,
+            child: Container(
+              decoration: image == ""
+                  ? BoxDecoration(
+                      color: Colors.grey,
+                    )
+                  : BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(image),
                       ),
-              ),
-              Expanded(
-                flex: 10,
-                child: SizedBox(),
-              ),
-              Expanded(
-                flex: 50,
-                child: Container(
-                  height: getHeight(110),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            height: getHeight(30),
-                            width: getHeight(30),
-                            decoration: logo != ""
-                                ? BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      alignment: Alignment.center,
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(logo),
-                                    ))
-                                : BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey,
-                                  ),
-                          ),
-                          SizedBox(
-                            width: getWidth(12),
-                          ),
-                          SizedBox(
-                            width: getWidth(75),
-                            child: Text(
-                              title,
-                              style: TextStyle(fontWeight: FontWeight.w700),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          isSearchResult
-                              ? Obx(() => Checkbox(
-                                    onChanged: (value) {
-                                      if (value == null || !value) {
-                                        mainScreenController.requests
-                                            .remove(id);
-                                      } else {
-                                        mainScreenController.requests.add(id);
-                                      }
-                                      print(mainScreenController.requests);
-                                    },
-                                    value: mainScreenController.requests
-                                        .contains(id),
-                                  ))
-                              : SizedBox(),
-                        ],
-                      ),
-                      RatingBarIndicator(
-                        rating: 2.75,
-                        itemSize: getHeight(20),
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        itemCount: 5,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.assistant_sharp,
-                            size: getHeight(20),
-                          ),
-                          Text(
-                            "  Requested " + requested.toString() + " times",
-                            style: TextStyle(
-                              fontSize: getWidth(12),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.assistant_sharp,
-                            size: getHeight(20),
-                          ),
-                          Text(
-                            "  " + reviews.toString() + " Customer Reviews",
-                            style: TextStyle(
-                              fontSize: getWidth(12),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
+                    ),
+            ),
           ),
-          isSearchResult
-              ? Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: getHeight(12),
-                      ),
-                      Text(
-                        "About",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      SizedBox(
-                        height: getHeight(8),
-                      ),
-                      Text(
-                        about,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                      )
-                    ],
+          Expanded(flex: 5, child: Container()),
+          Expanded(
+            flex: 45,
+            child: Padding(
+                padding: EdgeInsets.only(
+                  top: getHeight(10),
+                  left: getWidth(12),
+                ),
+                child: Text(
+                  service,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: getWidth(16),
                   ),
-                )
-              : SizedBox(),
+                )),
+          ),
         ],
       ),
     ),
   );
 }
 
-Container serviceItem({String image = "", String service = ""}) {
-  return Container(
-    height: getHeight(205),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          flex: 80,
-          child: Container(
-            decoration: image == ""
-                ? BoxDecoration(
-                    color: Colors.grey,
-                  )
-                : BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(image),
+Card carouselItem({
+  String image = "",
+  String logo = "",
+  String title = "",
+  double stars = 0,
+  int requested = 0,
+  int reviews = 0,
+}) {
+  return Card(
+    child: Container(
+      // width: getWidth(500),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 50,
+            child: Container(
+              decoration: image == ""
+                  ? BoxDecoration(
+                      color: Colors.grey,
+                    )
+                  : BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(image),
+                      ),
                     ),
-                  ),
+            ),
           ),
-        ),
-        Expanded(flex: 5, child: Container()),
-        Expanded(
-          flex: 15,
-          child: Text(service),
-        ),
-      ],
+          Expanded(
+            flex: 50,
+            child: Padding(
+                padding: EdgeInsets.only(
+                  top: getHeight(10),
+                  left: getWidth(12),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: getHeight(22),
+                          width: getHeight(30),
+                          decoration: logo != ""
+                              ? BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(logo),
+                                  ))
+                              : BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey,
+                                ),
+                        ),
+                        SizedBox(
+                          width: getWidth(12),
+                        ),
+                        SizedBox(
+                          width: getWidth(44),
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: getWidth(16),
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getHeight(8),
+                    ),
+                    Row(
+                      children: [
+                        SvgPicture.asset("assets/icons/book-mark.svg"),
+                        Text(
+                          " Requested " + requested.toString() + " times",
+                          style: TextStyle(
+                            fontSize: getWidth(12),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getHeight(8),
+                    ),
+                    Row(
+                      children: [
+                        SvgPicture.asset("assets/icons/chat.svg"),
+                        Text(
+                          " " + reviews.toString() + " Customer Reviews",
+                          style: TextStyle(
+                            fontSize: getWidth(12),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getHeight(8),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RatingBarIndicator(
+                          rating: 2.75,
+                          itemSize: getHeight(15),
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 17,
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
+          ),
+        ],
+      ),
     ),
   );
 }
