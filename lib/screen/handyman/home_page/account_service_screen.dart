@@ -11,10 +11,10 @@ import 'package:untitled/widgets/layout.dart';
 import 'package:us_states/us_states.dart';
 
 class AccountServiceScreen extends StatelessWidget {
-  AccountController accountController = Get.put(AccountController());
-
   @override
   Widget build(BuildContext context) {
+    AccountController accountController = Get.put(AccountController());
+    accountController.getBusinessInfo();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: Padding(
@@ -150,28 +150,28 @@ Container confirmButtonContainer(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Obx(
-          () => Expanded(
+              () => Expanded(
             child: controller.isLoading.value == true
                 ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+              child: CircularProgressIndicator(),
+            )
                 : OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color(0xffff511a),
-                      side: const BorderSide(
-                        color: Color(0xffff511a),
-                      ),
-                    ),
-                    onPressed: () async {
-                      var result = await controller.editBusinessInfo();
-                      controller.isLoading.value = false;
-                      if (result != null) {
-                        Get.to(() => AccountContactScreen());
-                      }
-                    },
-                    child:
-                        Text("next".tr, style: TextStyle(color: Colors.white)),
-                  ),
+              style: OutlinedButton.styleFrom(
+                backgroundColor: const Color(0xffff511a),
+                side: const BorderSide(
+                  color: Color(0xffff511a),
+                ),
+              ),
+              onPressed: () async {
+                var result = await controller.editBusinessInfo();
+                controller.isLoading.value = false;
+                if (result != null) {
+                  Get.to(() => AccountContactScreen());
+                }
+              },
+              child:
+              Text("next".tr, style: TextStyle(color: Colors.white)),
+            ),
           ),
         ),
         SizedBox(

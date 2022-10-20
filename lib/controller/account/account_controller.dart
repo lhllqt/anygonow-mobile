@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/model/custom_dio.dart';
 
-class AccountController extends GetxController{
+class AccountController extends GetxController {
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -33,8 +33,7 @@ class AccountController extends GetxController{
       var userID = globalController.user.value.id.toString();
       var response;
       CustomDio customDio = CustomDio();
-      customDio.dio.options.headers["Authorization"] =
-          globalController.user.value.certificate.toString();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
       response = await customDio.get("/users/$userID");
       var json = jsonDecode(response.toString());
       var userInfo = json["data"]["user"];
@@ -52,23 +51,18 @@ class AccountController extends GetxController{
     }
   }
 
-  Future editUserInfo (
-      {
-        required String firstName,
-        required String lastName,
-        required String avatar}) async {
+  Future editUserInfo({required String firstName, required String lastName, required String avatar}) async {
     try {
       AccountController myAccountController = Get.put(AccountController());
       var userID = globalController.user.value.id.toString();
       var response;
       CustomDio customDio = CustomDio();
-      customDio.dio.options.headers["Authorization"] =
-          globalController.user.value.certificate.toString();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
       response = await customDio.put(
         "/users/$userID",
         {
           "data": {
-            "UserId": userID,
+            "UserId": "",
             "avatarUrl": avatar,
             "firstName": firstName,
             "lastName": lastName,
@@ -90,7 +84,7 @@ class AccountController extends GetxController{
     }
   }
 
-  Future editBusinessInfo () async {
+  Future editBusinessInfo() async {
     try {
       var userID = globalController.user.value.id.toString();
       isLoading.value = true;
@@ -100,7 +94,6 @@ class AccountController extends GetxController{
         "/businesses/$userID",
         {
           "data": {
-            "UserId": userID,
             "avatarUrl": null,
             "name": business.text,
             "description": description.text,
@@ -116,7 +109,7 @@ class AccountController extends GetxController{
     }
   }
 
-  Future editBusinessContact () async {
+  Future editBusinessContact() async {
     try {
       var userID = globalController.user.value.id.toString();
       isLoading.value = true;
@@ -126,11 +119,9 @@ class AccountController extends GetxController{
         "/contacts/$userID",
         {
           "data": {
-            "id": userID,
-            "avatarUrl": null,
             "address1": address1.text,
             "address2": address2.text,
-            "stateId": state.text,
+            "stateId": "0914343f-28bb-49e8-971d-3f0f7646787c",
             "city": city.text,
             "zipcode": zipcode.text,
           }
@@ -145,6 +136,32 @@ class AccountController extends GetxController{
     }
   }
 
+  Future getBusinessInfo() async {
+    try {
+      var userID = globalController.user.value.id.toString();
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
+      var response = await customDio.get("/businesses/$userID");
+      var response2 = await customDio.get("/contacts/$userID");
+      var json = jsonDecode(response.toString());
+      var json2 = jsonDecode(response2.toString());
+      var businessData = json["data"]["business"];
+      var contact = json2["data"]["contact"];
 
+      business.text = businessData["name"] ?? "";
+      description.text = businessData["description"] ?? "";
+      address1.text = contact["address1"] ?? "";
+      address2.text = contact["address2"] ?? "";
+      state.text = contact["state"] ?? "";
+      city.text = contact["city"] ?? "";
+      website.text = contact["website"] ?? "";
+      zipcode.text = contact["zipcode"] ?? "";
+      phoneNumber.text = contact["phone"] ?? "";
 
+      return json["data"];
+    } catch (e, s) {
+      print(e);
+      return null;
+    }
+  }
 }
