@@ -75,6 +75,7 @@ dev_dependencies:
   flutter_map: ^0.14.0
   carousel_slider: ^4.0.0
   image_picker:
+  flutter_keyboard_visibility: ^5.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

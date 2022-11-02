@@ -8,6 +8,7 @@ import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/screen/brand_detail/brand_detail.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:untitled/widgets/image.dart';
 
 MainScreenController mainScreenController = Get.put(MainScreenController());
 
@@ -48,15 +49,11 @@ GestureDetector handymanItem({
                 Expanded(
                   flex: 42,
                   child: image != ""
-                      ? SvgPicture.network(
-                    image,
-                    fit: BoxFit.contain,
-                    height: getHeight(120),
-                  )
+                      ? getImage(image)
                       : Container(
-                    height: getHeight(120),
-                    color: Colors.grey,
-                  ),
+                          height: getHeight(120),
+                          color: Colors.grey,
+                        ),
                 ),
                 Expanded(
                   flex: 3,
@@ -77,22 +74,22 @@ GestureDetector handymanItem({
                               width: getHeight(25),
                               decoration: logo != ""
                                   ? BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    alignment: Alignment.center,
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(logo),
-                                  ))
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        alignment: Alignment.center,
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(logo),
+                                      ))
                                   : BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey,
-                              ),
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey,
+                                    ),
                             ),
                             SizedBox(
                               width: getWidth(12),
                             ),
                             SizedBox(
-                              width: getWidth(44),
+                              width: getWidth(100),
                               child: Text(
                                 title,
                                 style: TextStyle(fontWeight: FontWeight.w500),
@@ -211,14 +208,14 @@ Card serviceItem({String image = "", String service = ""}) {
             child: Container(
               decoration: image == ""
                   ? BoxDecoration(
-                color: Colors.grey,
-              )
+                      color: Colors.grey,
+                    )
                   : BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(image),
-                ),
-              ),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(image),
+                      ),
+                    ),
             ),
           ),
           Expanded(flex: 5, child: Container()),
@@ -262,14 +259,14 @@ Card carouselItem({
             child: Container(
               decoration: image == ""
                   ? BoxDecoration(
-                color: Colors.grey,
-              )
+                      color: Colors.grey,
+                    )
                   : BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(image),
-                ),
-              ),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(image),
+                      ),
+                    ),
             ),
           ),
           Expanded(
@@ -288,16 +285,16 @@ Card carouselItem({
                           width: getHeight(30),
                           decoration: logo != ""
                               ? BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                alignment: Alignment.center,
-                                fit: BoxFit.fill,
-                                image: NetworkImage(logo),
-                              ))
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(logo),
+                                  ))
                               : BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey,
-                          ),
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey,
+                                ),
                         ),
                         SizedBox(
                           width: getWidth(12),

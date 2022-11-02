@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/model/custom_dio.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../global_controller.dart';
 
@@ -35,6 +36,7 @@ class Category {
 class MainScreenController extends GetxController {
   TextEditingController searchText = TextEditingController();
   TextEditingController searchZipcode = TextEditingController();
+  TextEditingController textFilter = TextEditingController();
 
   GlobalController globalController = Get.put(GlobalController());
 
@@ -56,12 +58,27 @@ class MainScreenController extends GetxController {
 
   RxInt currentIndex = 0.obs;
 
+  RxBool isKeyboardVisible = false.obs;
+
+  late StreamSubscription<bool> keyboardSubscription;
+
   @override
   void onInit() {
     getProNear = getProfessionalNear();
     getMostInterest = getMostInterested();
     hasSearched.value = false;
+    var keyboardVisibilityController = KeyboardVisibilityController();
+
+    keyboardSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
+      isKeyboardVisible.value = visible;
+    });
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    keyboardSubscription.cancel();
+    super.dispose();
   }
 
   Future<List<Business>> getProfessionalNear() async {
