@@ -35,7 +35,7 @@ class SignupWelcomeScreen extends StatelessWidget {
             Text(
               "Sign up",
               style: TextStyle(
-                fontSize: getWidth(20),
+                fontSize: getHeight(20),
               ),
               textAlign: TextAlign.center,
             ),

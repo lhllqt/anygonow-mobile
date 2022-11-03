@@ -59,7 +59,7 @@ class HandymanUserScreen extends StatelessWidget {
                                       .username
                                       .toString(),
                                   style: TextStyle(
-                                      // fontSize: getWidth(20),
+                                      // fontSize: getHeight(20),
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
@@ -114,7 +114,7 @@ class HandymanUserScreen extends StatelessWidget {
                                       Text(
                                         'Manage your business',
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),
@@ -164,7 +164,7 @@ class HandymanUserScreen extends StatelessWidget {
                                       Text(
                                         "Service Areas",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),
@@ -214,7 +214,7 @@ class HandymanUserScreen extends StatelessWidget {
                                       Text(
                                         "Payment Center",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),
@@ -262,7 +262,7 @@ class HandymanUserScreen extends StatelessWidget {
                                       Text(
                                         "Rating Center",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),
@@ -312,7 +312,7 @@ class HandymanUserScreen extends StatelessWidget {
                                       Text(
                                         "Change Password",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),

@@ -18,7 +18,7 @@ SizedBox getAppName() {
           "appName".tr,
           style: TextStyle(
             color: Colors.white,
-            fontSize: getWidth(20),
+            fontSize: getHeight(20),
           ),
         ),
       ),

@@ -59,7 +59,7 @@ class UserScreen extends StatelessWidget {
                                       .username
                                       .toString(),
                                   style: TextStyle(
-                                      // fontSize: getWidth(20),
+                                      // fontSize: getHeight(20),
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
@@ -115,7 +115,7 @@ class UserScreen extends StatelessWidget {
                                       Text(
                                         'Account Information',
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),
@@ -164,7 +164,7 @@ class UserScreen extends StatelessWidget {
                                       Text(
                                         "My Request",
                                         style:
-                                            TextStyle(fontSize: getWidth(16)),
+                                            TextStyle(fontSize: getHeight(16)),
                                       )
                                     ],
                                   ),

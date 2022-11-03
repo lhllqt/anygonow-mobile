@@ -43,7 +43,7 @@ class MainScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w700,
-                        fontSize: getWidth(16),
+                        fontSize: getHeight(16),
                       ),
                     ),
                   ),
@@ -76,7 +76,7 @@ class MainScreen extends StatelessWidget {
                               child: Text(
                                 "Hi ${globalController.user.value.username}, have a good day",
                                 style: TextStyle(
-                                  fontSize: getWidth(18),
+                                  fontSize: getHeight(18),
                                   fontWeight: FontWeight.w500,
                                   color: Colors.white,
                                 ),
@@ -107,7 +107,7 @@ class MainScreen extends StatelessWidget {
                 //   child: Text(
                 //     "Hi ${globalController.user.value.username}, have a good day",
                 //     style: TextStyle(
-                //       fontSize: getWidth(18),
+                //       fontSize: getHeight(18),
                 //       fontWeight: FontWeight.w500,
                 //       color: Colors.white,
                 //     ),
@@ -264,7 +264,7 @@ class MainScreen extends StatelessWidget {
                 "Best Services",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: getWidth(18),
+                  fontSize: getHeight(18),
                 ),
               ),
             ],
@@ -318,7 +318,7 @@ class MainScreen extends StatelessWidget {
             "Most interest",
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: getWidth(18),
+              fontSize: getHeight(18),
             ),
           ),
           SizedBox(
@@ -361,7 +361,7 @@ class MainScreen extends StatelessWidget {
             "Professional Near You",
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: getWidth(18),
+              fontSize: getHeight(18),
             ),
           ),
           SizedBox(

@@ -22,7 +22,7 @@ Container inputPassword(
                 width: double.infinity,
                 child: Text(label,
                     style: TextStyle(
-                        fontSize: getWidth(14),
+                        fontSize: getHeight(14),
                         color: Colors.black,
                         fontWeight: FontWeight.w500)),
               )
@@ -45,7 +45,7 @@ Container inputPassword(
             children: [
               Expanded(
                 child: TextFormField(
-                    style: TextStyle(fontSize: getWidth(14)),
+                    style: TextStyle(fontSize: getHeight(14)),
                     controller: controller,
                     obscureText: isHide,
                     readOnly: !enabled,
@@ -61,7 +61,7 @@ Container inputPassword(
                           left: getWidth(18), bottom: getHeight(20)),
                       labelStyle: TextStyle(
                           color: enabled ? const Color(0xFF9E9E9E) : const Color(0xFF999999),
-                          fontSize: getWidth(14)),
+                          fontSize: getHeight(14)),
                     )),
               ),
               IconButton(
@@ -85,7 +85,7 @@ Container inputRegular(BuildContext context,
     required String hintText,
     required TextEditingController textEditingController,
     bool enabled = true,
-    double height = 50,
+    double height = 48,
     double width = 0,
     int maxLines = 1,
     int minLines = 1,
@@ -103,7 +103,7 @@ Container inputRegular(BuildContext context,
                 width: double.infinity,
                 child: Text(label,
                     style: TextStyle(
-                        fontSize: getWidth(14),
+                        fontSize: getHeight(14),
                         color: enabled ? Colors.black : const Color(0xFF999999),
                         fontWeight: FontWeight.w500)),
               )
@@ -131,7 +131,7 @@ Container inputRegular(BuildContext context,
                   keyboardType: keyboardType,
                   readOnly: !enabled,
                   controller: textEditingController,
-                  style: TextStyle(fontSize: getWidth(14)),
+                  style: TextStyle(fontSize: getHeight(14), color: enabled ? Colors.black : const Color(0xFF999999)),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -145,7 +145,7 @@ Container inputRegular(BuildContext context,
                       bottom: getHeight(20),
                     ),
                     labelStyle: TextStyle(
-                        color: const Color(0xFF9E9E9E), fontSize: getWidth(14)),
+                        color: const Color(0xFF9E9E9E), fontSize: getHeight(14)),
                   ),
                 ),
               ),
@@ -187,15 +187,15 @@ Container inputSearch(
               return TextFormField(
                 focusNode: _focusNode,
                 controller: textEditingController,
-                style: TextStyle(fontSize: getWidth(12)),
+                style: TextStyle(fontSize: getHeight(12)),
                 onEditingComplete: () {
                   FocusScope.of(context).unfocus();
                   onSearch();
                 },
                 decoration: InputDecoration(
                   prefixIconConstraints: BoxConstraints(
-                    maxHeight: 30,
-                    maxWidth: 30,
+                    maxHeight: getHeight(30),
+                    maxWidth: getWidth(30),
                   ),
                   prefixIcon: prefixIcon == ""
                       ? null
@@ -214,7 +214,7 @@ Container inputSearch(
                     top: getHeight(2),
                   ),
                   labelStyle: TextStyle(
-                      color: Color(0xFF878C92), fontSize: getWidth(16)),
+                      color: Color(0xFF878C92), fontSize: getHeight(16)),
                 ),
               );
             },
@@ -276,7 +276,7 @@ Container inputWithHint(BuildContext context,
               onchange == null ? null : onchange();
             },
             controller: textEditingController,
-            style: TextStyle(fontSize: getWidth(16)),
+            style: TextStyle(fontSize: getHeight(16)),
             decoration: InputDecoration(
               floatingLabelBehavior: FloatingLabelBehavior.always,
               border: InputBorder.none,
@@ -289,7 +289,7 @@ Container inputWithHint(BuildContext context,
               contentPadding:
                   EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+                  TextStyle(color: Color(0xFF878C92), fontSize: getHeight(16)),
             ),
           ),
         ),
@@ -322,7 +322,7 @@ Container inputSignup(BuildContext context,
         Expanded(
           child: TextFormField(
             controller: textEditingController,
-            style: TextStyle(fontSize: getWidth(16)),
+            style: TextStyle(fontSize: getHeight(16)),
             decoration: InputDecoration(
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
@@ -333,7 +333,7 @@ Container inputSignup(BuildContext context,
               contentPadding:
                   EdgeInsets.only(left: getWidth(16), right: getWidth(16)),
               labelStyle:
-                  TextStyle(color: Color(0xFF878C92), fontSize: getWidth(16)),
+                  TextStyle(color: Color(0xFF878C92), fontSize: getHeight(16)),
             ),
           ),
         ),
@@ -372,7 +372,7 @@ Container inputPasswordSignup(
               onChanged: (e) {
                 onchange != null ? onchange() : null;
               },
-              style: TextStyle(fontSize: getWidth(16)),
+              style: TextStyle(fontSize: getHeight(16)),
               controller: controller,
               obscureText: isHide,
               decoration: InputDecoration(

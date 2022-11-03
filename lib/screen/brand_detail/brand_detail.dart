@@ -91,7 +91,7 @@ class BrandDetailScreen extends StatelessWidget {
                   ),
                   Text(
                     "4 reviews",
-                    style: TextStyle(fontSize: getWidth(12), color: const Color(0xFF999999)),
+                    style: TextStyle(fontSize: getHeight(12), color: const Color(0xFF999999)),
                   ),
                 ],
               ),
@@ -151,7 +151,7 @@ class BrandDetailScreen extends StatelessWidget {
             "About us",
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: getWidth(18),
+              fontSize: getHeight(18),
             ),
           ),
           SizedBox(
@@ -161,7 +161,7 @@ class BrandDetailScreen extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: ReadMoreText(
               brandDetailController.business.bussiness["descriptions"] ?? "",
-              style: TextStyle(fontSize: getWidth(12)),
+              style: TextStyle(fontSize: getHeight(12)),
               trimMode: TrimMode.Line,
               trimCollapsedText: 'Read more',
               trimExpandedText: 'Show less',
@@ -182,7 +182,7 @@ class BrandDetailScreen extends StatelessWidget {
             "Service provided",
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: getWidth(18),
+              fontSize: getHeight(18),
             ),
           ),
           SizedBox(
@@ -267,7 +267,7 @@ class BrandDetailScreen extends StatelessWidget {
             "Reviews",
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: getWidth(18),
+              fontSize: getHeight(18),
             ),
           ),
           SizedBox(
@@ -325,7 +325,7 @@ class BrandDetailScreen extends StatelessWidget {
                             Text(
                               "Total 4",
                               style: TextStyle(
-                                fontSize: getWidth(14),
+                                fontSize: getHeight(14),
                               ),
                             ),
                           ],
@@ -353,7 +353,7 @@ class BrandDetailScreen extends StatelessWidget {
             "Comments",
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: getWidth(18),
+              fontSize: getHeight(18),
             ),
           ),
           Expanded(

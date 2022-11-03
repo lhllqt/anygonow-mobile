@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
             Text(
               'welcomeBack'.tr,
               style: TextStyle(
-                fontSize: getWidth(24),
+                fontSize: getHeight(24),
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
             Text(
               "Sign in to your account",
               style: TextStyle(
-                fontSize: getWidth(16),
+                fontSize: getHeight(16),
                 color: const Color(0xff999999),
               ),
               textAlign: TextAlign.center,

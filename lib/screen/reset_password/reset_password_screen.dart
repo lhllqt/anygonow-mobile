@@ -24,7 +24,7 @@ class ResetPasswordScreen extends StatelessWidget {
               height: getHeight(38),
             ),
             Text("Reset your password", style: TextStyle(
-              fontSize: getWidth(20)
+              fontSize: getHeight(20)
             ),),
             SizedBox(
               height: getHeight(16),

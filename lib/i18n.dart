@@ -29,7 +29,12 @@ class Messages extends Translations {
           "common_failed": "Failed !",
           "failed_add_payment": "Add payment failed !",
           "edit": "Edit",
-          "update": "Update"
+          "update": "Update",
+          "failed_change_password": "Change password failed !",
+          "wrong_password": "Your password is invalid !",
+          "password_not_empty": "Your password is mustn't empty !",
+          "success_change_password": "Change password successful !",
+          "cfpassword_not_match": "Your confirm password not match with your new password"
         },
       };
 }

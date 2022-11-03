@@ -52,7 +52,7 @@ class MyRequestScreen extends StatelessWidget {
             Text(
               "Number of free customer information view: ${myRequestController.requests.length}",
               style: TextStyle(
-                fontSize: getWidth(12),
+                fontSize: getHeight(12),
               ),
             ),
             SizedBox(
@@ -114,13 +114,13 @@ class MyRequestScreen extends StatelessWidget {
               Text(
                 "Request time: $startDate",
                 style: TextStyle(
-                  fontSize: getWidth(12),
+                  fontSize: getHeight(12),
                 ),
               ),
               Text(
                 "Expiry time: $endDate",
                 style: TextStyle(
-                  fontSize: getWidth(12),
+                  fontSize: getHeight(12),
                 ),
               ),
               Text(

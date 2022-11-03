@@ -52,7 +52,7 @@ AlertDialog alertDialogSuccess(context, message) {
           ),
           Text(
             message != null ? message.toString().tr : "common_success".tr,
-            style: TextStyle(fontSize: getWidth(17)),
+            style: TextStyle(fontSize: getHeight(17)),
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -79,7 +79,7 @@ AlertDialog alertDialogSuccess(context, message) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getHeight(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -113,7 +113,7 @@ AlertDialog alertDialogFailed(context, message) {
           ),
           Text(
             message != null ? message.toString().tr : "common_failed".tr,
-            style: TextStyle(fontSize: getWidth(17)),
+            style: TextStyle(fontSize: getHeight(17)),
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -140,7 +140,7 @@ AlertDialog alertDialogFailed(context, message) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getHeight(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -164,7 +164,7 @@ AlertDialog alertDialog(context, message) {
         children: [
           Text(
             message != null ? message.toString().tr : "common_message".tr,
-            style: TextStyle(fontSize: getWidth(17)),
+            style: TextStyle(fontSize: getHeight(17)),
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -191,7 +191,7 @@ AlertDialog alertDialog(context, message) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getHeight(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -215,14 +215,14 @@ AlertDialog alertHelpdeskDialog(context, title, helptext, image) {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: getWidth(14)),
+            style: TextStyle(fontSize: getHeight(14)),
           ),
           SizedBox(
             height: getHeight(15),
           ),
           Text(
             helptext,
-            style: TextStyle(fontSize: getWidth(12), fontWeight: FontWeight.normal),
+            style: TextStyle(fontSize: getHeight(12), fontWeight: FontWeight.normal),
             textAlign: TextAlign.center,
           ),
           image != null
@@ -259,7 +259,7 @@ AlertDialog alertHelpdeskDialog(context, title, helptext, image) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getHeight(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -283,14 +283,14 @@ AlertDialog alertConfirmDialog(context, title, message, onConfirm) {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: getWidth(16)),
+            style: TextStyle(fontSize: getHeight(16)),
           ),
           SizedBox(
             height: getHeight(15),
           ),
           Text(
             message,
-            style: TextStyle(fontSize: getWidth(14), fontWeight: FontWeight.normal),
+            style: TextStyle(fontSize: getHeight(14), fontWeight: FontWeight.normal),
             textAlign: TextAlign.center,
           ),
           Expanded(
@@ -315,7 +315,7 @@ AlertDialog alertConfirmDialog(context, title, message, onConfirm) {
                       },
                       child: Text(
                         'confirm'.tr,
-                        style: TextStyle(color: Colors.white, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.white, fontSize: getHeight(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
@@ -334,7 +334,7 @@ AlertDialog alertConfirmDialog(context, title, message, onConfirm) {
                       },
                       child: Text(
                         'close'.tr,
-                        style: TextStyle(color: Colors.black, fontSize: getWidth(17), fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black, fontSize: getHeight(17), fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),

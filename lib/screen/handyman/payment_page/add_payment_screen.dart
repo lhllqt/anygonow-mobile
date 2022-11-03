@@ -36,7 +36,7 @@ class AddPaymentScreen extends StatelessWidget {
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
-              fontSize: getWidth(16),
+              fontSize: getHeight(16),
             ),
           ),
           leading: IconButton(

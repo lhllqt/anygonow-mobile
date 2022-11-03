@@ -99,7 +99,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                         "Logo images*",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: getWidth(12),
+                          fontSize: getHeight(12),
                         ),
                       ),
                       SizedBox(
@@ -107,7 +107,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                       ),
                       Text(
                         "This image will also be used for navigation. At least 210x210 recommended.",
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: getWidth(10), color: const Color(0xFF696969)),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: getHeight(10), color: const Color(0xFF696969)),
                       ),
                       SizedBox(
                         height: getHeight(10),
@@ -153,7 +153,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                         "Banner",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: getWidth(12),
+                          fontSize: getHeight(12),
                         ),
                       ),
                       SizedBox(
@@ -161,7 +161,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                       ),
                       Text(
                         "This image will be used for featuring your business on the homepage. At least 440x220 recommended.",
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: getWidth(10), color: const Color(0xFF696969)),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: getHeight(10), color: const Color(0xFF696969)),
                       ),
                       SizedBox(
                         height: getHeight(10),

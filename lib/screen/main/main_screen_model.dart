@@ -119,7 +119,7 @@ GestureDetector handymanItem({
                             Text(
                               " Requested " + requested.toString() + " times",
                               style: TextStyle(
-                                fontSize: getWidth(12),
+                                fontSize: getHeight(12),
                               ),
                             ),
                           ],
@@ -130,7 +130,7 @@ GestureDetector handymanItem({
                             Text(
                               " " + reviews.toString() + " Customer Reviews",
                               style: TextStyle(
-                                fontSize: getWidth(12),
+                                fontSize: getHeight(12),
                               ),
                             ),
                           ],
@@ -230,7 +230,7 @@ Card serviceItem({String image = "", String service = ""}) {
                   service,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: getWidth(16),
+                    fontSize: getHeight(16),
                   ),
                 )),
           ),
@@ -305,7 +305,7 @@ Card carouselItem({
                             title,
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontSize: getWidth(16),
+                              fontSize: getHeight(16),
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -321,7 +321,7 @@ Card carouselItem({
                         Text(
                           " Requested " + requested.toString() + " times",
                           style: TextStyle(
-                            fontSize: getWidth(12),
+                            fontSize: getHeight(12),
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -336,7 +336,7 @@ Card carouselItem({
                         Text(
                           " " + reviews.toString() + " Customer Reviews",
                           style: TextStyle(
-                            fontSize: getWidth(12),
+                            fontSize: getHeight(12),
                             fontWeight: FontWeight.w500,
                           ),
                         ),

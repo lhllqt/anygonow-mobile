@@ -45,7 +45,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Text(
               "Forgot your password?",
               style: TextStyle(
-                fontSize: getWidth(24),
+                fontSize: getHeight(24),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Text(
               "We will sent you a URL to reset your password",
               style: TextStyle(
-                fontSize: getWidth(13),
+                fontSize: getHeight(13),
                 color: const Color(0xff999999),
                 height: getHeight(2),
               ),
@@ -64,7 +64,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             Text(
               "Please enter your email address you have registered for our system",
               style: TextStyle(
-                fontSize: getWidth(13),
+                fontSize: getHeight(13),
                 color: const Color(0xff999999),
                 height: getHeight(2),
               ),

@@ -33,7 +33,7 @@ class SignupHandymanScreen extends StatelessWidget {
             Text(
               "Homeowner - Sign up",
               style: TextStyle(
-                fontSize: getWidth(20),
+                fontSize: getHeight(20),
               ),
               textAlign: TextAlign.center,
             ),
@@ -92,12 +92,12 @@ class SignupHandymanScreen extends StatelessWidget {
                 Text(
                   "I agree to the ",
                   style: TextStyle(
-                      fontSize: getWidth(14), fontWeight: FontWeight.w500),
+                      fontSize: getHeight(14), fontWeight: FontWeight.w500),
                 ),
                 Text(
                   "Term of Use",
                   style: TextStyle(
-                      fontSize: getWidth(14),
+                      fontSize: getHeight(14),
                       fontWeight: FontWeight.w500,
                       color: Color(0xFF3864FF),
                       decoration: TextDecoration.underline),
@@ -105,12 +105,12 @@ class SignupHandymanScreen extends StatelessWidget {
                 Text(
                   " and ",
                   style: TextStyle(
-                      fontSize: getWidth(14), fontWeight: FontWeight.w500),
+                      fontSize: getHeight(14), fontWeight: FontWeight.w500),
                 ),
                 Text(
                   "Privacy Policy",
                   style: TextStyle(
-                      fontSize: getWidth(14),
+                      fontSize: getHeight(14),
                       fontWeight: FontWeight.w500,
                       color: Color(0xFF3864FF),
                       decoration: TextDecoration.underline),
