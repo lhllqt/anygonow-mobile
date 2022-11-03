@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/i18n.dart';
 import 'package:untitled/screen/brand_detail/brand_detail.dart';
+import 'package:untitled/screen/change_password/change_password_screen.dart';
 import 'package:untitled/screen/login/login_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:untitled/service/stripe.dart';

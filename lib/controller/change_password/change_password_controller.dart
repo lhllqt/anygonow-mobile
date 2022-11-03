@@ -39,6 +39,8 @@ class ChangePasswordController extends GetxController {
   var errNewPassword = "".obs;
   var errConfirmPassword = "".obs;
 
+  var isEditting = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -169,7 +171,6 @@ class ChangePasswordController extends GetxController {
   }
 
   void changePassword(context) async {
-    print("change pass");
     isSuccess.value = false;
     errNewPassword.value = errMsgNewPassword();
     errConfirmPassword.value = errMsgConfirmPassword();
@@ -216,14 +217,14 @@ class ChangePasswordController extends GetxController {
             password.clear();
             newPassword.clear();
             confirmPassword.clear();
-            Get.back();
+            isEditting.value = false;
           } else {
-            Get.back();
-            errPassword.value = "エラーが発生しました。";
+            isEditting.value = false;
+            errPassword.value = "Failed !";
           }
         } else {
-          Get.back();
-          errPassword.value = "パスワードが合っていません。";
+          isEditting.value = false;
+          errPassword.value = "Failed !";
         }
       }
     }

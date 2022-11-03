@@ -4,7 +4,7 @@ import 'package:untitled/utils/config.dart';
 
 Container inputPassword(
   BuildContext context, {
-  String? label,
+  String? label, bool enabled = true,
   required TextEditingController controller,
   required String hintText,
   required bool isHide,
@@ -48,6 +48,7 @@ Container inputPassword(
                     style: TextStyle(fontSize: getWidth(14)),
                     controller: controller,
                     obscureText: isHide,
+                    readOnly: !enabled,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -59,7 +60,7 @@ Container inputPassword(
                       contentPadding: EdgeInsets.only(
                           left: getWidth(18), bottom: getHeight(20)),
                       labelStyle: TextStyle(
-                          color: const Color(0xFF9E9E9E),
+                          color: enabled ? const Color(0xFF9E9E9E) : const Color(0xFF999999),
                           fontSize: getWidth(14)),
                     )),
               ),
@@ -103,7 +104,7 @@ Container inputRegular(BuildContext context,
                 child: Text(label,
                     style: TextStyle(
                         fontSize: getWidth(14),
-                        color: Colors.black,
+                        color: enabled ? Colors.black : const Color(0xFF999999),
                         fontWeight: FontWeight.w500)),
               )
             : Container(),
