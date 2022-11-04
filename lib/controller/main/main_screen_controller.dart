@@ -62,6 +62,8 @@ class MainScreenController extends GetxController {
 
   late StreamSubscription<bool> keyboardSubscription;
 
+  int filter = 0;
+
   @override
   void onInit() {
     getProNear = getProfessionalNear();
@@ -206,7 +208,7 @@ class MainScreenController extends GetxController {
       if (searchText.text == "" || value != null) {
         categoryId = value != null ? value.id : "";
         response = await customDio.get(
-            "/businesses?categoryId=$categoryId&zipcode=${searchZipcode.text}");
+            "/businesses?categoryId=$categoryId&zipcode=${searchZipcode.text}&query=$filter");
         var json = jsonDecode(response.toString());
 
         if (json["data"]["result"] != null) {

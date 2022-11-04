@@ -20,7 +20,7 @@ class MainScreen extends StatelessWidget {
       floatingActionButton: Obx(() {
         return mainScreenController.isKeyboardVisible.value
             ? Container(
-              child: Bouncing(
+                child: Bouncing(
                   onPress: () async {
                     var res = await mainScreenController.getBusinesses();
                     if (res) {
@@ -48,7 +48,7 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-            )
+              )
             : Container();
       }),
       body: Stack(
@@ -446,9 +446,21 @@ class MainScreen extends StatelessWidget {
                     // enabled: accountController.isEditting.value,
                   ),
                   getDropDown(
-                    ["Most viewed"],
-                    (String value) =>
-                        {mainScreenController.textFilter.text = value},
+                    ["Most reviewed", "Most requested"],
+                    (String value) async {
+                      if (value == "Most reviewed") {
+                        mainScreenController.filter = 2;
+                      }
+                      if (value == "Most requested") {
+                        mainScreenController.filter = 1;
+                      }
+
+                      var res = await mainScreenController
+                          .getBusinesses();
+                      if (res) {
+                        mainScreenController.textFilter.text = value;
+                      }
+                    },
                   ),
                 ]),
               ),
@@ -470,8 +482,9 @@ class MainScreen extends StatelessWidget {
                 title:
                     mainScreenController.businesses[index].bussiness["name"] ??
                         "",
-                stars:
-                    mainScreenController.businesses[index].rating["rate"] ?? 0,
+                stars: (mainScreenController.businesses[index].rating["rate"] ??
+                        0.0) *
+                    1.0,
                 reviews: mainScreenController.businesses[index].rating["review"]
                         ?.toInt() ??
                     0,

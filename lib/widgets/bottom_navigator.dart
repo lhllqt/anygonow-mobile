@@ -45,13 +45,13 @@ Container bottomNavigator() {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
-                              "assets/images/home.svg",
+                              "assets/icons/home.svg",
                               width: getWidth(24),
                               color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
-                              "home".tr,
-                              style: TextStyle(fontSize: getHeight(12), color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              "Home",
+                              style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -69,13 +69,13 @@ Container bottomNavigator() {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
-                              "assets/images/share.svg",
+                              "assets/icons/chat.svg",
                               width: getWidth(24),
                               color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
-                              "share".tr,
-                              style: TextStyle(fontSize: getHeight(12), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              "Message",
+                              style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -88,18 +88,18 @@ Container bottomNavigator() {
                         globalController.historyStatus.value = "REQUEST_MODE";
                       },
                       child: Container(
-                        width: getWidth(60),
+                        width: getWidth(70),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
-                              "assets/images/view.svg",
+                              "assets/icons/bell.svg",
                               width: getWidth(24),
                               color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92),
                             ),
                             Text(
-                              "view".tr,
-                              style: TextStyle(fontSize: getHeight(12), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              "Notification",
+                              style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -124,7 +124,7 @@ Container bottomNavigator() {
                             FittedBox(
                               child: Text(
                                 "Profile",
-                                style: TextStyle(fontSize: getHeight(12), color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                                style: TextStyle(fontSize: getWidth(12), color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                               ),
                             )
                           ],
@@ -181,7 +181,7 @@ Container bottomNavigatorHandyman() {
                             ),
                             Text(
                               "My request",
-                              style: TextStyle(fontSize: getHeight(10), color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 0 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -203,7 +203,7 @@ Container bottomNavigatorHandyman() {
                             ),
                             Text(
                               "Message",
-                              style: TextStyle(fontSize: getHeight(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -225,7 +225,7 @@ Container bottomNavigatorHandyman() {
                             ),
                             Text(
                               "Advertise",
-                              style: TextStyle(fontSize: getHeight(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -247,7 +247,7 @@ Container bottomNavigatorHandyman() {
                             ),
                             Text(
                               "Notification",
-                              style: TextStyle(fontSize: getHeight(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                              style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 5 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                             )
                           ],
                         ),
@@ -272,7 +272,7 @@ Container bottomNavigatorHandyman() {
                             FittedBox(
                               child: Text(
                                 "Profile",
-                                style: TextStyle(fontSize: getHeight(10), color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
+                                style: TextStyle(fontSize: getWidth(10), color: globalController.currentPage.value == 1 ? Color(0xFF61B3FF) : Color(0xFF878C92)),
                               ),
                             )
                           ],
