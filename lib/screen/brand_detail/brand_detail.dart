@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
@@ -290,7 +289,7 @@ class BrandDetailScreen extends StatelessWidget {
                         color: Color(0xFFFFF5F2),
                         alignment: Alignment.center,
                         child: Text(
-                          "3.0",
+                          brandDetailController.averageRate.value.toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Color(0xFFC02D02)),
                         ),
@@ -303,7 +302,7 @@ class BrandDetailScreen extends StatelessWidget {
                   child: Stack(
                     children: [
                       RatingBarIndicator(
-                        rating: 2.75,
+                        rating: brandDetailController.averageRate.value,
                         itemSize: getHeight(20),
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
@@ -362,7 +361,7 @@ class BrandDetailScreen extends StatelessWidget {
               child: ListView(
                 children: [
                   ...brandDetailController.comments.map((e) {
-                    return commentItem();
+                    return commentItem(e);
                   }).toList(),
                 ],
               ),
@@ -373,7 +372,7 @@ class BrandDetailScreen extends StatelessWidget {
     );
   }
 
-  Container commentItem() {
+  Container commentItem(dynamic item) {
     return Container(
         margin: EdgeInsets.only(bottom: getHeight(40)),
         child: Stack(
@@ -397,7 +396,7 @@ class BrandDetailScreen extends StatelessWidget {
                 Stack(children: [
                   Container(
                     child: Text(
-                      "Trinh Van Thuan",
+                      item.customerName,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: getHeight(14),
@@ -407,7 +406,7 @@ class BrandDetailScreen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: getHeight(20)),
                     child: Text(
-                      "Customer service: Moves and Truck",
+                      "Customer service: " + item.serviceOrder,
                       style: TextStyle(
                         fontSize: getHeight(12),
                         color: Color(0xFF333333),
@@ -420,7 +419,7 @@ class BrandDetailScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: getHeight(40), left: getWidth(32)),
               child: RatingBarIndicator(
-                rating: 3,
+                rating: item.rate,
                 itemSize: getHeight(20),
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
@@ -431,6 +430,7 @@ class BrandDetailScreen extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(top: getHeight(70), left: getWidth(32)),
+              width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: getHeight(8), horizontal: getWidth(8)),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -438,7 +438,7 @@ class BrandDetailScreen extends StatelessWidget {
                   color: Color(0xFFE6E6E6),
                 ),
               ),
-              child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....."),
+              child: Text(item.comment),
             )
           ],
         ));

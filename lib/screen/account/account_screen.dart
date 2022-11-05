@@ -28,7 +28,7 @@ class _AccountScreenState extends State<AccountScreen> {
         GestureDetector(
           onTap: () async {
             if (accountController.isEditting.value) {
-              var result = await accountController.editUserInfo(firstName: accountController.firstName.text, lastName: accountController.lastName.text, avatar: "");
+              var result = await accountController.editUserInfo();
               if (result != null) {
                 accountController.isEditting.value = !accountController.isEditting.value;
               }
@@ -37,7 +37,7 @@ class _AccountScreenState extends State<AccountScreen> {
             accountController.isEditting.value = !accountController.isEditting.value;
           },
           child: Obx(
-                () => Container(
+            () => Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(right: getHeight(16)),
                 child: Text(
@@ -68,83 +68,83 @@ class _AccountScreenState extends State<AccountScreen> {
               alignment: Alignment.centerLeft,
               child: logoFile.path == "" && accountController.logoImage.value == ""
                   ? GestureDetector(
-                onTap: () async {
-                  XFile? pickedFile = await ImagePicker().pickImage(
-                    source: ImageSource.gallery,
-                    maxWidth: 1800,
-                    maxHeight: 1800,
-                  );
-                  if (pickedFile != null) {
-                    setState(() {
-                      logoFile = File(pickedFile.path);
-                    });
-                  }
-                },
-                child: SvgPicture.asset(
-                  "assets/icons/account.svg",
-                ),
-              )
+                      onTap: () async {
+                        XFile? pickedFile = await ImagePicker().pickImage(
+                          source: ImageSource.gallery,
+                          maxWidth: 1800,
+                          maxHeight: 1800,
+                        );
+                        if (pickedFile != null) {
+                          setState(() {
+                            logoFile = File(pickedFile.path);
+                          });
+                        }
+                      },
+                      child: SvgPicture.asset(
+                        "assets/icons/account.svg",
+                      ),
+                    )
                   : Obx(() => Align(
-                alignment: Alignment.centerLeft,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(56),
-                  child: Container(
-                      width: getHeight(60),
-                      height: getHeight(60),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: accountController.logoImage.value != "" ? Colors.blueGrey : Colors.transparent),
-                      child: logoFile.path != ""
-                          ? Image.file(
-                        logoFile,
-                        fit: BoxFit.cover,
-                      )
-                          : getImage(accountController.logoImage.value, width: getWidth(60), height: getHeight(60))),
-                ),
-              )),
+                        alignment: Alignment.centerLeft,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(56),
+                          child: Container(
+                              width: getHeight(60),
+                              height: getHeight(60),
+                              decoration: BoxDecoration(shape: BoxShape.circle, color: accountController.logoImage.value != "" ? Colors.blueGrey : Colors.transparent),
+                              child: logoFile.path != ""
+                                  ? Image.file(
+                                      logoFile,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : getImage(accountController.logoImage.value, width: getWidth(60), height: getHeight(60))),
+                        ),
+                      )),
             ),
             SizedBox(
               height: getHeight(16),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "First name",
-              hintText: "",
-              textEditingController: accountController.firstName,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  label: "First name",
+                  hintText: "",
+                  textEditingController: accountController.firstName,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(16),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "Last name",
-              hintText: "",
-              textEditingController: accountController.lastName,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  label: "Last name",
+                  hintText: "",
+                  textEditingController: accountController.lastName,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(16),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "Email Address",
-              hintText: "",
-              textEditingController: accountController.email,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  label: "Email Address",
+                  hintText: "",
+                  textEditingController: accountController.email,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(16),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "Phone number",
-              hintText: "",
-              textEditingController: accountController.phoneNumber,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  label: "Phone number",
+                  hintText: "",
+                  textEditingController: accountController.phoneNumber,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(24),
             ),
@@ -156,29 +156,29 @@ class _AccountScreenState extends State<AccountScreen> {
               height: getHeight(16),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "Address 1",
-              hintText: "",
-              textEditingController: accountController.address1,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  label: "Address 1",
+                  hintText: "",
+                  textEditingController: accountController.address1,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(16),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "Address 2",
-              hintText: "",
-              textEditingController: accountController.address2,
-              enabled: accountController.isEditting.value,
-            )),
+                  context,
+                  label: "Address 2",
+                  hintText: "",
+                  textEditingController: accountController.address2,
+                  enabled: accountController.isEditting.value,
+                )),
             SizedBox(
               height: getHeight(16),
             ),
             Stack(children: [
               Obx(
-                    () => inputRegular(
+                () => inputRegular(
                   context,
                   label: "State",
                   hintText: "",
@@ -189,36 +189,36 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               Obx(() => accountController.isEditting.value
                   ? Container(
-                child: getDropDown(
-                  USStates.getAllNames(),
-                      (String value) => {accountController.state.text = value},
-                ),
-                margin: EdgeInsets.only(top: getHeight(18)),
-              )
+                      child: getDropDown(
+                        USStates.getAllNames(),
+                        (String value) => {accountController.state.text = value},
+                      ),
+                      margin: EdgeInsets.only(top: getHeight(22)),
+                    )
                   : Container()),
             ]),
             SizedBox(
-              height: getHeight(16),
+              height: getHeight(15),
             ),
             Obx(() => inputRegular(
-              context,
-              hintText: "",
-              label: "City",
-              textEditingController: accountController.city,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  hintText: "",
+                  label: "City",
+                  textEditingController: accountController.city,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(8),
             ),
             Obx(() => inputRegular(
-              context,
-              label: "Zipcode",
-              hintText: "",
-              textEditingController: accountController.zipcode,
-              enabled: accountController.isEditting.value,
-              required: true,
-            )),
+                  context,
+                  label: "Zipcode",
+                  hintText: "",
+                  textEditingController: accountController.zipcode,
+                  enabled: accountController.isEditting.value,
+                  required: true,
+                )),
             SizedBox(
               height: getHeight(16),
             ),

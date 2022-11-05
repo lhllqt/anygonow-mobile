@@ -29,6 +29,7 @@ GestureDetector handymanItem({
       var res = await brandDetailController.getBusinessDetail(id: id);
       var serviceRes = await brandDetailController.getBusinessServices(id: id);
       var ratingRes = await brandDetailController.getBusinessRating(id: id);
+      var feedbackRes = await brandDetailController.getBusinessFeedback(id: id);
       if (res != null && serviceRes && ratingRes) {
         Get.to(BrandDetailScreen());
       }
@@ -196,48 +197,56 @@ GestureDetector handymanItem({
   );
 }
 
-Card serviceItem({String image = "", String service = ""}) {
+Card serviceItem({String image = "", String service = "", required String id}) {
   return Card(
-    child: Container(
-      // height: getHeight(205),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 60,
-            child: Container(
-              decoration: image == ""
-                  ? BoxDecoration(
-                      color: Colors.grey,
-                    )
-                  : BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(image),
-                      ),
+    child: GestureDetector(
+      onTap: () async {
+    var brandDetailController = Get.put(BrandDetailController());
+    var res = await brandDetailController.getBusinessDetail(id: id);
+    var serviceRes = await brandDetailController.getBusinessServices(id: id);
+    var ratingRes = await brandDetailController.getBusinessRating(id: id);
+    var feedbackRes = await brandDetailController.getBusinessFeedback(id: id);
+    if (res != null && serviceRes && ratingRes) {
+      Get.to(BrandDetailScreen());
+    }
+  },
+  child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 60,
+          child: Container(
+            decoration: image == ""
+                ? BoxDecoration(
+                    color: Colors.grey,
+                  )
+                : BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(image),
                     ),
-            ),
-          ),
-          Expanded(flex: 5, child: Container()),
-          Expanded(
-            flex: 45,
-            child: Padding(
-                padding: EdgeInsets.only(
-                  top: getHeight(10),
-                  left: getWidth(12),
-                ),
-                child: Text(
-                  service,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: getHeight(16),
                   ),
-                )),
           ),
-        ],
-      ),
+        ),
+        Expanded(flex: 5, child: Container()),
+        Expanded(
+          flex: 45,
+          child: Padding(
+              padding: EdgeInsets.only(
+                top: getHeight(10),
+                left: getWidth(12),
+              ),
+              child: Text(
+                service,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: getHeight(16),
+                ),
+              )),
+        ),
+      ],
     ),
-  );
+  ),);
 }
 
 Card carouselItem({

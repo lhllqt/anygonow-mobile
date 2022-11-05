@@ -341,6 +341,8 @@ class MainScreen extends StatelessWidget {
                           image: mainScreenController
                                   .mostInterested[index].bussiness["logoUrl"] ??
                               "",
+                          id: mainScreenController
+                              .mostInterested[index].bussiness["id"],
                           service: mainScreenController
                                   .mostInterested[index].bussiness["name"] ??
                               "",

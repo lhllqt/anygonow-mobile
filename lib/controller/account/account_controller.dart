@@ -36,21 +36,24 @@ class AccountController extends GetxController {
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
       var response = await customDio.get("/users/$userID");
+      var response2 = await customDio.get("/contacts/$userID");
       var json = jsonDecode(response.toString());
+      var json2 = jsonDecode(response2.toString());
       var userInfo = json["data"]["user"];
+      var contactInfo = json2["data"]["contact"];
 
       email.text = userInfo["mail"] ?? "";
       firstName.text = userInfo["firstName"] ?? "";
       lastName.text = userInfo["lastName"] ?? "";
       phoneNumber.text = userInfo["phone"] ?? "";
+      logoImage.value = userInfo["image"] ?? "";
 
-      address1.text = userInfo["address1"] ?? "";
-      address2.text = userInfo["address2"] ?? "";
-      state.text = userInfo["state"] ?? "";
-      city.text = userInfo["city"] ?? "";
-      zipcode.text = userInfo["zipcode"] ?? "";
-      country.text = userInfo["country"] ?? "";
-
+      address1.text = contactInfo["address1"] ?? "";
+      address2.text = contactInfo["address2"] ?? "";
+      state.text = contactInfo["state"] ?? "";
+      city.text = contactInfo["city"] ?? "";
+      zipcode.text = contactInfo["zipcode"] ?? "";
+      country.text = contactInfo["country"] ?? "";
 
       return (json["data"]);
     } catch (e, s) {
@@ -60,25 +63,32 @@ class AccountController extends GetxController {
     }
   }
 
-  Future editUserInfo({required String firstName, required String lastName, required String avatar}) async {
+  Future editUserInfo() async {
     try {
       AccountController myAccountController = Get.put(AccountController());
       var userID = globalController.user.value.id.toString();
-      var response;
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
-      response = await customDio.put(
+      var response = await customDio.put(
         "/users/$userID",
         {
           "data": {
-            "UserId": "",
-            "avatarUrl": avatar,
-            "firstName": firstName,
-            "lastName": lastName,
+            "firstName": firstName.value,
+            "lastName": lastName.value,
           }
         },
       );
-      print(response);
+      var response2 = await customDio.put(
+        "/contacts/$userID",
+        {
+          "data": {
+            "zipcode": zipcode.value,
+            "address1": address1.value,
+            "address2": address2.value,
+            "city": city.value,
+          }
+        },
+      );
       var json = jsonDecode(response.toString());
       if (json["data"] != null) {
         var data = json["data"];
@@ -136,6 +146,7 @@ class AccountController extends GetxController {
             "stateId": "0914343f-28bb-49e8-971d-3f0f7646787c",
             "city": city.text,
             "zipcode": zipcode.text,
+            "state": state.text,
           }
         },
       );
