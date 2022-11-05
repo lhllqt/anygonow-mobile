@@ -32,8 +32,6 @@ class AccountController extends GetxController {
 
   Future getUserInfo() async {
     try {
-      AccountController myAccountController = Get.put(AccountController());
-
       var userID = globalController.user.value.id.toString();
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
@@ -41,10 +39,18 @@ class AccountController extends GetxController {
       var json = jsonDecode(response.toString());
       var userInfo = json["data"]["user"];
 
-      myAccountController.email.text = userInfo["mail"] ?? "";
-      myAccountController.firstName.text = userInfo["firstName"] ?? "";
-      myAccountController.lastName.text = userInfo["lastName"] ?? "";
-      myAccountController.phoneNumber.text = userInfo["phone"] ?? "";
+      email.text = userInfo["mail"] ?? "";
+      firstName.text = userInfo["firstName"] ?? "";
+      lastName.text = userInfo["lastName"] ?? "";
+      phoneNumber.text = userInfo["phone"] ?? "";
+
+      address1.text = userInfo["address1"] ?? "";
+      address2.text = userInfo["address2"] ?? "";
+      state.text = userInfo["state"] ?? "";
+      city.text = userInfo["city"] ?? "";
+      zipcode.text = userInfo["zipcode"] ?? "";
+      country.text = userInfo["country"] ?? "";
+
 
       return (json["data"]);
     } catch (e, s) {

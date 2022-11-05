@@ -157,7 +157,7 @@ class ChangePasswordController extends GetxController {
   void changePassword(context) async {
     if (newPassword.text == "") {
       CustomDialog(context, "FAILED").show({"message": "password_not_empty"});
-    } else if (password.text != confirmPassword.text) {
+    } else if (newPassword.text != confirmPassword.text) {
       CustomDialog(context, "FAILED").show({"message": "cfpassword_not_match"});
     } else {
       // Todo change password api
