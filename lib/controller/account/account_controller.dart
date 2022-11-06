@@ -65,7 +65,6 @@ class AccountController extends GetxController {
 
   Future editUserInfo() async {
     try {
-      AccountController myAccountController = Get.put(AccountController());
       var userID = globalController.user.value.id.toString();
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
@@ -73,8 +72,8 @@ class AccountController extends GetxController {
         "/users/$userID",
         {
           "data": {
-            "firstName": firstName.value,
-            "lastName": lastName.value,
+            "firstName": firstName.text,
+            "lastName": lastName.text,
           }
         },
       );
@@ -82,23 +81,22 @@ class AccountController extends GetxController {
         "/contacts/$userID",
         {
           "data": {
-            "zipcode": zipcode.value,
-            "address1": address1.value,
-            "address2": address2.value,
-            "city": city.value,
+            "zipcode": zipcode.text,
+            "address1": address1.text,
+            "address2": address2.text,
+            "stateId": "0914343f-28bb-49e8-971d-3f0f7646787c",
+            "city": city.text,
           }
         },
       );
       var json = jsonDecode(response.toString());
       if (json["data"] != null) {
-        var data = json["data"];
-        return data["user"];
+        return json["data"]["user"];
       } else {
         return null;
       }
     } catch (e, s) {
       print(e);
-      print(s);
       return null;
     }
   }
