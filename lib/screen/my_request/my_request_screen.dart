@@ -31,8 +31,8 @@ class MyRequestUserScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             pendingTab(context, myRequestUserController),
-            connectedTab(context),
-            completedTab(context),
+            connectedTab(context, myRequestUserController),
+            completedTab(context, myRequestUserController),
           ],
         ),
       ),
@@ -43,39 +43,81 @@ class MyRequestUserScreen extends StatelessWidget {
 Container pendingTab(BuildContext context, MyRequestUserController controller) {
   return Container(
     child: ListView(
-      children: List.generate(controller.pendingRequests.length, (index) {
-        dynamic item = controller.pendingRequests[index];
-        return requestItem(
-          context: context,
-          title: item["businessName"],
-          service: item["serviceName"],
-          timeRequest: TimeService.requestTimeFormat(
-            TimeService.stringToDateTime(item["startDate"]) ??
-                DateTime(1, 1, 1),
-          ),
-          phone: item["customerPhone"],
-        );
-      }),
+      children: List.generate(
+        controller.pendingRequests.length,
+        (index) {
+          dynamic item = controller.pendingRequests[index];
+          return requestItem(
+            context: context,
+            title: item["businessName"],
+            service: item["serviceName"],
+            timeRequest: TimeService.requestTimeFormat(
+              TimeService.stringToDateTime(item["startDate"]) ??
+                  DateTime(1, 1, 1),
+            ),
+            phone: item["customerPhone"],
+            orderId: item["id"],
+            serviceId: item["serviceId"],
+            businessId: item["businessId"],
+          );
+        },
+      ),
     ),
   );
 }
 
-Container connectedTab(BuildContext context) {
+Container connectedTab(
+    BuildContext context, MyRequestUserController controller) {
   return Container(
     child: ListView(
-      children: [
-        requestItem(context: context, type: 1),
-      ],
+      children: List.generate(
+        controller.connectedRequests.length,
+        (index) {
+          dynamic item = controller.connectedRequests[index];
+          return requestItem(
+            context: context,
+            title: item["businessName"],
+            service: item["serviceName"],
+            timeRequest: TimeService.requestTimeFormat(
+              TimeService.stringToDateTime(item["startDate"]) ??
+                  DateTime(1, 1, 1),
+            ),
+            phone: item["customerPhone"],
+            orderId: item["id"],
+            serviceId: item["serviceId"],
+            businessId: item["businessId"],
+            type: 1,
+          );
+        },
+      ),
     ),
   );
 }
 
-Container completedTab(BuildContext context) {
+Container completedTab(
+    BuildContext context, MyRequestUserController controller) {
   return Container(
     child: ListView(
-      children: [
-        requestItem(context: context, type: 2),
-      ],
+      children: List.generate(
+        controller.completedRequests.length,
+        (index) {
+          dynamic item = controller.completedRequests[index];
+          return requestItem(
+            context: context,
+            title: item["businessName"],
+            service: item["serviceName"],
+            timeRequest: TimeService.requestTimeFormat(
+              TimeService.stringToDateTime(item["startDate"]) ??
+                  DateTime(1, 1, 1),
+            ),
+            phone: item["customerPhone"],
+            orderId: item["id"],
+            serviceId: item["serviceId"],
+            businessId: item["businessId"],
+            type: 2,
+          );
+        },
+      ),
     ),
   );
 }
@@ -87,6 +129,9 @@ Container requestItem({
   String? phone,
   String? timeRequest,
   int type = 0,
+  required String orderId,
+  required String businessId,
+  required String serviceId,
 }) {
   return Container(
     margin: EdgeInsets.only(
@@ -248,7 +293,12 @@ Container requestItem({
                   cancelRequestPopup();
                   break;
                 case 2:
-                  feedbackPopup(context: context);
+                  feedbackPopup(
+                    context: context,
+                    serviceId: serviceId,
+                    businessId: businessId,
+                    orderId: orderId,
+                  );
                   break;
               }
             })
