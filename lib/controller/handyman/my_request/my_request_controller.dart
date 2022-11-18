@@ -10,14 +10,14 @@ class MyRequestController extends GetxController {
 
   RxList<dynamic> requests = [].obs;
 
+  String currentRequest = "";
+
   Future getRequests() async {
     try {
-      var response;
       CustomDio customDio = CustomDio();
       customDio.dio.options.headers["Authorization"] =
           globalController.user.value.certificate.toString();
-      response = await customDio.get("/orders");
-      print(response);
+      var response = await customDio.get("/orders");
       requests.clear();
       var json = jsonDecode(response.toString());
       if (json["data"]["result"] != null) {
@@ -30,5 +30,50 @@ class MyRequestController extends GetxController {
     }
   }
 
+  Future rejectRequest() async {
+    try {
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
+      var response = await customDio.post(
+        "/orders/reject",
+        {
+          "data": {
+            "orderId": currentRequest,
+          },
+        },
+        sign: true,
+      );
+
+      var json = jsonDecode(response.toString());
+
+      return(json["success"]);
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future completeRequest() async {
+    try {
+      CustomDio customDio = CustomDio();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
+      var response = await customDio.post(
+        "/orders/complete",
+        {
+          "data": {
+            "orderId": currentRequest,
+          },
+        },
+        sign: true,
+      );
+
+      var json = jsonDecode(response.toString());
+
+      return(json["success"]);
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 
 }
