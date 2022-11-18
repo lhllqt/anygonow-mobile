@@ -82,7 +82,9 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
                         ),
                       ),
                       Text(
-                        '\$' + manageAdvertiseController.currentAdvertise["price"].toString(),
+                        '\$' +
+                            manageAdvertiseController.currentAdvertise["price"]
+                                .toString(),
                         style: TextStyle(
                           fontSize: getWidth(18),
                           fontWeight: FontWeight.w500,
@@ -211,17 +213,11 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
                               textEditingController:
                                   manageAdvertiseController.serviceArea,
                               options: List.generate(
-                                  manageAdvertiseController
-                                              .currentAdvertise["zipcodes"] !=
-                                          null
-                                      ? manageAdvertiseController
-                                          .currentAdvertise["zipcodes"].length
+                                  manageAdvertiseController.currentAdvertise["zipcodes"] != null
+                                      ? manageAdvertiseController.currentAdvertise["zipcodes"].length
                                       : 0,
-                                  (index) => manageAdvertiseController
-                                              .currentAdvertise["zipcodes"] !=
-                                          null
-                                      ? manageAdvertiseController
-                                          .currentAdvertise["zipcodes"]
+                                  (index) => manageAdvertiseController.currentAdvertise["zipcodes"] !=null
+                                      ? manageAdvertiseController.currentAdvertise["zipcodes"][index]
                                       : ""),
                               // suffixIcon: "assets/icons/date.svg",
                             ),
@@ -240,9 +236,10 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Obx(() => 
-                        Text(
-                          '\$' + manageAdvertiseController.totalPrice.toString(),
+                      Obx(
+                        () => Text(
+                          '\$' +
+                              manageAdvertiseController.totalPrice.toString(),
                           style: TextStyle(
                             fontSize: getWidth(18),
                             fontWeight: FontWeight.w700,
@@ -459,24 +456,30 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
   }
 
   void _openModalDatePicker(context, index) {
-      showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2100),
-        selectableDayPredicate: _decideWhichDayToEnable,
-      ).then((date) {
-        print(date);
-        index == 1 ? manageAdvertiseController.registrationDate.text =
-            TimeService.dateTimeToString5(date!)
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+      selectableDayPredicate: _decideWhichDayToEnable,
+    ).then((date) {
+      print(date);
+      index == 1
+          ? manageAdvertiseController.registrationDate.text =
+              TimeService.dateTimeToString5(date!)
           : manageAdvertiseController.expiryDate.text =
-            TimeService.dateTimeToString5(date!);
-        if (manageAdvertiseController.registrationDate.text != "" && manageAdvertiseController.expiryDate.text != "") {
-          int kc = _tinhkhoangcachhaimocthoigian(manageAdvertiseController.registrationDate.text, manageAdvertiseController.expiryDate.text);
-          double price = double.parse(manageAdvertiseController.currentAdvertise["price"].toString());
-          manageAdvertiseController.totalPrice.value = kc * price;
-        }
-      });
+              TimeService.dateTimeToString5(date!);
+      if (manageAdvertiseController.registrationDate.text != "" &&
+          manageAdvertiseController.expiryDate.text != "") {
+        int kc = _tinhkhoangcachhaimocthoigian(
+            manageAdvertiseController.registrationDate.text,
+            manageAdvertiseController.expiryDate.text);
+        double price = double.parse(
+            manageAdvertiseController.currentAdvertise["price"].toString());
+        double totalPrice = kc * price;
+        manageAdvertiseController.totalPrice.value = totalPrice.ceil();
+      }
+    });
   }
 
   bool _decideWhichDayToEnable(DateTime day) {

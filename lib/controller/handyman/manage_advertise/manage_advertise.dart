@@ -15,7 +15,7 @@ class ManageAdvertiseController extends GetxController {
   TextEditingController category = TextEditingController();
   TextEditingController serviceArea = TextEditingController();
 
-  RxDouble totalPrice = 0.0.obs;
+  RxInt totalPrice = 0.obs;
 
   TextEditingController cardNumber = MaskedTextController(mask: '0000 0000 0000 0000');
   TextEditingController expiryDateCard = MaskedTextController(mask: '00/0000');
@@ -182,9 +182,9 @@ class ManageAdvertiseController extends GetxController {
       loading.value = true;
       print(globalController.user.value.id);
       var data = {
-          // "UserId": globalController.user.value.id,
+          "userid": globalController.user.value.id.toString(),
           "amount": totalPrice.value,
-          "paymentId": bsPaymentMethod["payment"]["paymentMethodId"]
+          "paymentId": bsPaymentMethod["payment"]["id"]
       };
       print(data);
       CustomDio customDio = CustomDio();
