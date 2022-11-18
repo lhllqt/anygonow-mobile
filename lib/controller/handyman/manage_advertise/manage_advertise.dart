@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/model/custom_dio.dart';
@@ -190,8 +191,19 @@ class ManageAdvertiseController extends GetxController {
       CustomDio customDio = CustomDio();
       var response = await customDio.post("businesses/buy-promote/setup", {"data": data}, sign: true);
       print('123');
+      print(response);
+      // if (response["success"]==true) {
       var json = jsonDecode(response.toString());
-      print(json["data"]);
+      String clientSecret = json["data"]["clientSecret"];
+
+      // PaymentMethodParams params = PaymentMethodParams.cardFromMethodId(
+      //     paymentMethodId: paymentMethod.id, cvc: _card.cvc);
+
+      // SetupIntent confirmPayment = await Stripe.instance.confirmSetupIntent(json["data"]["clientSecret"])
+      print(clientSecret);
+      // } else {
+
+      // }
       return response;
     } catch (e, s) {
       loading.value = false;
