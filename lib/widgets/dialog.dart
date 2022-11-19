@@ -282,7 +282,7 @@ AlertDialog alertConfirmDialog(context, title, message, onConfirm) {
       child: Column(
         children: [
           Text(
-            title,
+            title ?? "",
             style: TextStyle(fontSize: getHeight(16)),
           ),
           SizedBox(
