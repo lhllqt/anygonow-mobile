@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/app_bar.dart';
+import 'package:untitled/widgets/dialog.dart';
 import 'package:untitled/widgets/dropdown.dart';
 import 'package:untitled/widgets/image.dart';
 import 'package:untitled/widgets/input.dart';
@@ -31,6 +32,7 @@ class _AccountScreenState extends State<AccountScreen> {
               var result = await accountController.editUserInfo();
               if (result != null) {
                 accountController.isEditting.value = !accountController.isEditting.value;
+                CustomDialog(context, "SUCCESS").show({"message": "Update information successfully"});
               }
               return;
             }

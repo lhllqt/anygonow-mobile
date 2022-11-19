@@ -62,8 +62,10 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                     }
 
                     var result = await accountController.editBusinessInfo();
+                    print(result);
                     if (result != null) {
                       accountController.isBusinessScreen.value = false;
+                      CustomDialog(context, "SUCCESS").show({"message": "Update profile successfully"});
                     }
                   } else {
                     if (accountController.phoneNumber.text == "" || accountController.city.text == "" || accountController.address1.text == "" || accountController.zipcode.text == "") {

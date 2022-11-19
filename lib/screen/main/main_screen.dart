@@ -12,6 +12,7 @@ import 'package:untitled/utils/cdn.dart';
 import 'package:untitled/utils/common-function.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
+import 'package:untitled/widgets/dialog.dart';
 import 'package:untitled/widgets/dropdown.dart';
 import 'package:untitled/widgets/image.dart';
 import 'package:untitled/widgets/input.dart';
@@ -33,7 +34,8 @@ class MainScreen extends StatelessWidget {
                       mainScreenController.hasSearched.value = true;
                       FocusManager.instance.primaryFocus?.unfocus();
                     } else {
-                      print("not found");
+                      mainScreenController.isKeyboardVisible.value = false;
+                      CustomDialog(context, "FAILED").show({"message": "Not found"});
                     }
                   },
                   child: Container(
@@ -160,7 +162,7 @@ class MainScreen extends StatelessWidget {
                                     mainScreenController.hasSearched.value =
                                         true;
                                   } else {
-                                    print("not found");
+                                    print('not found');
                                   }
                                 },
                                 options: List.generate(
@@ -303,7 +305,7 @@ class MainScreen extends StatelessWidget {
           SizedBox(
             height: getHeight(12),
           ),
-          GridView.count(
+          Obx(() => GridView.count(
             shrinkWrap: true,
             childAspectRatio: (167 / 48),
             crossAxisCount: 2,
@@ -312,6 +314,7 @@ class MainScreen extends StatelessWidget {
               (index) {
                 var colors = getPairColor(
                     index > 3 ? Random().nextInt(4) : 0 + index % 4);
+                print({"db": globalController.categories.length});
                 return Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: getWidth(4), vertical: getHeight(4)),
@@ -329,7 +332,7 @@ class MainScreen extends StatelessWidget {
                         )));
               },
             ),
-          ),
+          ),),
           SizedBox(
             height: getHeight(24),
           ),
