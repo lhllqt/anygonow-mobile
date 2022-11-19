@@ -35,7 +35,8 @@ class MainScreen extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                     } else {
                       mainScreenController.isKeyboardVisible.value = false;
-                      CustomDialog(context, "FAILED").show({"message": "Not found"});
+                      CustomDialog(context, "FAILED")
+                          .show({"message": "Not found"});
                     }
                   },
                   child: Container(
@@ -209,14 +210,17 @@ class MainScreen extends StatelessWidget {
                 height: getHeight(12),
               ),
               Padding(
-                padding: EdgeInsets.only(left: getWidth(16),),
-                child: Obx(() {
-                    return Text(
-                      mainScreenController.missingSearchField.value ? "Missing text field" : "",
-                      style: TextStyle(color: Colors.red),
-                    );
-                  }
+                padding: EdgeInsets.only(
+                  left: getWidth(16),
                 ),
+                child: Obx(() {
+                  return Text(
+                    mainScreenController.missingSearchField.value
+                        ? "Missing text field"
+                        : "",
+                    style: TextStyle(color: Colors.red),
+                  );
+                }),
               ),
               SizedBox(
                 height: getHeight(12),
@@ -305,34 +309,37 @@ class MainScreen extends StatelessWidget {
           SizedBox(
             height: getHeight(12),
           ),
-          Obx(() => GridView.count(
-            shrinkWrap: true,
-            childAspectRatio: (167 / 48),
-            crossAxisCount: 2,
-            children: List.generate(
-              globalController.categories.length >= 4 ? globalController.categories.sublist(0, 4).length : globalController.categories.length,
-              (index) {
-                var colors = getPairColor(
-                    index > 3 ? Random().nextInt(4) : 0 + index % 4);
-                print({"db": globalController.categories.length});
-                return Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: getWidth(4), vertical: getHeight(4)),
-                    height: getHeight(48),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: Color(colors[0])),
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          globalController.categories[index].name,
-                          style: TextStyle(
-                            color: Color(colors[1]),
-                          ),
-                        )));
-              },
+          Obx(
+            () => GridView.count(
+              shrinkWrap: true,
+              childAspectRatio: (167 / 48),
+              crossAxisCount: 2,
+              children: List.generate(
+                globalController.categories.length >= 4
+                    ? globalController.categories.sublist(0, 4).length
+                    : globalController.categories.length,
+                (index) {
+                  var colors = getPairColor(
+                      index > 3 ? Random().nextInt(4) : 0 + index % 4);
+                  return Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: getWidth(4), vertical: getHeight(4)),
+                      height: getHeight(48),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Color(colors[0])),
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            globalController.categories[index].name,
+                            style: TextStyle(
+                              color: Color(colors[1]),
+                            ),
+                          )));
+                },
+              ),
             ),
-          ),),
+          ),
           SizedBox(
             height: getHeight(24),
           ),

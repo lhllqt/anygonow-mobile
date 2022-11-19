@@ -29,7 +29,7 @@ GestureDetector handymanItem({
       var res = await brandDetailController.getBusinessDetail(id: id);
       var serviceRes = await brandDetailController.getBusinessServices(id: id);
       var ratingRes = await brandDetailController.getBusinessRating(id: id);
-      var feedbackRes = await brandDetailController.getBusinessFeedback(id: id);
+      await brandDetailController.getBusinessFeedback(id: id);
       if (res != null && serviceRes && ratingRes) {
         Get.to(BrandDetailScreen());
       }
@@ -98,7 +98,8 @@ GestureDetector handymanItem({
                                         width: getWidth(25),
                                         height: getHeight(25),
                                       )
-                                    : SvgPicture.asset("assets/icons/account.svg")),
+                                    : SvgPicture.asset(
+                                        "assets/icons/account.svg")),
                           ),
                           SizedBox(
                             width: getWidth(4),
@@ -107,7 +108,8 @@ GestureDetector handymanItem({
                             width: getWidth(100),
                             child: Text(
                               title,
-                              style: const TextStyle(fontWeight: FontWeight.w500),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -162,53 +164,6 @@ GestureDetector handymanItem({
                 child: SizedBox(),
               ),
             ],
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Card serviceItem({String image = "", String service = "", required String id}) {
-  return Card(
-    child: GestureDetector(
-      onTap: () async {
-        var brandDetailController = Get.put(BrandDetailController());
-        var res = await brandDetailController.getBusinessDetail(id: id);
-        var serviceRes = await brandDetailController.getBusinessServices(id: id);
-        var ratingRes = await brandDetailController.getBusinessRating(id: id);
-        var feedbackRes = await brandDetailController.getBusinessFeedback(id: id);
-        if (res != null && serviceRes && ratingRes) {
-          Get.to(BrandDetailScreen());
-        }
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 60,
-            child: image == ""
-                ? Container(
-                    decoration: const BoxDecoration(
-                    color: Colors.grey,
-                  ))
-                : getImage(image),
-          ),
-          Expanded(flex: 5, child: Container()),
-          Expanded(
-            flex: 45,
-            child: Padding(
-                padding: EdgeInsets.only(
-                  top: getHeight(10),
-                  left: getWidth(12),
-                ),
-                child: Text(
-                  service,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: getHeight(16),
-                  ),
-                )),
           ),
         ],
       ),
