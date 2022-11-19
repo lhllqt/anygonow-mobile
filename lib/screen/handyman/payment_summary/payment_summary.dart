@@ -43,34 +43,83 @@ class PaymentSummary extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: getWidth(180),
-                  height: getHeight(48),
-                  padding: EdgeInsets.symmetric(horizontal: getWidth(24)),
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: const Color.fromARGB(255, 230,230,230)),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/coin.svg",
-                        height: getHeight(24),
-                        width: getWidth(24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Obx(() => 
+                      Container(
+                        // width: getWidth(180),
+                        height: getHeight(48),
+                        padding: EdgeInsets.symmetric(horizontal: getWidth(24)),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: const Color.fromARGB(255, 230,230,230)),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/coin.svg",
+                              height: getHeight(24),
+                              width: getWidth(24),
+                            ),
+                            SizedBox(width: getWidth(8)),
+                            Text(
+                              'Total: \$' + (paymentSummaryController.totalFee.value  == 0 ? "0" : paymentSummaryController.totalFee.value.toString()),
+                              style: TextStyle(
+                                fontFamily: 'TTNorm',
+                                fontSize: getWidth(16),
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromARGB(255,17,149,45),
+                              )
+                            ),
+                          ]
+                        ),
                       ),
-                      SizedBox(width: getWidth(8)),
-                      Text(
-                        'Total: \$' + (paymentSummaryController.totalFee.value  == 0 ? "0" : paymentSummaryController.totalFee.value.toString()),
+                    ),
+
+                    Container(
+                      // width: getWidth(180),
+                      height: getHeight(48),
+                      padding: EdgeInsets.symmetric(horizontal: getWidth(24)),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: const Color.fromARGB(255, 230,230,230)),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: DropdownButton<String>(
+                        value: paymentSummaryController.queryTime.value,
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          size: getHeight(32),
+                        ),
+                        elevation: 16,
                         style: TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: getHeight(16),
                           fontFamily: 'TTNorm',
-                          fontSize: getWidth(16),
                           fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255,17,149,45),
-                        )
+                        ),
+                        underline: Container(
+                          height: 0,
+                        ),
+                        onChanged: (String? newValue) async {
+                          // setState(() {
+                          //   dropdownValue = newValue!;
+                          // });
+                          paymentSummaryController.queryTime.value = newValue!;
+                          await paymentSummaryController.getPaymentSummary();
+                        },
+                        items: <String>['This week', 'Last week', 'Last 2 week', 'Last 3 week', 'Last month']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
-                    ]
-                  ),
+                    ),
+
+                  ],
                 ),
 
                 SizedBox(height: getHeight(12)),              

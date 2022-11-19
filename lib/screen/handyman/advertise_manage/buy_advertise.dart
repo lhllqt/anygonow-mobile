@@ -64,357 +64,322 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
             right: getWidth(16),
           ),
           child: Column(children: [
-            Expanded(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  SizedBox(
-                    height: getHeight(24),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Fee',
-                        style: TextStyle(
-                          fontSize: getWidth(16),
-                          fontWeight: FontWeight.w500,
+            Obx(() => 
+              Expanded(
+                child: ListView(
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    SizedBox(
+                      height: getHeight(24),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Fee',
+                          style: TextStyle(
+                            fontSize: getWidth(16),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '\$' +
-                            manageAdvertiseController.currentAdvertise["price"]
-                                .toString(),
-                        style: TextStyle(
-                          fontSize: getWidth(18),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getHeight(22),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.only(left: getWidth(16)),
-                                  child: textLabel(title: 'Registration date')),
-                              SizedBox(
-                                height: getHeight(4),
-                              ),
-                              inputDate(
-                                context,
-                                textEditingController:
-                                    manageAdvertiseController.registrationDate,
-                                hintText: "DD/MM/YYYY",
-                                suffixIcon: "assets/icons/date.svg",
-                                onTap: () {
-                                  _openModalDatePicker(context, 1);
-                                },
-                              ),
-                            ]),
-                      ),
-                      SizedBox(width: getWidth(16)),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.only(left: getWidth(16)),
-                                  child: textLabel(title: 'Expiry date')),
-                              SizedBox(
-                                height: getHeight(4),
-                              ),
-                              inputDate(
-                                context,
-                                textEditingController:
-                                    manageAdvertiseController.expiryDate,
-                                hintText: "DD/MM/YYYY",
-                                suffixIcon: "assets/icons/date.svg",
-                                onTap: () {
-                                  _openModalDatePicker(context, 2);
-                                },
-                              ),
-                            ]),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: getHeight(17)),
-                  Row(children: [
-                    Expanded(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(left: getWidth(16)),
-                                child:
-                                    textLabel(title: 'Professional Category')),
-                            SizedBox(
-                              height: getHeight(4),
-                            ),
-                            // inputRegular(
-                            //   context,
-                            //   textEditingController: inputText,
-                            //   hintText: "Category",
-                            // ),
-                            inputSelect(
-                              context,
-                              hintText: "Category",
-                              textEditingController:
-                                  manageAdvertiseController.category,
-                              options: List.generate(
-                                manageAdvertiseController
-                                            .currentAdvertise["serviceInfo"] !=
-                                        null
-                                    ? manageAdvertiseController
-                                        .currentAdvertise["serviceInfo"].length
-                                    : 0,
-                                (index) => manageAdvertiseController
-                                            .currentAdvertise["serviceInfo"] !=
-                                        null
-                                    ? manageAdvertiseController
-                                            .currentAdvertise["serviceInfo"]
-                                        [index]["serviceName"]
-                                    : "",
-                              ),
-                              // options: List.generate(manageAdvertiseController.listAdvertise[manageAdvertiseController.indexCurrentAd.value]["serviceInfo"].length, (index) => manageAdvertiseController.listAdvertise[manageAdvertiseController.indexCurrentAd.value]["serviceInfo"][index]["serviceName"]),
-                              // suffixIcon: "assets/icons/date.svg",
-                            ),
-                          ]),
-                    )
-                  ]),
-                  SizedBox(height: getHeight(17)),
-                  Row(children: [
-                    Expanded(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(left: getWidth(16)),
-                                child: textLabel(title: 'Service areas')),
-                            SizedBox(
-                              height: getHeight(4),
-                            ),
-                            // inputRegular(
-                            //   context,
-                            //   textEditingController: inputText,
-                            //   hintText: "Service areas",
-                            // ),
-                            inputSelect(
-                              context,
-                              hintText: "Service areas",
-                              textEditingController:
-                                  manageAdvertiseController.serviceArea,
-                              options: List.generate(
-                                  manageAdvertiseController.currentAdvertise["zipcodes"] != null
-                                      ? manageAdvertiseController.currentAdvertise["zipcodes"].length
-                                      : 0,
-                                  (index) => manageAdvertiseController.currentAdvertise["zipcodes"] !=null
-                                      ? manageAdvertiseController.currentAdvertise["zipcodes"][index]
-                                      : ""),
-                              // suffixIcon: "assets/icons/date.svg",
-                            ),
-                          ]),
-                    )
-                  ]),
-                  borderBottom(),
-                  SizedBox(height: getHeight(24)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total amount',
-                        style: TextStyle(
-                          fontSize: getWidth(16),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Obx(
-                        () => Text(
+                        Text(
                           '\$' +
-                              manageAdvertiseController.totalPrice.toString(),
+                              manageAdvertiseController.currentAdvertise["price"]
+                                  .toString(),
                           style: TextStyle(
                             fontSize: getWidth(18),
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromARGB(255, 255, 81, 26),
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  borderBottom(),
-                  SizedBox(height: getHeight(24)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Card information',
-                        style: TextStyle(
-                          fontSize: getWidth(18),
-                          fontWeight: FontWeight.w500,
+                      ],
+                    ),
+                    SizedBox(
+                      height: getHeight(22),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(left: getWidth(16)),
+                                    child: textLabel(title: 'Registration date')),
+                                SizedBox(
+                                  height: getHeight(4),
+                                ),
+                                inputDate(
+                                  context,
+                                  textEditingController:
+                                      manageAdvertiseController.registrationDate,
+                                  hintText: "DD/MM/YYYY",
+                                  suffixIcon: "assets/icons/date.svg",
+                                  onTap: () {
+                                    _openModalDatePicker(context, 1);
+                                  },
+                                ),
+                              ]),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getHeight(24),
-                  ),
-                  manageAdvertiseController.paymentMethod["last4"] != null
-                      ? Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: getHeight(14)),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: const Color(0xFFFF511A),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                        SizedBox(width: getWidth(16)),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(left: getWidth(16)),
+                                    child: textLabel(title: 'Expiry date')),
+                                SizedBox(
+                                  height: getHeight(4),
+                                ),
+                                inputDate(
+                                  context,
+                                  textEditingController:
+                                      manageAdvertiseController.expiryDate,
+                                  hintText: "DD/MM/YYYY",
+                                  suffixIcon: "assets/icons/date.svg",
+                                  onTap: () {
+                                    _openModalDatePicker(context, 2);
+                                  },
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: getHeight(17)),
+                    Row(children: [
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(left: getWidth(12)),
-                                  child: Image.asset(
-                                      "assets/icons/ratio-icon.png")),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: getWidth(8),
-                                  ),
-                                  SvgPicture.asset(
-                                      "assets/icons/bankcard-icon.svg"),
-                                  SizedBox(
-                                    width: getWidth(8),
-                                  ),
-                                  Text(
-                                    "xxxx xxxx xxxx " +
-                                        manageAdvertiseController
-                                            .paymentMethod["last4"]!,
-                                    style: TextStyle(fontSize: getHeight(14)),
-                                  )
-                                ],
+                                  padding: EdgeInsets.only(left: getWidth(16)),
+                                  child:
+                                      textLabel(title: 'Professional Category')),
+                              SizedBox(
+                                height: getHeight(4),
                               ),
-                            ],
+                              // inputRegular(
+                              //   context,
+                              //   textEditingController: inputText,
+                              //   hintText: "Category",
+                              // ),
+                              inputSelect(
+                                context,
+                                hintText: "Category",
+                                textEditingController:
+                                    manageAdvertiseController.category,
+                                options: List.generate(
+                                  manageAdvertiseController
+                                              .currentAdvertise["serviceInfo"] !=
+                                          null
+                                      ? manageAdvertiseController
+                                          .currentAdvertise["serviceInfo"].length
+                                      : 0,
+                                  (index) => manageAdvertiseController
+                                              .currentAdvertise["serviceInfo"] !=
+                                          null
+                                      ? manageAdvertiseController
+                                              .currentAdvertise["serviceInfo"]
+                                          [index]["serviceName"]
+                                      : "",
+                                ),
+                                // options: List.generate(manageAdvertiseController.listAdvertise[manageAdvertiseController.indexCurrentAd.value]["serviceInfo"].length, (index) => manageAdvertiseController.listAdvertise[manageAdvertiseController.indexCurrentAd.value]["serviceInfo"][index]["serviceName"]),
+                                // suffixIcon: "assets/icons/date.svg",
+                              ),
+                            ]),
+                      )
+                    ]),
+                    SizedBox(height: getHeight(17)),
+                    Row(children: [
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.only(left: getWidth(16)),
+                                  child: textLabel(title: 'Service areas')),
+                              SizedBox(
+                                height: getHeight(4),
+                              ),
+                              // inputRegular(
+                              //   context,
+                              //   textEditingController: inputText,
+                              //   hintText: "Service areas",
+                              // ),
+                              inputSelect(
+                                context,
+                                hintText: "Service areas",
+                                textEditingController:
+                                    manageAdvertiseController.serviceArea,
+                                options: List.generate(
+                                    manageAdvertiseController.currentAdvertise["zipcodes"] != null
+                                        ? manageAdvertiseController.currentAdvertise["zipcodes"].length
+                                        : 0,
+                                    (index) => manageAdvertiseController.currentAdvertise["zipcodes"] !=null
+                                        ? manageAdvertiseController.currentAdvertise["zipcodes"][index]
+                                        : ""),
+                                // suffixIcon: "assets/icons/date.svg",
+                              ),
+                            ]),
+                      )
+                    ]),
+                    borderBottom(),
+                    SizedBox(height: getHeight(24)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total amount',
+                          style: TextStyle(
+                            fontSize: getWidth(16),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Obx(
+                          () => Text(
+                            '\$' +
+                                (manageAdvertiseController.totalPrice / 100).toString(),
+                            style: TextStyle(
+                              fontSize: getWidth(18),
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromARGB(255, 255, 81, 26),
+                            ),
                           ),
                         )
-                      : Container(
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/icons/no-payment.png",
-                                height: getHeight(180),
+                      ],
+                    ),
+                    borderBottom(),
+                    SizedBox(height: getHeight(24)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Card information',
+                          style: TextStyle(
+                            fontSize: getWidth(18),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getHeight(24),
+                    ),
+                    manageAdvertiseController.paymentMethod["last4"] != null
+                        ? Container(
+                            padding:
+                                EdgeInsets.symmetric(vertical: getHeight(14)),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: const Color(0xFFFF511A),
                               ),
-                              Text(
-                                "You don't have any payment method",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: getHeight(14),
-                                  color: const Color(0xFF999999),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.only(left: getWidth(12)),
+                                    child: Image.asset(
+                                        "assets/icons/ratio-icon.png")),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: getWidth(8),
+                                    ),
+                                    SvgPicture.asset(
+                                        "assets/icons/bankcard-icon.svg"),
+                                    SizedBox(
+                                      width: getWidth(8),
+                                    ),
+                                    Text(
+                                      "xxxx xxxx xxxx " +
+                                          manageAdvertiseController
+                                              .paymentMethod["last4"]!,
+                                      style: TextStyle(fontSize: getHeight(14)),
+                                    )
+                                  ],
                                 ),
-                              ),
-                            ],
-                          )),
+                              ],
+                            ),
+                          )
+                        : Container(
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/no-payment.png",
+                                  height: getHeight(180),
+                                ),
+                                Text(
+                                  "You don't have any payment method",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: getHeight(14),
+                                    color: const Color(0xFF999999),
+                                  ),
+                                ),
+                              ],
+                            )),
+                    SizedBox(height: getHeight(24)),
+                    Bouncing(
+                      onPress: () {
+                        Get.to(() => AddCard());
+                      },
+                      child: Container(
+                        width: getWidth(235),
+                        height: getHeight(42),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Color.fromARGB(255, 255, 81, 26),
+                              width: 1,
+                            )),
+                        child: Center(
+                          child: Text('Add card',
+                              style: TextStyle(
+                                  fontSize: getWidth(16),
+                                  color: Color.fromARGB(255, 255, 81, 26),
+                                  fontFamily: 'TTNorm',
+                                  fontWeight: FontWeight.w700)),
+                        ),
+                      ),
+                    ),
 
-                  // Container(
-                  //     // padding: EdgeInsets.all(getWidth(23)),
-                  //     margin: EdgeInsets.only(top: getWidth(23)),
-                  //     child: Container(
-                  //       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  //       decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(8),
-                  //         border: Border.all(
-                  //           color: const Color(0xFFFF511A),
-                  //         ),
-                  //       ),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           Container(
-                  //               margin: EdgeInsets.only(left: getWidth(12)),
-                  //               child: Image.asset(
-                  //                   "assets/icons/ratio-icon.png")
-                  //           ),
-                  //           SizedBox(width: getWidth(24),),
-                  //           Row(
-                  //             children: [
-                  //               SvgPicture.asset(
-                  //                 "assets/icons/bankcard-icon.svg",
-                  //               ),
-                  //               SizedBox(
-                  //                 width: getWidth(8),
-                  //               ),
-                  //               Text(
-                  //                 "422149******2397",
-                  //                 style: TextStyle(fontSize: getWidth(14)),
-                  //               )
-                  //             ],
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     )
-                  // ),
-                  SizedBox(height: getHeight(24)),
-                  Bouncing(
-                    onPress: () {
-                      Get.to(() => AddCard());
-                    },
-                    child: Container(
-                      width: getWidth(235),
-                      height: getHeight(42),
-                      decoration: BoxDecoration(
+                    SizedBox(height: getHeight(72)),
+                    manageAdvertiseController.loadingBuyAd.value == false ?
+                    Bouncing(
+                      onPress:  () async {
+                        await manageAdvertiseController.setBusinessesPaymentMethod();
+                        // Get.off(() => PopupNotification());
+                      },
+                      child: Container(
+                        width: getWidth(235),
+                        height: getHeight(48),
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 255, 81, 26),
-                            width: 1,
-                          )),
-                      child: Center(
-                        child: Text('Add card',
-                            style: TextStyle(
-                                fontSize: getWidth(16),
-                                color: Color.fromARGB(255, 255, 81, 26),
-                                fontFamily: 'TTNorm',
-                                fontWeight: FontWeight.w700)),
+                          color: Color.fromARGB(255, 255, 81, 26),
+                        ),
+                        child: Center(
+                          child: Text('Pay now',
+                              style: TextStyle(
+                                  fontSize: getWidth(16),
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontFamily: 'TTNorm',
+                                  fontWeight: FontWeight.w700)),
+                        ),
                       ),
-                    ),
-                  ),
-
-                  SizedBox(height: getHeight(72)),
-                  Bouncing(
-                    onPress: () {
-                      manageAdvertiseController.setBusinessesPaymentMethod();
-                      // Get.off(() => PopupNotification());
-                    },
-                    child: Container(
-                      width: getWidth(235),
-                      height: getHeight(48),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Color.fromARGB(255, 255, 81, 26),
-                      ),
-                      child: Center(
-                        child: Text('Play now',
-                            style: TextStyle(
-                                fontSize: getWidth(16),
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontFamily: 'TTNorm',
-                                fontWeight: FontWeight.w700)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: getHeight(24)),
-                ],
+                    ) :
+                    Center(child: SizedBox(child: const CircularProgressIndicator(), height: getHeight(42), width: getHeight(42))),
+                    SizedBox(height: getHeight(24)),
+                  ],
+                ),
               ),
-            ),
+            )
           ]),
         ),
       ),
@@ -461,7 +426,7 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
-      selectableDayPredicate: _decideWhichDayToEnable,
+      selectableDayPredicate: _getEnabledDate,
     ).then((date) {
       print(date);
       index == 1
@@ -471,18 +436,18 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
               TimeService.dateTimeToString5(date!);
       if (manageAdvertiseController.registrationDate.text != "" &&
           manageAdvertiseController.expiryDate.text != "") {
-        int kc = _tinhkhoangcachhaimocthoigian(
+        int kc = _calculateTimeDiff(
             manageAdvertiseController.registrationDate.text,
             manageAdvertiseController.expiryDate.text);
         double price = double.parse(
             manageAdvertiseController.currentAdvertise["price"].toString());
-        double totalPrice = kc * price;
+        double totalPrice = kc * price * 100;
         manageAdvertiseController.totalPrice.value = totalPrice.ceil();
       }
     });
   }
 
-  bool _decideWhichDayToEnable(DateTime day) {
+  bool _getEnabledDate(DateTime day) {
     if ((day.isAfter(DateTime.now().subtract(Duration(days: 1))) &&
         day.isBefore(DateTime(2100)))) {
       return true;
@@ -490,7 +455,7 @@ class _BuyAdvertiseScreenState extends State<BuyAdvertiseScreen> {
     return false;
   }
 
-  int _tinhkhoangcachhaimocthoigian(String s1, String s2) {
+  int _calculateTimeDiff(String s1, String s2) {
     DateTime t1 = DateTime.parse(s1);
     DateTime t2 = DateTime.parse(s2);
     int difference = t2.difference(t1).inDays;

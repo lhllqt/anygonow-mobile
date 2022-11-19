@@ -12,6 +12,8 @@ class PaymentSummaryController extends GetxController{
   RxList<dynamic> listPaymentSummary = <dynamic>[].obs;
   RxInt totalFee = 0.obs;
 
+  RxString queryTime = 'This week'.obs;
+
   // export const getPaymentSummary = (data: any) => {
   // return axios.get(API_BASE_URL + '/businesses/payment-summary', {
   //   params: {
@@ -23,19 +25,39 @@ class PaymentSummaryController extends GetxController{
   // });
   // };
 
+  int setIndexSortTime(String textTime) {
+    switch (textTime) {
+      case "This week":
+        return 0;
+      case "Last week":
+        return 1;
+      case "Last 2 week":
+        return 2;
+      case "Last 3 week":
+        return 3;
+      case "Last month":
+        return 4;
+      default:
+        return -1;
+    }
+  }
+
 
   Future getPaymentSummary() async{
     try {
       CustomDio customDio = CustomDio();
+      int indexTime = setIndexSortTime(queryTime.value);
       customDio.dio.options.headers["Authorization"] =
           globalController.user.value.certificate.toString();
-      var response = await customDio.get("/businesses/payment-summary?query=2");
+      var response = await customDio.get("/businesses/payment-summary?query=$indexTime");
       listPaymentSummary.clear();
       var json = jsonDecode(response.toString());
       if (json["data"]["result"] != null) {
         listPaymentSummary.value = json["data"]["result"];
         // print(TimeService.stringToDateTime2(json["data"]["result"][0]["startDate"]));
         totalFee.value = json["data"]["totalFee"];
+      } else {
+        totalFee.value = 0;
       }
 
       return true;

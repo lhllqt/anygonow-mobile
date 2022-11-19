@@ -17,7 +17,7 @@ jobs:
     name: MAC
   variables:
     - name: configuration
-      value: "Release"
+      value: "Release-dev"
     - name: sdk
       value: "iphoneos"
     - name: iosReleaseDir
@@ -55,9 +55,10 @@ jobs:
     inputs:
       target: 'ios'
       projectDirectory: '.'
-      extraArgs: '--release'
       buildName: "$(Build.BuildNumber)"
+      buildFlavour: 'dev'
       iosCodesign: false
+
 #
 #  - task: InstallAppleCertificate@2
 #    inputs:
@@ -77,7 +78,7 @@ jobs:
     displayName: "Code Sign ipa for Distribution"
     inputs:
       actions: "archive"
-      scheme: "Runner"
+      scheme: "dev"
       sdk: "$(sdk)"
       configuration: "$(configuration)"
       xcWorkspacePath: "ios/Runner.xcworkspace"

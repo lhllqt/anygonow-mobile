@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,9 +6,11 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/model/custom_dio.dart';
+import 'package:untitled/screen/handyman/advertise_manage/popup_notification.dart';
+import 'package:untitled/service/date_format.dart';
+import 'package:untitled/service/stripe.dart';
 
-class ManageAdvertiseController extends GetxController { 
-
+class ManageAdvertiseController extends GetxController {
   GlobalController globalController = Get.put(GlobalController());
   TextEditingController registrationDate = TextEditingController();
   TextEditingController expiryDate = TextEditingController();
@@ -25,6 +26,7 @@ class ManageAdvertiseController extends GetxController {
   var paymentMethod = {}.obs;
   var bsPaymentMethod = {}.obs;
   var loading = false.obs;
+  var loadingBuyAd = false.obs;
 
   RxList<dynamic> listAdvertise = [].obs;
   var currentAdvertise = {}.obs;
@@ -36,12 +38,9 @@ class ManageAdvertiseController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    cardNumber.addListener(() {
-    });
-    expiryDateCard.addListener(() {
-    });
-    cvvCode.addListener(() {
-    });
+    cardNumber.addListener(() {});
+    expiryDateCard.addListener(() {});
+    cvvCode.addListener(() {});
     pageController = PageController(initialPage: 0, keepPage: true, viewportFraction: 0.9);
     super.onInit();
   }
@@ -51,6 +50,7 @@ class ManageAdvertiseController extends GetxController {
     indexCurrentAd.value = 0;
     currentAdvertise.value = {};
   }
+
   void ChangeBuy() {
     isBuy.value = true;
   }
@@ -83,18 +83,16 @@ class ManageAdvertiseController extends GetxController {
       indexCurrentAd.value = value;
       pageController = PageController(initialPage: value, keepPage: true);
     }
-
   }
 
   // void onSetCurrentAd(currentAd) {
   //   currentAdvertise.value = currentAd;
   // }
 
-  Future getListAdvertise() async{
+  Future getListAdvertise() async {
     try {
       CustomDio customDio = CustomDio();
-      customDio.dio.options.headers["Authorization"] =
-          globalController.user.value.certificate.toString();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
       var response = await customDio.get("/businesses/promote");
       listAdvertise.clear();
       var json = jsonDecode(response.toString());
@@ -109,12 +107,11 @@ class ManageAdvertiseController extends GetxController {
     }
   }
 
-  Future getItemAdvertise(currentAdId) async{
+  Future getItemAdvertise(currentAdId) async {
     try {
       print(currentAdId);
       CustomDio customDio = CustomDio();
-      customDio.dio.options.headers["Authorization"] =
-          globalController.user.value.certificate.toString();
+      customDio.dio.options.headers["Authorization"] = globalController.user.value.certificate.toString();
       var response = await customDio.get("/businesses/promote/$currentAdId");
       currentAdvertise.clear();
       var json = jsonDecode(response.toString());
@@ -180,35 +177,65 @@ class ManageAdvertiseController extends GetxController {
 
   Future setBusinessesPaymentMethod() async {
     try {
-      loading.value = true;
+      loadingBuyAd.value = true;
       print(globalController.user.value.id);
-      var data = {
-          "userid": globalController.user.value.id.toString(),
-          "amount": totalPrice.value,
-          "paymentId": bsPaymentMethod["payment"]["id"]
-      };
-      print(data);
+
+      // lấy serviceId từ serviceName
+      String serviceId = "";
+      for(final item in currentAdvertise["serviceInfo"]){
+        if (item["serviceName"] == category.text) {
+          serviceId = item["serviceId"];
+          break;
+        }
+      }
+
+      var dataValidate = {"UserId": globalController.user.value.id, "categoryId": serviceId, "zipcode": serviceArea.text};
+      var dataSetup = {"UserId": globalController.user.value.id.toString(), "amount": totalPrice.value, "paymentId": bsPaymentMethod["payment"]["id"]};
       CustomDio customDio = CustomDio();
-      var response = await customDio.post("businesses/buy-promote/setup", {"data": data}, sign: true);
-      print('123');
-      print(response);
-      // if (response["success"]==true) {
-      var json = jsonDecode(response.toString());
-      String clientSecret = json["data"]["clientSecret"];
 
-      // PaymentMethodParams params = PaymentMethodParams.cardFromMethodId(
-      //     paymentMethodId: paymentMethod.id, cvc: _card.cvc);
+      // validate promote
+      var res = await customDio.post('/businesses/buy-promote/validate', {"data": dataValidate}, sign: true);
+      var json = jsonDecode(res.toString());
+      if (json["success"]==true) {
+        // setup promote
+        print(dataSetup);
+        var response = await customDio.post("businesses/buy-promote/setup", {"data": dataSetup}, sign: true);
+        var json = jsonDecode(response.toString());
+        print(json["data"]["status"]);
+        if (json["data"]["status"] == "succeeded") {
+          // buy promote
+          var dataAdvertise = {
+            "UserId": "",
+            "advertisePackageId": currentAdvertise["id"],
+            "packageName": currentAdvertise["name"],
+            "price": currentAdvertise["price"],
+            "bannerUrl": currentAdvertise["bannerUrl"],
+            "description": currentAdvertise["description"],
+            "zipcode": serviceArea.text,
+            "categoryName": category.text,
+            "categoryId": serviceId,
+            "startDate": TimeService.timeToBackEndMaster(DateTime.parse(registrationDate.text)),
+            "endDate": TimeService.timeToBackEndMaster(DateTime.parse(expiryDate.text)),
+          };
+          var responseBuyAd = await customDio.post("/businesses/buy-promote", {"data": dataAdvertise}, sign: true);
+          var jsonBuyAd = jsonDecode(responseBuyAd.toString());
+          if(jsonBuyAd["success"] == true) {
+            loadingBuyAd.value = false;
+            Get.back();
+            Get.to(() => PopupNotification());
+          } 
+        }
+        // String clientSecret = json["data"]["clientSecret"];
+      }
 
-      // SetupIntent confirmPayment = await Stripe.instance.confirmSetupIntent(json["data"]["clientSecret"])
-      print(clientSecret);
-      // } else {
 
-      // }
-      return response;
+
+
+
+      // return res;
     } catch (e, s) {
       loading.value = false;
       return null;
     }
   }
-
 }
