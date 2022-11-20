@@ -17,7 +17,7 @@ class ChatScreen extends StatelessWidget {
     MessageController messageController = Get.put(MessageController());
     return Scaffold(
         appBar: appBar(
-            title: "On top mover",
+            title: messageController.currentService.value,
             bottom: Get.put(GlobalController()).user.value.role == 1 &&
                     !messageController.completedChat
                 ? PreferredSize(
@@ -97,7 +97,14 @@ class ChatScreen extends StatelessWidget {
                               color: Color(0xFFFF511A), fontSize: getWidth(16)),
                         ),
                         onPress: () {
-                          customerDetailPopup(context: context);
+                          customerDetailPopup(
+                            context: context,
+                            startTime: messageController.currentConversation["startDate"],
+                            serviceName: messageController.currentConversation["serviceName"],
+                            zipcode: messageController.currentConversation["customerZipcode"],
+                            email: messageController.currentConversation["businessName"],
+                            phone: messageController.currentConversation["customerPhone"],
+                          );
                         },
                       ),
                     )

@@ -108,7 +108,7 @@ AlertDialog alertDialogFailed(context, message, height) {
       child: Column(
         children: [
           Container(
-            height: getHeight(120),
+            height: getHeight(60),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/icons/failed-icon2.png'),
@@ -116,11 +116,11 @@ AlertDialog alertDialogFailed(context, message, height) {
             ),
           ),
           SizedBox(
-            height: getHeight(27),
+            height: getHeight(15),
           ),
           Text(
             message != null ? message.toString().tr : "common_failed".tr,
-            style: TextStyle(fontSize: getHeight(17)),
+            style: TextStyle(fontSize: getHeight(16)),
             textAlign: TextAlign.center,
           ),
           SizedBox(

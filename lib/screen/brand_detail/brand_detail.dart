@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -396,7 +395,7 @@ class BrandDetailScreen extends StatelessWidget {
                       ),
                       SizedBox(width: getWidth(2)),
                       Text(
-                        "${brandDetailController.ratings.length >= index ? brandDetailController.ratings[index].review : 0} reviews",
+                        "${brandDetailController.ratings.length > index ? brandDetailController.ratings[index].review : 0} reviews",
                         style: TextStyle(
                           color: const Color(0xFF999999),
                           fontSize: getHeight(12),

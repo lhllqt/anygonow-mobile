@@ -56,6 +56,7 @@ class MessageScreen extends StatelessWidget {
               : "",
           index: index,
           completed: false,
+          conversation:  requests[index]
         );
       }),
     );
@@ -78,6 +79,7 @@ class MessageScreen extends StatelessWidget {
               : "",
           index: index,
           completed: true,
+          conversation:  requests[index]
         );
       }),
     );
@@ -90,10 +92,12 @@ class MessageScreen extends StatelessWidget {
     String time = "",
     int index = 0,
     bool completed = false,
+    conversation
   }) {
     return GestureDetector(
       onTap: () {
-        print("time" + time);
+        // print("time" + time);
+        messageController.currentConversation = conversation;
         messageController.index = index;
         messageController.completedChat = completed;
         messageController.chats.clear();
@@ -109,6 +113,9 @@ class MessageScreen extends StatelessWidget {
           Get.put(MyRequestController()).currentRequest =
               requestController.connectedRequests[index]["id"];
         }
+
+        messageController.currentService.value = business;
+        
 
         Get.to(ChatScreen());
       },

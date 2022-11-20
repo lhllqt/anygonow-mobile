@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/project/project_controller.dart';
+import 'package:untitled/main.dart';
 import 'package:untitled/screen/account/account_screen.dart';
 import 'package:untitled/screen/change_password/change_password_screen.dart';
 import 'package:untitled/screen/login/login_screen.dart';
 import 'package:untitled/screen/project/project_screen.dart';
 import 'package:untitled/utils/config.dart';
+import 'package:untitled/widgets/image.dart';
 
 class UserScreen extends StatelessWidget {
   @override
@@ -72,12 +74,19 @@ class UserScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Container(
-                              width: getWidth(48),
-                              height: getWidth(48),
-                              color: Colors.black,
+                          Obx(
+                            () => ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: globalController.user.value.avatar != null
+                                  ? getImage(globalController.user.value.avatar,
+                                      width: getWidth(60),
+                                      height: getHeight(60),
+                                      fit: BoxFit.cover)
+                                  : Container(
+                                      width: getWidth(48),
+                                      height: getWidth(48),
+                                      color: Colors.black,
+                                    ),
                             ),
                           ),
                           SizedBox(

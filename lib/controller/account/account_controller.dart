@@ -104,6 +104,7 @@ class AccountController extends GetxController {
 
       var json = jsonDecode(response.toString());
       if (json["data"] != null) {
+        globalController.user.value.avatar = logoImage.value;
         return json["data"]["user"];
       } else {
         return null;
