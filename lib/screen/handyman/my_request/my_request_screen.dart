@@ -44,7 +44,15 @@ class MyRequestScreen extends StatelessWidget {
                   ),
                 ),
                 Bouncing(
-                  onPress: () {},
+                  onPress: () async {
+                    var res = await myRequestController.connectAllRequest();
+                    if (res == true) {
+                      myRequestController.requests.removeRange(0, myRequestController.requests.length);
+                      CustomDialog(context, "SUCCESS").show({'message': 'Successfully connect order'});
+                    } else {
+                      CustomDialog(context, "FAILED").show({'message': 'Failed refused order'});
+                    }
+                  },
                   child: const Text(
                     "Connect all",
                     style: TextStyle(

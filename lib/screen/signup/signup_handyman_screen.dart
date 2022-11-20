@@ -106,7 +106,7 @@ class SignupHandymanScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     String url = GlobalController.baseWebUrl;
-                    String termsUrl = url + "terms";
+                    String termsUrl = url + "Anygonow_Term&Conditions";
                     await launch(termsUrl);
                   },
                   child: Text(
@@ -126,8 +126,8 @@ class SignupHandymanScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     String url = GlobalController.baseWebUrl;
-                    String termsUrl = url + "privacy";
-                    await launch(termsUrl);
+                    String privacyUrl = url + "Anygonow_PrivacyPolicy";
+                    await launch(privacyUrl);
                   },
                   child: Text(
                     "Privacy Policy",

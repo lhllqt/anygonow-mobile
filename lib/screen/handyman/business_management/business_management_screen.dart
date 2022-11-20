@@ -15,7 +15,6 @@ import 'package:untitled/widgets/dialog.dart';
 import 'package:untitled/widgets/dropdown.dart';
 import 'package:untitled/widgets/image.dart';
 import 'package:untitled/widgets/input.dart';
-import 'package:us_states/us_states.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BusinessManagementScreen extends StatefulWidget {
@@ -72,6 +71,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                     var result = await accountController.editBusinessInfo();
                     print(result);
                     if (result != null) {
+                      accountController.getBusinessInfo();
                       accountController.isBusinessScreen.value = false;
                       CustomDialog(context, "SUCCESS")
                           .show({"message": "Update profile successfully"});
@@ -87,7 +87,10 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                     }
                     var result = await accountController.editBusinessContact();
                     if (result != null) {
+                      accountController.getBusinessInfo();
                       accountController.isBusinessScreen.value = false;
+                      CustomDialog(context, "SUCCESS")
+                          .show({"message": "Update profile successfully"});
                       final flutterWebviewPlugin = new FlutterWebviewPlugin();
                       print("localst");
                       flutterWebviewPlugin

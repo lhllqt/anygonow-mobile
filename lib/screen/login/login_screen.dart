@@ -172,6 +172,7 @@ Container confirmButtonContainer(
                         Get.put(GlobalController()).currentPage.value = 0;
                         Get.delete<BuyAdvertiseScreen>();
                         Get.delete<ManageAdvertiseController>();
+                        Get.delete<AccountController>();
                         int? role = globalController.user.value.role;
                         int? process = globalController.user.value.process;
                         await Get.put(GlobalController()).getCategories();
@@ -187,8 +188,10 @@ Container confirmButtonContainer(
                             Get.put(AccountController()).isEditting.value = true;
                           }
                         } else {
+                          Get.to(() => HandymanHomePageScreen());
                           if (process == 1) {
                             Get.to(() => BusinessManagementScreen());
+                            CustomDialog(context, "SUCCESS").show({"message": "You need to update information"});
                             AccountController().isBusinessScreen.value = true;
                             Get.put(AccountController()).isEditting.value = true;
                           } else if (process == 2) {

@@ -102,7 +102,7 @@ class ChatScreen extends StatelessWidget {
                             startTime: messageController.currentConversation["startDate"],
                             serviceName: messageController.currentConversation["serviceName"],
                             zipcode: messageController.currentConversation["customerZipcode"],
-                            email: messageController.currentConversation["businessName"],
+                            email: messageController.currentConversation["email"],
                             phone: messageController.currentConversation["customerPhone"],
                           );
                         },
