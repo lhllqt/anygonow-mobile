@@ -72,7 +72,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                     print(result);
                     if (result != null) {
                       accountController.getBusinessInfo();
-                      accountController.isBusinessScreen.value = false;
+                      // accountController.isBusinessScreen.value = false;
                       CustomDialog(context, "SUCCESS")
                           .show({"message": "Update profile successfully"});
                     }
@@ -88,7 +88,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                     var result = await accountController.editBusinessContact();
                     if (result != null) {
                       accountController.getBusinessInfo();
-                      accountController.isBusinessScreen.value = false;
+                      // accountController.isBusinessScreen.value = false;
                       CustomDialog(context, "SUCCESS")
                           .show({"message": "Update profile successfully"});
                       final flutterWebviewPlugin = new FlutterWebviewPlugin();
@@ -134,8 +134,14 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
           bottom: TabBar(
             onTap: (index) {
               accountController.isEditting.value = false;
-              accountController.isBusinessScreen.value =
-                  !accountController.isBusinessScreen.value;
+              if (index == 0) {
+                accountController.isBusinessScreen.value = true;
+                print(accountController.isBusinessScreen.value);
+              } else {
+                accountController.isBusinessScreen.value = false;
+                print(accountController.isBusinessScreen.value);
+              }
+              // accountController.isBusinessScreen.value = !accountController.isBusinessScreen.value;
             },
             labelColor: const Color(0xFFFF511A),
             indicatorColor: const Color(0xFFFF511A),
@@ -357,8 +363,8 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                         SizedBox(
                           height: getHeight(18),
                         ),
-                        Obx(
-                          () => inputRegular(
+                        // Obx(() => 
+                        inputRegular(
                             context,
                             label: "Business name",
                             hintText: "",
@@ -366,7 +372,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                             enabled: accountController.isEditting.value,
                             required: true,
                           ),
-                        ),
+                        // ),
                         SizedBox(
                           height: getHeight(18),
                         ),
@@ -413,8 +419,8 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                         SizedBox(
                           height: getHeight(24),
                         ),
-                        Obx(
-                          () => inputRegular(context,
+                        // Obx(() => 
+                        inputRegular(context,
                               label: "Description",
                               hintText: "",
                               enabled: accountController.isEditting.value,
@@ -424,7 +430,7 @@ class _BusinessManagementScreenState extends State<BusinessManagementScreen> {
                               keyboardType: TextInputType.multiline,
                               height: 120,
                               minLines: 4),
-                        ),
+                        // ),
                       ],
                     ),
                   ),

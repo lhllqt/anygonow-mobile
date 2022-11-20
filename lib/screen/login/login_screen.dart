@@ -190,12 +190,15 @@ Container confirmButtonContainer(
                         } else {
                           Get.to(() => HandymanHomePageScreen());
                           if (process == 1) {
+                            await Get.put(AccountController()).getBusinessInfo();
                             Get.to(() => BusinessManagementScreen());
                             CustomDialog(context, "SUCCESS").show({"message": "You need to update information"});
                             AccountController().isBusinessScreen.value = true;
                             Get.put(AccountController()).isEditting.value = true;
                           } else if (process == 2) {
+                            await Get.put(AccountController()).getBusinessInfo();
                             Get.to(() => BusinessManagementScreen());
+                            CustomDialog(context, "SUCCESS").show({"message": "You need to update information"});
                             AccountController().isBusinessScreen.value = false;
                             Get.put(AccountController()).isEditting.value = true;
                           } else {

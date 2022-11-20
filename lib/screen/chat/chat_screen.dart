@@ -98,11 +98,10 @@ class ChatScreen extends StatelessWidget {
                         ),
                         onPress: () {
                           customerDetailPopup(
-                            context: context,
                             startTime: messageController.currentConversation["startDate"],
                             serviceName: messageController.currentConversation["serviceName"],
                             zipcode: messageController.currentConversation["customerZipcode"],
-                            email: messageController.currentConversation["email"],
+                            email: messageController.currentConversation["customerMail"],
                             phone: messageController.currentConversation["customerPhone"],
                           );
                         },

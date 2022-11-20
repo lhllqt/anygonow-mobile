@@ -85,6 +85,7 @@ class MyRequestController extends GetxController {
         {},
         sign: true,
       );
+      // api/orders/connect-all
 
       var json = jsonDecode(response.toString());
 
