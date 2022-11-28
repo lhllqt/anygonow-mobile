@@ -22,7 +22,7 @@ GestureDetector handymanItem({
   String id = "",
   MainScreenController? controller,
 }) {
-  RxBool selected = false.obs;
+  bool selected = false;
   return GestureDetector(
     onTap: () async {
       var brandDetailController = Get.put(BrandDetailController());
@@ -41,7 +41,7 @@ GestureDetector handymanItem({
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: selected.value
+          side:  controller?.requests.contains(id) ?? false
               ? BorderSide(
                   color: Color(0xFFFF511A),
                   width: 1,
@@ -129,11 +129,12 @@ GestureDetector handymanItem({
                                     height: getWidth(20),
                                     width: getWidth(20),
                                     child: Obx(() {
+                                      selected = controller?.requests.contains(id) ?? false;
                                       return Checkbox(
-                                        value: selected.value,
+                                        value: controller?.requests.contains(id),
                                         onChanged: (value) => {
-                                          selected.value = value ?? false,
-                                          if (selected.value)
+                                          selected = value ?? false,
+                                          if (selected)
                                             controller?.requests.add(id)
                                           else
                                             controller?.requests.removeWhere(

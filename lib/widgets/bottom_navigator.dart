@@ -447,7 +447,9 @@ Container bottomSearchResult() {
                   color: Color(0xffff511a),
                 ),
               ),
-              onPressed: () async {},
+              onPressed: () async {
+                Get.put(MainScreenController()).requests.clear();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

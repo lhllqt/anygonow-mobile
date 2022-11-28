@@ -40,47 +40,57 @@ class MessageScreen extends StatelessWidget {
     );
   }
 
-  ListView connectedTab(List<dynamic> requests) {
+  Container connectedTab(List<dynamic> requests) {
     // print(requests);
-    return ListView(
-      children: List.generate(requests.length, (index) {
-        var messages = messageController.connectedMessageList[index];
-        return messageItem(
-            message: messages.isNotEmpty
-                ? messages[messages.length - 1]["payload"]
-                : "Connected",
-            business: requests[index]["serviceName"],
-            img: requests[index]["businessLogo"],
-            time: messages.isNotEmpty
-                ? messageController
-                    .getTimeSent(messages[messages.length - 1]["timestamp"])
-                : "",
-            index: index,
-            completed: false,
-            conversation: requests[index]);
-      }),
+    return Container(
+      child: Obx(() {
+          return ListView(
+            children: List.generate(requests.length, (index) {
+              var messages = messageController.connectedMessageList[index];
+              return messageItem(
+                  message: messages.isNotEmpty
+                      ? messages[messages.length - 1]["payload"]
+                      : "Connected",
+                  business: requests[index]["serviceName"],
+                  img: requests[index]["businessLogo"],
+                  time: messages.isNotEmpty
+                      ? messageController
+                          .getTimeSent(messages[messages.length - 1]["timestamp"])
+                      : "",
+                  index: index,
+                  completed: false,
+                  conversation: requests[index]);
+            }),
+          );
+        }
+      ),
     );
   }
 
-  ListView completedTab(List<dynamic> requests) {
+  Container completedTab(List<dynamic> requests) {
     print(requests);
-    return ListView(
-      children: List.generate(requests.length, (index) {
-        var messages = messageController.completedMessageList[index];
-        return messageItem(
-            message: messages.isNotEmpty
-                ? messages[messages.length - 1]["payload"]
-                : "Service request: " + requests[index]["serviceName"],
-            business: requests[index]["businessName"],
-            img: requests[index]["businessLogo"],
-            time: messages.isNotEmpty
-                ? messageController
-                    .getTimeSent(messages[messages.length - 1]["timestamp"])
-                : "",
-            index: index,
-            completed: true,
-            conversation: requests[index]);
-      }),
+    return Container(
+      child: Obx(() {
+          return ListView(
+            children: List.generate(requests.length, (index) {
+              var messages = messageController.completedMessageList[index];
+              return messageItem(
+                  message: messages.isNotEmpty
+                      ? messages[messages.length - 1]["payload"]
+                      : "Service request: " + requests[index]["serviceName"],
+                  business: requests[index]["businessName"],
+                  img: requests[index]["businessLogo"],
+                  time: messages.isNotEmpty
+                      ? messageController
+                          .getTimeSent(messages[messages.length - 1]["timestamp"])
+                      : "",
+                  index: index,
+                  completed: true,
+                  conversation: requests[index]);
+            }),
+          );
+        }
+      ),
     );
   }
 
