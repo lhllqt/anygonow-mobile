@@ -1,17 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:untitled/controller/account/account_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/handyman/manage_advertise/manage_advertise.dart';
 import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
 import 'package:untitled/controller/login/login_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
+import 'package:untitled/controller/reset_password/reset_password_controller.dart';
 import 'package:untitled/screen/account/account_screen.dart';
 import 'package:untitled/screen/forgot_password/forgot_password_screen.dart';
 import 'package:untitled/screen/handyman/advertise_manage/buy_advertise.dart';
 import 'package:untitled/screen/handyman/business_management/business_management_screen.dart';
 import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
 import 'package:untitled/screen/home_page/home_page_screen.dart';
+import 'package:untitled/screen/reset_password/reset_password_screen.dart';
 import 'package:untitled/screen/signup/signup_welcome_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/bounce_button.dart';
@@ -22,7 +28,74 @@ import 'package:untitled/widgets/layout.dart';
 
 enum LoginOption { customer, professional }
 
-class LoginScreen extends StatelessWidget {
+bool _initialUriIsHandled = false;
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  StreamSubscription? _sub;
+  ResetPasswordController resetPasswordController = Get.put(ResetPasswordController());
+
+  // Future<void> initUniLinks() async {
+  //   // ... check initialLink
+  //   print("Loading");
+
+  //   // Attach a listener to the stream
+  //   _sub = linkStream.listen((String? link) {
+  //     print(link);
+  //     if (link != null) {
+  //       print("listener is working");
+  //       var uri = Uri.parse(link);
+  //       if (uri.queryParameters["otp"] != null &&
+  //           uri.queryParameters["otpId"] != null) {
+  //         print(uri.queryParameters["id"].toString());
+  //         Get.to(() => ResetPasswordScreen());
+  //       }
+  //     }
+  //   }, onError: (err) {
+  //     // Handle exception by warning the user their action did not succeed
+  //     print(err);
+  //   });
+  // }
+  
+  Future<void> _handleInitialUri() async {
+    // In this example app this is an almost useless guard, but it is here to
+    // show we are not going to call getInitialUri multiple times, even if this
+    // was a weidget that will be disposed of (ex. a navigation route change).
+    if (!_initialUriIsHandled) {
+      _initialUriIsHandled = true;
+      Get.snackbar('Title' ,'_handleInitialUri called');
+      try {
+        final uri = await getInitialUri();
+        if (uri == null) {
+          print('no initial uri');
+        } else {
+          print('got initial uri: $uri');
+          print('123 reset');
+          resetPasswordController.otp = uri.queryParameters["otp"]!;
+          resetPasswordController.otpId = uri.queryParameters["otpId"]!;
+          Get.to(() => ResetPasswordScreen());
+        }
+        if (!mounted) return;
+      } on PlatformException {
+        // Platform messages may fail but we ignore the exception
+        print('falied to get initial uri');
+      } on FormatException catch (err) {
+        if (!mounted) return;
+        print('malformed initial uri');
+      }
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    // initUniLinks();
+    _handleInitialUri();
+    print("initState");
+  }
+
   @override
   Widget build(BuildContext context) {
     LoginPageController loginPageController = Get.put(LoginPageController());
@@ -185,22 +258,29 @@ Container confirmButtonContainer(
                             CustomDialog(context, "SUCCESS").show({
                               "message": "You need to complete your information"
                             });
-                            Get.put(AccountController()).isEditting.value = true;
+                            Get.put(AccountController()).isEditting.value =
+                                true;
                           }
                         } else {
                           Get.to(() => HandymanHomePageScreen());
                           if (process == 1) {
-                            await Get.put(AccountController()).getBusinessInfo();
+                            await Get.put(AccountController())
+                                .getBusinessInfo();
                             Get.to(() => BusinessManagementScreen());
-                            CustomDialog(context, "SUCCESS").show({"message": "You need to update information"});
+                            CustomDialog(context, "SUCCESS").show(
+                                {"message": "You need to update information"});
                             AccountController().isBusinessScreen.value = true;
-                            Get.put(AccountController()).isEditting.value = true;
+                            Get.put(AccountController()).isEditting.value =
+                                true;
                           } else if (process == 2) {
-                            await Get.put(AccountController()).getBusinessInfo();
+                            await Get.put(AccountController())
+                                .getBusinessInfo();
                             Get.to(() => BusinessManagementScreen());
-                            CustomDialog(context, "SUCCESS").show({"message": "You need to update information"});
+                            CustomDialog(context, "SUCCESS").show(
+                                {"message": "You need to update information"});
                             AccountController().isBusinessScreen.value = false;
-                            Get.put(AccountController()).isEditting.value = true;
+                            Get.put(AccountController()).isEditting.value =
+                                true;
                           } else {
                             await Get.put(MyRequestController()).getRequests();
                             await Get.put(ManageAdvertiseController())
