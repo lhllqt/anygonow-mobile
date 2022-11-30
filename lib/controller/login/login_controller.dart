@@ -91,8 +91,7 @@ class LoginPageController extends GetxController {
         var publicKey = data['publicKey'];
         var encryptedPrivateKey = data['encryptedPrivateKey'];
         var userName = username.text;
-        shouldChangeMail.value = data["shouldChangeMail"];
-
+        shouldChangeMail.value = data["shouldChangeMail"] != null ? true : false;
 
         String? privateKey =
             decryptAESCryptoJS(encryptedPrivateKey, password.text);
@@ -190,6 +189,19 @@ class LoginPageController extends GetxController {
               "publicKey": keyPair["publicKey"],
             }
           },
+      );
+      return response;
+    } catch (e, s) {
+      return null;
+    }
+  }
+
+  Future checkMailAccount() async {
+    try {
+      CustomDio customDio = CustomDio();
+      var keyPair = generateKeyPairAndEncrypt(pwVerify.text);
+      var response = await customDio.get(
+          "/check-valid-mail?mail=$emailVerify",
       );
       return response;
     } catch (e, s) {
