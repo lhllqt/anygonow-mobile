@@ -8,6 +8,7 @@ import 'package:untitled/model/User.dart';
 import 'package:untitled/model/custom_dio.dart';
 import 'package:untitled/model/status.dart';
 import 'package:untitled/screen/login/login_screen.dart';
+import 'package:untitled/screen/signup/reset_password_account.dart';
 import 'package:untitled/service/response_validator.dart';
 
 import '../global_controller.dart';
@@ -18,10 +19,18 @@ class LoginPageController extends GetxController {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  TextEditingController emailVerify = TextEditingController();
+  TextEditingController pwVerify = TextEditingController();
+  TextEditingController cpwVerify = TextEditingController();
+  RxBool isLoadingVerify = false.obs;
+
   RxBool isHidePassword = true.obs;
   RxBool isLoading = false.obs;
+  RxBool shouldChangeMail = false.obs;
   var messValidateUsername = "".obs;
   var messValidatePassword = "".obs;
+
+
 
   void changeHidePassword() {
     isHidePassword.value = !isHidePassword.value;
@@ -82,9 +91,13 @@ class LoginPageController extends GetxController {
         var publicKey = data['publicKey'];
         var encryptedPrivateKey = data['encryptedPrivateKey'];
         var userName = username.text;
+        shouldChangeMail.value = data["shouldChangeMail"] != null ? true : false;
+
         String? privateKey =
             decryptAESCryptoJS(encryptedPrivateKey, password.text);
 
+
+        
         Status validatePassword = Status();
 
         if (privateKey == null) {
@@ -92,9 +105,12 @@ class LoginPageController extends GetxController {
         } else {
           validatePassword = Status(status: "SUCCESS", message: "SUCCESS");
         }
+        // print("123login");
+        // print(validatePassword);
 
         if (validatePassword.status == "SUCCESS") {
           var certificateInfo = SignatureService.getCertificateInfo(userId);
+          // print(certificateInfo);
           String signature = SignatureService.getSignature(
               certificateInfo, privateKey as String);
           int times = DateTime.now().toUtc().millisecondsSinceEpoch;
@@ -108,6 +124,7 @@ class LoginPageController extends GetxController {
               times);
 
           var responsePing = await getPing(certificateList);
+          
           print(responsePing);
           Status validateServer2 = ResponseValidator.check(responsePing);
           var jsonResponse = jsonDecode(responsePing.toString());
@@ -140,6 +157,8 @@ class LoginPageController extends GetxController {
             }
 
             Get.put(GlobalController()).user.value = userInfo;
+
+            // print();
             return true;
           } else {
             messValidatePassword.value = "invalid_password";
@@ -155,4 +174,39 @@ class LoginPageController extends GetxController {
     }
     return false;
   }
+
+  Future changeEmailAndPassword() async {
+    try {
+      CustomDio customDio = CustomDio();
+      var keyPair = generateKeyPairAndEncrypt(pwVerify.text);
+      var response = await customDio.put(
+          "/auth/change-mail-and-pass",
+          {
+            "data": {
+              "userId": "",
+              "mail": emailVerify.text,
+              "encryptedPrivateKey": keyPair["encryptedPrivateKey"],
+              "publicKey": keyPair["publicKey"],
+            }
+          },
+      );
+      return response;
+    } catch (e, s) {
+      return null;
+    }
+  }
+
+  Future checkMailAccount() async {
+    try {
+      CustomDio customDio = CustomDio();
+      var keyPair = generateKeyPairAndEncrypt(pwVerify.text);
+      var response = await customDio.get(
+          "/check-valid-mail?mail=$emailVerify",
+      );
+      return response;
+    } catch (e, s) {
+      return null;
+    }
+  }
+
 }

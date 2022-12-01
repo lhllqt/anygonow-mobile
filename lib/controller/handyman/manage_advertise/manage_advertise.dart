@@ -38,6 +38,11 @@ class ManageAdvertiseController extends GetxController {
   RxInt indexCurrentAd = 0.obs;
   RxInt indexCurrentAdOrder = 0.obs;
 
+  RxBool enableInput = true.obs;
+
+  RxString categoryName = "".obs;
+  RxString zipcode = "".obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -58,6 +63,7 @@ class ManageAdvertiseController extends GetxController {
 
   void ChangeBuy() {
     isBuy.value = true;
+    enableInput.value = true;
   }
 
   void NoChangeBuy() {

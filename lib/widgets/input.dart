@@ -46,7 +46,7 @@ Container inputPassword(
               )
             : Container(),
         Container(
-          height: getHeight(50),
+          height: getHeight(52),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(getHeight(6)),
             border: Border.all(
@@ -71,7 +71,7 @@ Container inputPassword(
                       labelText: hintText,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       contentPadding: EdgeInsets.only(
-                          left: getWidth(18), bottom: getHeight(20)),
+                          left: getWidth(18), bottom: getHeight(19)),
                       labelStyle: TextStyle(
                           color: enabled
                               ? const Color(0xFF9E9E9E)
@@ -258,13 +258,13 @@ Container inputPhoneNUmber(
             children: [
               Expanded(
                 child: TextFormField(
-                  inputFormatters:  numberOnly
-                    ? <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                        LengthLimitingTextInputFormatter(
-                            maxLength != 0 ? maxLength : null)
-                      ]
-                    : null,
+                  inputFormatters: numberOnly
+                      ? <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          LengthLimitingTextInputFormatter(
+                              maxLength != 0 ? maxLength : null)
+                        ]
+                      : null,
                   maxLines: maxLines,
                   minLines: minLines,
                   keyboardType: keyboardType,
@@ -618,6 +618,7 @@ Container inputSelect(
   required List<String> options,
   String prefixIcon = "",
   String suffixIcon = "",
+  bool enabled = true,
 }) {
   final FocusNode _focusNode = FocusNode();
   final GlobalKey _autocompleteKey = GlobalKey();
@@ -640,6 +641,7 @@ Container inputSelect(
                 FocusNode focusNode,
                 VoidCallback onFieldSubmitted) {
               return TextFormField(
+                enabled: enabled,
                 focusNode: _focusNode,
                 controller: textEditingController,
                 style: TextStyle(
