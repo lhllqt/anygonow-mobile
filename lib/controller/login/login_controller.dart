@@ -176,9 +176,19 @@ class LoginPageController extends GetxController {
   }
 
   Future changeEmailAndPassword() async {
+    
     try {
+      
       CustomDio customDio = CustomDio();
       var keyPair = generateKeyPairAndEncrypt(pwVerify.text);
+      var data = {
+        "userId": "",
+        "mail": emailVerify.text,
+        "encryptedPrivateKey": keyPair["encryptedPrivateKey"],
+        "publicKey": keyPair["publicKey"],
+      };
+      print("123data");
+      print(data);
       var response = await customDio.put(
           "/auth/change-mail-and-pass",
           {
@@ -199,11 +209,16 @@ class LoginPageController extends GetxController {
   Future checkMailAccount() async {
     try {
       CustomDio customDio = CustomDio();
-      var keyPair = generateKeyPairAndEncrypt(pwVerify.text);
+      String newMail = emailVerify.text.replaceAll("+", "%2B");
+      // var keyPair = generateKeyPairAndEncrypt(pwVerify.text);
       var response = await customDio.get(
-          "/check-valid-mail?mail=$emailVerify",
+          "/check-valid-mail?mail=$newMail",
       );
-      return response;
+      var json = jsonDecode(response.toString());
+      if (json["data"]["isValidate"] != null) {
+        return true;
+      }
+      return false;
     } catch (e, s) {
       return null;
     }

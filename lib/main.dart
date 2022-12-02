@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
+import 'package:untitled/controller/message/noti_controller.dart';
 import 'package:untitled/flavour_config.dart';
 import 'package:untitled/i18n.dart';
 import 'package:untitled/screen/login/login_screen.dart';
@@ -25,20 +26,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await globalController.getStates();
-  Timer.periodic(new Duration(seconds: 1), (timer) {
-    Get.put(MessageController()).getMessages();
-  });
-  Timer.periodic(new Duration(seconds: 5), (timer) async {
-    var json = await Get.put(MessageController()).getNotiChat();
-    if (json["data"]["seen"] == true) {
-      Get.put(MessageController()).isNoti.value = false;
-    } else {
-      Get.put(MessageController()).isNoti.value = true;
-    }
-    print(json);
-    print("123seen");
-    print(json["data"]["seen"]);
-  });
+  // Timer.periodic(new Duration(seconds: 5), (timer) {
+  //   Get.put(MessageController()).getMessages();
+  // });
   runApp(MyApp());
 }
 
