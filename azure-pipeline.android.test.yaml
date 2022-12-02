@@ -26,17 +26,17 @@ jobs:
     inputs:
       mode: 'auto'
       channel: 'stable'
-      version: 'custom'
-      customVersion: '2.10.1'
+      version: 'latest'
   - task: CmdLine@2
     displayName: Upgrade & clean Flutter
     inputs:
       script: |
-        $(FlutterToolPath)/flutter clean \
+        $(FlutterToolPath)/flutter upgrade \
         cd ios \
         pod deintegrate \
         rm Flutter/Flutter.podspec \
         rm podfile.lock \
+        $(FlutterToolPath)/flutter clean \
   
   - task: mirror-git-repository-vsts-task@1
     inputs:

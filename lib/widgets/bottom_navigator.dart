@@ -9,7 +9,6 @@ import 'package:untitled/controller/handyman/manage_advertise/manage_advertise.d
 import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
 import 'package:untitled/controller/main/main_screen_controller.dart';
 import 'package:untitled/controller/message/message_controller.dart';
-import 'package:untitled/controller/message/noti_controller.dart';
 import 'package:untitled/controller/my_request/my_request_user_controller.dart';
 import 'package:untitled/screen/main/main_screen_model.dart';
 import 'package:untitled/utils/config.dart';
@@ -20,7 +19,8 @@ import 'bounce_button.dart';
 
 Container bottomNavigator() {
   GlobalController globalController = Get.put(GlobalController());
-
+  MessageController messageController = Get.put(MessageController());
+  
   return Container(
     height: getHeight(80),
     width: double.infinity,
@@ -78,10 +78,9 @@ Container bottomNavigator() {
                         if (globalController.currentPage.value != 1) {
                           var request = Get.put(MyRequestUserController());
                           var message = Get.put(MessageController());
-                          var noti = Get.put(NotiController());
                           await request.getRequests("", "");
-                          await noti.putNotiChat();
-                          noti.isNoti.value = false;
+                          await message.putNotiChat();
+                          message.isNoti.value = false;
 
                           message.connectedMessageIds = List.generate(
                             request.connectedRequests.length,
@@ -107,7 +106,7 @@ Container bottomNavigator() {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Get.put(NotiController()).isNoti.value == true ?
+                            Get.put(MessageController()).isNoti.value == true ?
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -251,10 +250,9 @@ Container bottomNavigatorHandyman() {
                         if (globalController.currentPage != 1) {
                           var request = Get.put(MyRequestUserController());
                           var message = Get.put(MessageController());
-                          var noti = Get.put(NotiController());
                           await request.getRequests("", "");
-                          await noti.putNotiChat();
-                          noti.isNoti.value = false;
+                          await message.putNotiChat();
+                          message.isNoti.value = false;
 
                           message.connectedMessageIds = List.generate(
                             request.connectedRequests.length,
@@ -281,7 +279,7 @@ Container bottomNavigatorHandyman() {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Get.put(NotiController()).isNoti.value == true ?
+                            Get.put(MessageController()).isNoti.value == true ?
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
