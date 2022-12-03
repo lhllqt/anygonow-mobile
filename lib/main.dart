@@ -6,39 +6,32 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/global_controller.dart';
-import 'package:untitled/flavour_config.dart';
+import 'package:untitled/controller/location/location.dart';
 import 'package:untitled/i18n.dart';
+import 'package:untitled/screen/handyman/home_page/home_page_screen.dart';
+import 'package:untitled/screen/home_page/home_page_screen.dart';
 import 'package:untitled/screen/login/login_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:untitled/service/db_service.dart';
 import 'package:untitled/service/stripe.dart';
-import 'package:flutter/services.dart' show PlatformException;
-
-import 'controller/message/message_controller.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 
 GlobalController globalController = Get.put(GlobalController());
 
 Future<void> main() async {
-  Constants.setEnvironment(Environment.dev);
   var publishedKey = await StripeService.getPubKey();
   Stripe.publishableKey = publishedKey;
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  await initDB();
   await dotenv.load(fileName: ".env");
   await globalController.getStates();
-  Timer.periodic(new Duration(seconds: 1), (timer) {
-    Get.put(MessageController()).getMessages();
-  });
-  Timer.periodic(new Duration(seconds: 5), (timer) async {
-    var json = await Get.put(MessageController()).getNotiChat();
-    if (json["data"]["seen"] == true) {
-      Get.put(MessageController()).isNoti.value = false;
-    } else {
-      Get.put(MessageController()).isNoti.value = true;
-    }
-    print(json);
-    print("123seen");
-    print(json["data"]["seen"]);
-  });
+  ZipcodeUser.determinePosition();
+
+  if (globalController.db.get("user") != null) {
+    globalController.user.value = globalController.db.get("user");
+  }
   runApp(MyApp());
 }
 
@@ -62,10 +55,17 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  
-
   Widget home() {
+    print({"db": globalController.db.get("user").role});
+
+    if (globalController.user.value.id != null) {
+      var role = globalController.user.value.role;
+      if (role == null || role == 0) {
+        return HomePageScreen();
+      } else {
+        return HandymanHomePageScreen();
+      }
+    }
     return LoginScreen();
   }
-
 }
