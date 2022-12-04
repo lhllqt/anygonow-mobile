@@ -182,12 +182,11 @@ Container confirmButtonContainer(
                     .show({"message": "Email invalidate"});
                 return;
               }
-              bool phoneValid = RegExp(r'(^(?:[+0]9)?[0-9]{7,12}$)')
+              bool phoneValid = RegExp(r'(^\+1[0-9]{3}[0-9]{3}[0-9]{4}$)')
                   .hasMatch(signupController.phoneNumber.text);
               if (!phoneValid) {
                 CustomDialog(context, "FAILED").show({
-                  "message":
-                      "Phone numbers are only alphanumeric and have 7-12 characters"
+                  "message": "Phone numbers must be in the format: +1AAABBBCCCC"
                 });
                 return;
               }
@@ -212,7 +211,12 @@ Container confirmButtonContainer(
                     .show({"message": "You do not agree to the terms of use"});
                 return;
               }
-              await signupController.signup();
+              var ret = await signupController.signup();
+              if (!ret) {
+                CustomDialog(context, "FAILED")
+                    .show({"message": "Email or phone number is existed!"});
+                return;
+              }
               Get.to(() => CheckEmailScreen());
             },
             child: Text("continue".tr,
