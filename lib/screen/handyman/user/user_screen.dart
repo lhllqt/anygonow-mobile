@@ -15,7 +15,9 @@ import 'package:untitled/screen/handyman/service_area/service_area_screen.dart';
 import 'package:untitled/screen/login/login_screen.dart';
 import 'package:untitled/utils/config.dart';
 import 'package:untitled/widgets/app_bar.dart';
+import 'package:untitled/widgets/profile_avatar.dart';
 import 'package:untitled/widgets/image.dart';
+import 'package:untitled/widgets/profile_name.dart';
 
 class HandymanUserScreen extends StatelessWidget {
   GlobalController globalController = Get.put(GlobalController());
@@ -23,10 +25,6 @@ class HandymanUserScreen extends StatelessWidget {
       Get.put(RatingCenterController());
   @override
   Widget build(BuildContext context) {
-    print(globalController.user.value.fullName);
-    print(globalController.user.value.username);
-    var profileName = globalController.user.value.name ??
-        globalController.user.value.username;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBar(
@@ -58,35 +56,17 @@ class HandymanUserScreen extends StatelessWidget {
                           color: Colors.white,
                           child: Row(
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(56),
-                                child: Container(
-                                    width: getHeight(60),
-                                    height: getHeight(60),
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                        "assets/icons/account.svg",
-                                        width: getWidth(60),
-                                        height: getHeight(60))),
-                              ),
+                              ProfileAvatar(),
                               SizedBox(
                                 width: getWidth(18),
                               ),
-                              FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  profileName.toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
+                              ProfileName(),
                             ],
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: getHeight(24),
+                        height: getHeight(20),
                       ),
                     ],
                   ),
