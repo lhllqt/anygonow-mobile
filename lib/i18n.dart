@@ -27,7 +27,7 @@ class Messages extends Translations {
           "brand_detail.uncheck_all": "Uncheck all",
 
           // chat screen
-          "chat_screen.send_message" : "Send message",
+          "chat_screen.send_request" : "Send request",
           "chat_screen.write_review" : "Write review",
           // navigator
           "navigator.message": "Message",

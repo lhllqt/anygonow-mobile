@@ -36,7 +36,7 @@ class MainScreenController extends GetxController {
   RxList<Business> businessNearList = <Business>[].obs;
   RxList<Business> mostInterested = <Business>[].obs;
 
-  RxList<dynamic> listBussinessOrder = [].obs;
+  RxList<dynamic> listBusinessOrder = [].obs;
 
   RxList<Business> businesses = <Business>[].obs;
 
@@ -76,7 +76,7 @@ class MainScreenController extends GetxController {
     getMostInterest = getMostInterested();
     hasSearched.value = false;
     var keyboardVisibilityController = KeyboardVisibilityController();
-    searchZipcode.text = globalController.zipcodeUser.value;
+    searchZipcode.text = globalController.user.value.zipcode ?? globalController.zipcodeUser.value;
 
     keyboardSubscription =
         keyboardVisibilityController.onChange.listen((bool visible) {
@@ -294,7 +294,7 @@ class MainScreenController extends GetxController {
 
   Future<List<Business>> getListOrderAlready() async {
     try {
-      listBussinessOrder.value = [];
+      listBusinessOrder.value = [];
       Category? value = categories.firstWhereOrNull((element) => element.name == searchText.text);
       if (value != null) {
         categoryId = value != null ? value.id : "";
@@ -310,7 +310,7 @@ class MainScreenController extends GetxController {
       print("123listorder");
       print(responseData);
 
-      listBussinessOrder.value = responseData;
+      listBusinessOrder.value = responseData;
       return [];
     } catch (e) {
       print(e);

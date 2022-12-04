@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
+import 'package:untitled/controller/customer/customer_order_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
 import 'package:untitled/controller/message/message_controller.dart';
@@ -118,7 +119,7 @@ class CompletedCustomerChatScreen extends StatelessWidget {
                             child: Container(
                               alignment: Alignment.center,
                               child: Text(
-                                "chat_screen.send_message".tr,
+                                "chat_screen.send_request".tr,
                                 style: TextStyle(
                                   color: Color(0xFFFF511A),
                                   fontWeight: FontWeight.w700,
@@ -132,6 +133,11 @@ class CompletedCustomerChatScreen extends StatelessWidget {
                               String id =
                                   requestUserController.completedRequests[
                                       messageController.index]["businessId"];
+                              var customerOrderController = Get.put(CustomerOrderController());
+                              customerOrderController.clear();
+                              customerOrderController.businessIds.add(id);
+                              customerOrderController.category.value = messageController.currentCateId.value;
+                              customerOrderController.selectedZipcode.value = messageController.currentZipcode.value;
 
                               var results = await Future.wait([brandDetailController
                                   .getBusinessDetail(id: id), brandDetailController

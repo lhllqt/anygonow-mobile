@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/config.dart';
 import 'package:untitled/controller/brand_detail/brand_detail_controller.dart';
+import 'package:untitled/controller/customer/customer_order_controller.dart';
 import 'package:untitled/controller/global_controller.dart';
 import 'package:untitled/controller/handyman/manage_advertise/manage_advertise.dart';
 import 'package:untitled/controller/handyman/my_request/my_request_controller.dart';
@@ -400,7 +401,8 @@ Container bottomNavigatorHandyman() {
 }
 
 Container bottomBrandDetail({String id = ""}) {
-  MainScreenController mainScreenController = Get.put(MainScreenController());
+  // MainScreenController mainScreenController = Get.put(MainScreenController());
+  CustomerOrderController customerOrderController = Get.put(CustomerOrderController());
   return bottomContainerLayout(
     height: 100,
     child: Row(
@@ -461,10 +463,8 @@ Container bottomBrandDetail({String id = ""}) {
                 ),
               ),
               onPressed: () async {
-                mainScreenController.requests.clear();
-                mainScreenController.requests.add(
-                    Get.put(BrandDetailController()).business.bussiness["id"]);
-                var res = await mainScreenController.sendRequest();
+                customerOrderController.businessIds.add(id);
+                var res = await customerOrderController.sendRequest();
                 if (res) {
                   showPopUp(
                     message: "brand_detail.request_sent_successfully".tr,
@@ -478,8 +478,8 @@ Container bottomBrandDetail({String id = ""}) {
                     cancel: "brand_detail.cancel".tr,
                   );
                 }
-                mainScreenController.requests.clear();
-                await mainScreenController.getListOrderAlready();
+                // mainScreenController.requests.clear();
+                // await mainScreenController.getListOrderAlready();
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

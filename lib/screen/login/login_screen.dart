@@ -238,7 +238,7 @@ Container confirmButtonContainer(
                         int? role = globalController.user.value.role;
                         int? process = globalController.user.value.process;
                         await Get.put(GlobalController()).getCategories();
-                        await Get.put(MainScreenController()).getCategories();
+                        // await Get.put(MainScreenController()).getCategories();
                         if (controller.shouldChangeMail.value == true &&
                             controller.username.text
                                 .contains("@anygonow.com")) {

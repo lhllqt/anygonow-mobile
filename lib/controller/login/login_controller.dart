@@ -173,6 +173,9 @@ class LoginPageController extends GetxController {
               // userInfo.fullName = firstName + " " + lastName;
               userInfo.name = jsonResponse["data"]["user"]["name"];
               userInfo.fullName = jsonResponse["data"]["user"]["name"];
+              userInfo.phone = jsonResponse["data"]["user"]["phone"];
+              userInfo.mail = jsonResponse["data"]["user"]["mail"];
+              userInfo.zipcode = jsonResponse["data"]["user"]["zipcode"];
             }
             if (userInfo.role == 1) {
               userInfo.name = jsonResponse["data"]["business"]["name"];
