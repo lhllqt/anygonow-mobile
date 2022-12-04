@@ -156,6 +156,10 @@ class LoginPageController extends GetxController {
               userInfo.name = jsonResponse["data"]["user"]["name"];
               userInfo.fullName = jsonResponse["data"]["user"]["name"];
             }
+            if (userInfo.role == 1) {
+              userInfo.name = jsonResponse["data"]["business"]["name"];
+              userInfo.fullName = jsonResponse["data"]["business"]["name"];
+            }
             Get.put(GlobalController()).db.put("user", userInfo);
             Get.put(GlobalController()).user.value = userInfo;
             String? token = await FirebaseMessaging.instance.getToken();
